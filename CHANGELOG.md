@@ -10,6 +10,8 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ### Added
 
 - Initial Repo
+- Added ping of `pihole` group
+- Added Docker & Docker Compose
 
 [Unreleased]: https://github.com/iancleary/ansible-home-network/compare/v2020.1.0...HEAD
 [2020.1.0]: https://github.com/iancleary/ansible-home-network/releases/tag/v2020.1.0
