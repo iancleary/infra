@@ -89,9 +89,9 @@ docs-live:
 docs-live: ## create live docs
 	bash scripts/docs-live.sh
 
-docker:
-docker: ## Install Docker and Docker-Compose
-	@$(ANSIBLE) --tags="docker"
+install-docker:
+install-docker: ## Install Docker and Docker-Compose
+	@$(ANSIBLE) --tags="install-docker"
 
 disable-dns-stub-resolver:
 disable-dns-stub-resolver: ## Disable DNS Stub Resolver in Ubuntu (17.10+)
