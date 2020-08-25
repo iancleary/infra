@@ -31,7 +31,7 @@ endif
 # Main Ansible Playbook Command (prompts for password)
 ANSIBLE_PLAYBOOK = ansible-playbook home_network.yml -v -i inventory
 
-ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-become-pass
+ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-pass
 
 # - to suppress if it doesn't exist
 -include make.env
