@@ -1,4 +1,4 @@
 ---
-- hosts: pi_hole
+- hosts: pihole
   roles:
     - {role: docker, tags: ['docker']}

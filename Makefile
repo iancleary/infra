@@ -31,7 +31,7 @@ endif
 # Main Ansible Playbook Command (prompts for password)
 ANSIBLE_PLAYBOOK = ansible-playbook home_network.yml -v -i inventory
 
-ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-become-pass
+ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-pass
 
 # - to suppress if it doesn't exist
 -include make.env
@@ -70,19 +70,13 @@ check: DARGS?=
 check: ## Checks personal-computer.yml playbook
 	@$(ANSIBLE) --check
 
-non-ansible:
-non-ansible: ## Runs all non-ansible make targets for fresh install (all target)
-
-	# No user input required
-	make flameshot-keybindings
-
-	# Ubuntu 20.04 defaults
-	make python-three-eight-install
-	make python-three-eight-supporting
-
 lint:  ## Lint the repo
 lint:
 	bash scripts/lint.sh
+
+ping:
+ping: ## Ping ansible groups
+	ansible pihole -m ping -i inventory --ask-pass
 
 docs-develop:
 docs-develop: ## setup pipenv to develop docs
@@ -99,46 +93,5 @@ docker:
 docker: ## Install Docker and Docker-Compose
 	@$(ANSIBLE) --tags="docker"
 
-python-three-eight-install: ## Install python3.8 using apt (main install)
-python-three-eight-install:
-
-	sudo apt-get update
-
-	# Start by updating the packages list and installing the prerequisites:
-	sudo apt install software-properties-common
-
-	# Once the repository is enabled, install Python 3.8 with: (added libpython3.8-dev for pip installs)
-	# - httptools wasn't installing correctly until adding it
-	# - see: https://github.com/huge-success/sanic/issues/1503#issuecomment-469031275
-	sudo apt update
-	sudo apt install -y python3.8 libpython3.8-dev
-
-	# At this point, Python 3.8 is installed on your Ubuntu system and ready to be used.
-	# You can verify it by typing:
-	python3.8 --version
-
-python-three-eight-supporting: ## Install useful packages
-python-three-eight-supporting:
-
-	# python3 pip
-	sudo apt install -y python3-pip
-
-	# upgrade pip
-	python3.8 -m pip install --user --upgrade pip
-	-python3.8 -m pip install --upgrade keyrings.alt --user
-	-python3.8 -m pip install --user --upgrade setuptools
-
-	# At this point, Python 3.7 is installed on your Ubuntu system and ready to be used.
-	# You can verify it by typing:
-	python3.8 --version
-	python3.8 -m pip --version
-
-	python3.8 -m pip install --user pipenv
-	# https://python-poetry.org/docs/
-	python3.8 -m pip install --user poetry
-	sudo apt-get install -y python3-venv
-	# https://github.com/python-poetry/poetry/issues/721#issuecomment-623399861
-	# Ubuntu 20.04 https://wiki.ubuntu.com/FocalFossa/ReleaseNotes#Python3_by_default
-	-sudo apt install python-is-python3
 
 .DEFAULT_GOAL := help
