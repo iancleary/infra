@@ -2,3 +2,5 @@
 - hosts: pihole
   roles:
     - {role: docker, tags: ['docker']}
+    - {role: disable-dns-stub-resolver, tags: ['disable-dns-stub-resolver']}
+    - {role: docker-compose-template, tags: ['docker-compose-template']}

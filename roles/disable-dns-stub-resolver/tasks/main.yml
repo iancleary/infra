@@ -1,0 +1,7 @@
+---
+- name: Disable DNSStubResolver in system-resolved.conf
+  become: true
+  lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^DNSStubListener='
+    line: DNSStubListener=no

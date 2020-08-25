@@ -93,5 +93,14 @@ docker:
 docker: ## Install Docker and Docker-Compose
 	@$(ANSIBLE) --tags="docker"
 
+disable-dns-stub-resolver:
+disable-dns-stub-resolver: ## Disable DNS Stub Resolver in Ubuntu (17.10+)
+	# See "Installing on Ubuntu" at https://hub.docker.com/r/pihole/pihole/
+	@$(ANSIBLE) --tags="disable-dns-stub-resolver"
+
+docker-compose-template:
+docker-compose-template: ## Copy Docker Compose Template
+	@$(ANSIBLE) --tags="docker-compose-template"
+
 
 .DEFAULT_GOAL := help

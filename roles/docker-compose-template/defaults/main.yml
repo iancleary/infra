@@ -1,0 +1,3 @@
+---
+pihole_tz: 'America/Phoenix'
+pihole_docker_tag: latest
