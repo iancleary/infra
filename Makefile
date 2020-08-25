@@ -85,6 +85,10 @@ docs-develop: ## setup pipenv to develop docs
 	pipenv shell
 	# make docs-live
 
+pihole:
+pihole: ## Run Playbook for pihole
+	@$(ANSIBLE)
+
 docs-live:
 docs-live: ## create live docs
 	bash scripts/docs-live.sh
