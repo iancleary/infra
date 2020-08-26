@@ -85,13 +85,13 @@ docs-develop: ## setup pipenv to develop docs
 	pipenv shell
 	# make docs-live
 
-pihole:
-pihole: ## Run Playbook for pihole
-	@$(ANSIBLE)
-
 docs-live:
 docs-live: ## create live docs
 	bash scripts/docs-live.sh
+
+pihole:
+pihole: ## Run Playbook for pihole
+	@$(ANSIBLE)
 
 install-docker:
 install-docker: ## Install Docker and Docker-Compose
@@ -106,5 +106,8 @@ docker-compose-template:
 docker-compose-template: ## Copy Docker Compose Template
 	@$(ANSIBLE) --tags="docker-compose-template"
 
+start-pihole:
+start-pihole: ## Build and Start Pihole
+	@$(ANSIBLE) --tags="start-pihole"
 
 .DEFAULT_GOAL := help
