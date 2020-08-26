@@ -5,3 +5,18 @@
     path: /etc/systemd/resolved.conf
     regexp: '^DNSStubListener='
     line: DNSStubListener=no
+  register: resolved
+
+- name: Force update /etc/resolv.conf symlink
+  become: true
+  file:
+    src: "/etc/resolv.conf"
+    dest: "/run/systemd/resolve/resolv.conf"
+    state: link
+    force: yes
+  register: symlink
+
+- name: Restart systemd-resolve
+  become: true
+  command: systemctl restart systemd-resolved
+  when: symlink.changed or resolved.changed
