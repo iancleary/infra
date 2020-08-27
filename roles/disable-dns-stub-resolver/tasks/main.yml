@@ -29,6 +29,12 @@
     src: 50-cloud-init.yaml.j2
     dest: '/etc/netplan/50-cloud-init.yaml'
     mode: 'u=rw,go=r'
+  register: netplan
+
+- name: Apply Netplan
+  become: true
+  command: netplan apply
+  when: netplan.changed
 
 - name: Reload or restart systemd-resolved
   become: true

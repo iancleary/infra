@@ -13,6 +13,13 @@ This repo continues that Infrastructure as Code philosophy for my home network.
     Imaged using Raspberry Pi Imager v1.4
     `sudo apt install rpi-imager`
 
+## Pi-Hole
+    I tried to get Docker working but was having DNS Stub Resolver issues
+
+    Ending up going with the "One-Step Automated Install"
+
+    `curl -sSL https://install.pi-hole.net | bash`
+
 ## Calendar Versioning
 
 This project adheres to [Calendar Versioning](https://calver.org/), YYYY.MINOR.MICRO.
