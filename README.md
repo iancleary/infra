@@ -9,6 +9,9 @@ This repo continues that Infrastructure as Code philosophy for my home network.
 ### My Setup
 
 * Raspberry Pi 3B running PiHole [docs/pi-hole.md]
+    Ubuntu 20.04.1 LTS
+    Imaged using Raspberry Pi Imager v1.4
+    `sudo apt install rpi-imager`
 
 ## Calendar Versioning
 
