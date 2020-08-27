@@ -9,6 +9,16 @@ This repo continues that Infrastructure as Code philosophy for my home network.
 ### My Setup
 
 * Raspberry Pi 3B running PiHole [docs/pi-hole.md]
+    Ubuntu 20.04.1 LTS
+    Imaged using Raspberry Pi Imager v1.4
+    `sudo apt install rpi-imager`
+
+## Pi-Hole
+    I tried to get Docker working but was having DNS Stub Resolver issues
+
+    Ending up going with the "One-Step Automated Install"
+
+    `curl -sSL https://install.pi-hole.net | bash`
 
 ## Calendar Versioning
 

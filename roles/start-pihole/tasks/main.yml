@@ -1,0 +1,7 @@
+---
+- name: Build and Start pihole
+  shell:
+    chdir: "~{{ ansible_user }}/"
+    cmd: docker-compose up --detach
+  args:
+    executable: /bin/bash

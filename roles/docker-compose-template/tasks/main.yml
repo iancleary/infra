@@ -1,0 +1,9 @@
+---
+- name: Copy Template to Home folder
+  become: "yes"
+  become_user: '{{ ansible_user }}'
+  template:
+    src: docker-compose.yml.j2
+    dest: '~{{ ansible_user }}/docker-compose.yml'
+    backup: "yes"
+    mode: 'u=rw,go=r'
