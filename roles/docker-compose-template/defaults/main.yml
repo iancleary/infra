@@ -1,3 +1,5 @@
 ---
 pihole_tz: 'America/Phoenix'
-pihole_docker_tag: v5.1.2-armhf-stretch
+pihole_docker_tag: v5.1.2-arm64-stretch
+pihole_server_ip: 192.168.0.160
+pihole_web_password: 'admin'
