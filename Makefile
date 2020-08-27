@@ -114,8 +114,8 @@ provision:
 provision: ## Provision server with Dependencies
 	@$(ANSIBLE) --tags="provision"
 
-build:
-build: ## build and start application on server
-	@$(ANSIBLE) --tags="build"
+deploy:
+deploy: ## build and start application on server
+	@$(ANSIBLE) --tags="deploy"
 
 .DEFAULT_GOAL := help
