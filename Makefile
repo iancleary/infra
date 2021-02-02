@@ -29,7 +29,7 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PLAYBOOK = ansible-playbook playbook.yml -v -i inventory
+ANSIBLE_PLAYBOOK = ansible-playbook playbook.yml -v -i inventory.yaml --ask-become-pass
 
 ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-pass
 

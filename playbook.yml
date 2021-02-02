@@ -1,4 +1,4 @@
 ---
 - hosts: code_server
   roles:
-    - {role: geerlingguy.docker, tags: ['install-docker', 'provision']}
+    - {role: docker, tags: ['install-docker', 'provision']}
