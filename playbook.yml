@@ -1,0 +1,4 @@
+---
+- hosts: code_server
+  roles:
+    - {role: docker, tags: ['install-docker', 'provision']}

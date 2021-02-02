@@ -1,0 +1,36 @@
+---
+
+dns:
+  hosts:
+    pihole:
+      ansible_host: 192.168.1.66
+      ansible_user: "administrator"
+
+development:
+  hosts:
+    code_server:
+      ansible_host: 192.168.1.65
+      ansible_user: "iancleary"
+
+blog:
+  hosts:
+    ghost:
+      ansible_host: "blog.iancleary.me"
+
+nextcloud:
+  hosts:
+    personal:
+      ansible_host: "nextcloud.iancleary.me"
+
+network:
+  children:
+    dns
+    blog
+
+local_network:
+  children:
+    dns
+
+linode:
+  children:
+    blog

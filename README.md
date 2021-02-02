@@ -1,24 +1,10 @@
-# ansible-home-network
+# infra
 
-## Ansible Playbook to configure my home network
+## Personal Infrastructure as code
 
 I manage my (Ubuntu LTS) desktop configuration with Ansible: [iancleary/ansible-desktop](https://github.com/iancleary/ansible-desktop).
 
-This repo continues that Infrastructure as Code philosophy for my home network.
-
-### My Setup
-
-* Raspberry Pi 3B running PiHole [docs/pi-hole.md]
-    Ubuntu 20.04.1 LTS
-    Imaged using Raspberry Pi Imager v1.4
-    `sudo apt install rpi-imager`
-
-## Pi-Hole
-    I tried to get Docker working but was having DNS Stub Resolver issues
-
-    Ending up going with the "One-Step Automated Install"
-
-    `curl -sSL https://install.pi-hole.net | bash`
+This repo continues that Infrastructure as Code philosophy for my home and personal network.
 
 ## Calendar Versioning
 
@@ -26,7 +12,7 @@ This project adheres to [Calendar Versioning](https://calver.org/), YYYY.MINOR.M
 
 ## Documentation
 
-Detailed documentation is hosted by Netlify at <https://ansible-home-network.iancleary.me>.
+Detailed documentation is hosted by Vercel at <https://infra.iancleary.me>.
 
 --------------------------
 

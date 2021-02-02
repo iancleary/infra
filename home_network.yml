@@ -1,7 +1,0 @@
----
-- hosts: pihole
-  roles:
-    - {role: install-docker, tags: ['install-docker', 'provision']}
-    - {role: disable-dns-stub-resolver, tags: ['disable-dns-stub-resolver', 'provision']}
-    - {role: docker-compose-template, tags: ['docker-compose-template', 'deploy']}
-    - {role: start-pihole, tags: ['start-pihole', 'deploy']}
