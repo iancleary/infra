@@ -1,9 +1,0 @@
----
-# Docker Compose on armv7l GitHub Issue -> APT install for now
-# https://github.com/docker/compose/issues/6831#issuecomment-568815378
-
-# Docker Compose options.
-# docker_install_compose: true
-# docker_compose_version: 1.26.2
-# docker_compose_arch: "armv7l"
-# docker_compose_path: /usr/local/bin/docker-compose

@@ -1,0 +1,29 @@
+---
+
+dns:
+  hosts:
+    pi_hole:
+      ansible_host: 192.168.1.66
+
+blog:
+  hosts:
+    ghost:
+      ansible_host: "blog.iancleary.me"
+
+nextcloud:
+  hosts:
+    nextcloud:
+      ansible_host: "nextcloud.iancleary.me"
+
+network:
+  children:
+    dns
+    blog
+
+local_network:
+  children:
+    dns
+
+linode:
+  children:
+    blog

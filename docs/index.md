@@ -4,11 +4,15 @@
 
 I manage my (Ubuntu LTS) desktop configuration with Ansible: [iancleary/ansible-desktop](https://github.com/iancleary/ansible-desktop).
 
-This repo continues that Infrastructure as Code philosophy for my home network.
+This repo continues that Infrastructure as Code philosophy for my personal network.
 
 ### My Setup
 
-* Raspberry Pi 3B running PiHole
+* UnRAID OS Tower
+* EdgeRouter 10x
+* Unifi AC Pro Access Point (Office)
+* Unifi AC Lite Access Point (Living Room)
+* TP-Link Powerline Ethernet Adapter
 
 ## Calendar Versioning
 
@@ -16,7 +20,7 @@ This project adheres to [Calendar Versioning](https://calver.org/), YYYY.MINOR.M
 
 ## Documentation
 
-Detailed documentation is hosted by Netlify at <https://ansible-home-network.iancleary.me>.
+Detailed documentation is hosted by Vercel at <https://infra.iancleary.me>.
 
 --------------------------
 
