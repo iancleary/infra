@@ -1,10 +1,10 @@
-# ansible-home-network
+# infra
 
-## Ansible Playbook to configure my home network
+## Personal Infrastructure as code
 
 I manage my (Ubuntu LTS) desktop configuration with Ansible: [iancleary/ansible-desktop](https://github.com/iancleary/ansible-desktop).
 
-This repo continues that Infrastructure as Code philosophy for my home network.
+This repo continues that Infrastructure as Code philosophy for my home and personal network.
 
 ## Calendar Versioning
 

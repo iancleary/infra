@@ -1,13 +1,13 @@
 ---
-site_name: ansible-desktop
-site_description: Ansible Configuration of Ubuntu LTS Desktops!
-site_url: https://ansible-desktop.iancleary.me
+site_name: infra
+site_description: Infrastructure as code
+site_url: https://infra.iancleary.me
 
 theme:
     name: 'material'
 
-repo_name: iancleary/ansible-desktop
-repo_url: https://github.com/iancleary/ansible-desktop
+repo_name: iancleary/infra
+repo_url: https://github.com/iancleary/infra
 edit_uri: 'blob/main'
 
 nav:

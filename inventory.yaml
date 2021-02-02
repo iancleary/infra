@@ -2,8 +2,15 @@
 
 dns:
   hosts:
-    pi_hole:
+    pihole:
       ansible_host: 192.168.1.66
+      ansible_user: "administrator"
+
+development:
+  hosts:
+    code_server:
+      ansible_host: 192.168.1.65
+      ansible_user: "iancleary"
 
 blog:
   hosts:
@@ -12,7 +19,7 @@ blog:
 
 nextcloud:
   hosts:
-    nextcloud:
+    personal:
       ansible_host: "nextcloud.iancleary.me"
 
 network:

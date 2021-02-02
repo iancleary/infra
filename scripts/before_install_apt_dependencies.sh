@@ -11,5 +11,5 @@ sudo apt install -y python3-setuptools python3-apt python3-pip
 sudo apt install -y yamllint
 sudo apt install -y shellcheck
 
-# SSH Passwords
+# SSH Passwords for ansible
 sudo apt install -y sshpass

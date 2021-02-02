@@ -76,7 +76,7 @@ lint:
 
 ping:
 ping: ## Ping ansible groups
-	ansible pihole -m ping -i inventory --ask-pass
+	ansible code_server -m ping -i inventory.yaml --ask-pass -vvvv
 
 docs-develop:
 docs-develop: ## setup pipenv to develop docs
@@ -96,26 +96,5 @@ pihole: ## Run Playbook for pihole
 install-docker:
 install-docker: ## Install Docker and Docker-Compose
 	@$(ANSIBLE) --tags="install-docker"
-
-disable-dns-stub-resolver:
-disable-dns-stub-resolver: ## Disable DNS Stub Resolver in Ubuntu (17.10+)
-	# See "Installing on Ubuntu" at https://hub.docker.com/r/pihole/pihole/
-	@$(ANSIBLE) --tags="disable-dns-stub-resolver"
-
-docker-compose-template:
-docker-compose-template: ## Copy Docker Compose Template
-	@$(ANSIBLE) --tags="docker-compose-template"
-
-start-pihole:
-start-pihole: ## Build and Start Pihole
-	@$(ANSIBLE) --tags="start-pihole"
-
-provision:
-provision: ## Provision server with Dependencies
-	@$(ANSIBLE) --tags="provision"
-
-deploy:
-deploy: ## build and start application on server
-	@$(ANSIBLE) --tags="deploy"
 
 .DEFAULT_GOAL := help
