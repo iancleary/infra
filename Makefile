@@ -29,7 +29,7 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PLAYBOOK = ansible-playbook home_network.yml -v -i inventory
+ANSIBLE_PLAYBOOK = ansible-playbook playbook.yml -v -i inventory
 
 ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-pass
 
@@ -88,10 +88,6 @@ docs-develop: ## setup pipenv to develop docs
 docs-live:
 docs-live: ## create live docs
 	bash scripts/docs-live.sh
-
-pihole:
-pihole: ## Run Playbook for pihole
-	@$(ANSIBLE)
 
 install-docker:
 install-docker: ## Install Docker and Docker-Compose
