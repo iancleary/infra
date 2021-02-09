@@ -1,9 +1,11 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change.
+When contributing to this repository, please first discuss the change
+you wish to make via issue, email, or any other
+method with the owners of this repository before making a change.
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+Please note we have a code of conduct,
+please follow it in all your interactions with the project.
 
 ## First Steps to fix an issue or bug
 
@@ -15,9 +17,11 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## First steps to contribute new features
 
-- Create an issue to discuss the feature's scope and its fit for this package
+- Create an issue to discuss the feature's
+scope and its fit for this package
 - run pytest to ensure your local version of code passes all unit tests
-- try to edit the relevant code and implement your new feature in a backwards compatible manner
+- try to edit the relevant code and implement
+your new feature in a backwards compatible manner
 - create new tests as you go, and run the test suite as you go
 - update the documentation as you go
 
@@ -31,35 +35,12 @@ Linting is performed on common file types:
 - Bash files with [shellcheck](https://www.shellcheck.net/)
 - Markdown files with [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)
 
-The [Makefile](https://github.com/iancleary/ansible-desktop/blob/main/Makefile)  is the entry point.
+The [Makefile](https://github.com/iancleary/ansible-desktop/blob/main/Makefile)
+is the entry point.
 
 ```bash
 make lint
 ```
-
-#### Testing
-
-Continuous Integration Testing is done with the
-[.travis.yml](https://github.com/iancleary/ansible-desktop/blob/main/.travis.yml) file and [PyUp](https://pyup.io/).
-
-Multiple jobs test independent portions of the installation.
-
-### Requirements to merge code (Pull Request Process)
-
-- you must include test coverage
-- you must update the documentation
-- you must run the above scripts to format and line
-
-## Pull Request Process
-
-1. Ensure you include test coverage for all changes
-2. Ensure your code is formatted properly via the command above
-3. Update the documentation and the README.md with details of changes to the interface, this includes new environment
-   variables, function names, decorators, etc..
-4. Increase the version numbers in any examples files and the README.md to the new version that this
-   Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-5. You may merge the Pull Request in once you have the sign-off of another developers, or if you
-   do not have permission to do that, you may request the reviewer to merge it for you.
 
 ---
 
