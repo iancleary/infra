@@ -10,7 +10,10 @@ development:
   hosts:
     code_server:
       ansible_host: 192.168.1.65
-      ansible_user: "iancleary"
+      ansible_user: "administrator"
+    docker_test:
+      ansible_host: 192.168.1.67
+      ansible_user: "administrator"
 
 blog:
   hosts:
@@ -26,10 +29,12 @@ network:
   children:
     dns
     blog
+    docker_test
 
 local_network:
   children:
     dns
+    docker_test
 
 linode:
   children:
