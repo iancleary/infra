@@ -14,6 +14,15 @@ This project adheres to [Calendar Versioning](https://calver.org/), YYYY.MINOR.M
 
 Detailed documentation is hosted by Vercel at <https://infra.iancleary.me>.
 
+## Gettting Started
+
+Install apt and python dependencies:
+
+```bash
+make bootstrap
+make bootstrap-check
+```
+
 --------------------------
 
 ## Changes

@@ -1,4 +1,4 @@
 ---
-- hosts: code_server
+- hosts: docker_test
   roles:
-    - {role: docker, tags: ['install-docker', 'provision']}
+    - {role: iancleary.docker, tags: ['install-docker', 'provision']}
