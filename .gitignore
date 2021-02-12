@@ -132,6 +132,11 @@ yarn-error.log*
 # unknown
 .DS_Store
 
+# Terraform
+.terraform
+*.tfstate
+*.tfstate.backup
+
 # Private inventory file
 .inventory
 
