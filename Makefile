@@ -29,14 +29,15 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PLAYBOOK = ansible-playbook playbook.yml -v -i inventory.yaml --ask-become-pass
+ANSIBLE_PING = cd ansible && ansible docker_test -m ping -v -i inventory.yaml
 
-ANSIBLE = $(ANSIBLE_PLAYBOOK) --ask-pass
+ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v -i inventory.yaml --ask-become-pass --ask-pass
 
 # - to suppress if it doesn't exist
 -include make.env
 
-$(warning ANSIBLE is $(ANSIBLE))
+$(warning ANSIBLE_PING is $(ANSIBLE_PING))
+$(warning ANSIBLE_PLAYBOOK is $(ANSIBLE_PLAYBOOK))
 
 help:
 # http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
@@ -68,15 +69,23 @@ bootstrap-check: ## Check that PATH and requirements are correct
 
 check: DARGS?=
 check: ## Checks personal-computer.yml playbook
-	@$(ANSIBLE) --check
+	@$(ANSIBLE_PLAYBOOK) --check
 
 lint:  ## Lint the repo
 lint:
 	bash scripts/lint.sh
 
+tfinit:
+tfinit: ## Setup Terraform Providers
+	cd terraform; terraform init
+
+tfcreate:
+tfcreate: ## Demo Terraform Create
+	cd terraform; terraform apply
+
 ping:
 ping: ## Ping ansible groups
-	ansible code_server -m ping -i inventory.yaml --ask-pass -vvvv
+	@$(ANSIBLE_PING)
 
 docs-develop:
 docs-develop: ## setup pipenv to develop docs
@@ -91,6 +100,6 @@ docs-live: ## create live docs
 
 install-docker:
 install-docker: ## Install Docker and Docker-Compose
-	@$(ANSIBLE) --tags="install-docker"
+	@$(ANSIBLE_PLAYBOOK) --tags="install-docker"
 
 .DEFAULT_GOAL := help
