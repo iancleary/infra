@@ -15,7 +15,7 @@ The terraform provider setup for Linode was elusive initially.
 
 > Add the following to the top of your `main.tf` file:
 
-```json
+```tf
 // main.tf
 terraform {
   required_providers {
