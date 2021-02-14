@@ -7,7 +7,7 @@ linode_image_ubu2004  = "linode/ubuntu20.04"
 
 ## linode-cli regions list
 ### https://api.linode.com/v4/regions
-linode_region_us_west = "us-central"west
+linode_region_us_west = "us-west"
 linode_region_us_central = "us-central"
 linode_region_us_east = "us-east"
 linode_region_uk = "eu-west"

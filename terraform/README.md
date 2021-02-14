@@ -3,7 +3,12 @@
 
 ## Setup Linode ipv4 token
 
-I use an environment variable for my access token.
+Modeling of of <https://github.com/selfhostedshow/infra>, I use an config file for token and default password:
+
+```yaml
+---
+- default-root-pass: "supersecretpassword"
+- token: 123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
 
 ```bash
 export TF_VAR_LINODE_TOKEN=replace_me

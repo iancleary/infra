@@ -83,6 +83,11 @@ tfcreate:
 tfcreate: ## Demo Terraform Create
 	cd terraform/demo; terraform apply
 
+tfdestroy:
+tfdestroy: ## Demo Terraform Destroy
+	cd terraform/demo; terraform destroy
+
+
 ping:
 ping: ## Ping ansible groups
 	@$(ANSIBLE_PING)
