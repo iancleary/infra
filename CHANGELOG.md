@@ -12,6 +12,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 - Initial Repo
 - Added ping of `pihole` group per [(#1, 82f665a)](https://github.com/iancleary/ansible-home-network/pull/1/commits/82f665a7e0e7d45cf519c6e2bd00e6577afe11d1)
 - Added Docker & Docker Compose per [(#1)](https://github.com/iancleary/ansible-home-network/pull/1)
+- Terraform for Linode, with help from <https://github.com/selfhostedshow/infra>
 
 [Unreleased]: https://github.com/iancleary/ansible-home-network/compare/v2020.1.0...HEAD
 [2020.1.0]: https://github.com/iancleary/ansible-home-network/releases/tag/v2020.1.0

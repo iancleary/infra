@@ -77,11 +77,11 @@ lint:
 
 tfinit:
 tfinit: ## Setup Terraform Providers
-	cd terraform; terraform init
+	cd terraform/demo; terraform init
 
 tfcreate:
 tfcreate: ## Demo Terraform Create
-	cd terraform; terraform apply
+	cd terraform/demo; terraform apply
 
 ping:
 ping: ## Ping ansible groups
