@@ -7,11 +7,9 @@ Modeling of of <https://github.com/selfhostedshow/infra>, I use an config file f
 
 ```yaml
 ---
-- default-root-pass: "supersecretpassword"
-- token: 123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
-
-```bash
-export TF_VAR_LINODE_TOKEN=replace_me
+# ~/.config/tokens/linode.yaml
+default-root-pass: "supersecretpassword"
+token: 123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
 ```
 
 ## Add support for third-party provider
