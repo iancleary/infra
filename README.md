@@ -24,6 +24,35 @@ make bootstrap
 make bootstrap-check
 ```
 
+## Linode API Configuration Tokens
+
+Create an ipv4 token for your machine.
+
+### Terraform
+
+Modeling of of <https://github.com/selfhostedshow/infra>, I use an config file for token and default password:
+
+```yaml
+---
+# ~/.config/tokens/linode.yaml
+default-root-pass: "supersecretpassword"
+token: 123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
+```
+
+### Ansible
+
+Install roles and collections
+
+```bash
+ansible-galaxy install -r ansible/requirements.yml
+```
+
+The Ansible communnity.general.linode plugin requires the LINODE_ACCESS_TOKEN to be set as an environment variable
+
+```bash
+export LINODE_ACCESS_TOKEN=123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
+```
+
 --------------------------
 
 ## Changes

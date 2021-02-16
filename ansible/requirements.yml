@@ -1,2 +1,6 @@
 ---
+roles:
 - src: iancleary.docker
+
+collections:
+- name: community.general
