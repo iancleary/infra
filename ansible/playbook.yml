@@ -2,3 +2,10 @@
 - hosts: docker_test
   roles:
     - {role: iancleary.docker, tags: ['install-docker', 'provision']}
+
+- name: Setup Linodes from Terraform
+  hosts: terraform
+  vars:
+    ansible_user: "root"
+  roles:
+    - {role: iancleary.docker, tags: ['install-docker']}

@@ -1,2 +1,6 @@
 ---
 plugin: community.general.linode
+tags:
+  - "terraform_demo"
+groups:
+  terraform: "'terraform_demo' in (tags|list)"

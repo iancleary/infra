@@ -29,9 +29,9 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PING = cd ansible && ansible docker_test -m ping -v -i inventory.yaml
+ANSIBLE_PING = cd ansible && ansible docker_test -m ping -v
 
-ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v -i inventory.yaml --ask-become-pass --ask-pass
+ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v --ask-become-pass
 
 # - to suppress if it doesn't exist
 -include make.env
@@ -87,6 +87,9 @@ tfdestroy:
 tfdestroy: ## Demo Terraform Destroy
 	cd terraform/demo; terraform destroy
 
+inventory:
+inventory: ## Show ansible inventory
+	cd ansible; ansible-inventory --list
 
 ping:
 ping: ## Ping ansible groups
@@ -106,5 +109,9 @@ docs-live: ## create live docs
 install-docker:
 install-docker: ## Install Docker and Docker-Compose
 	@$(ANSIBLE_PLAYBOOK) --tags="install-docker"
+
+ansible-terraform-demo:
+ansible-terraform-demo: ## Ansible Playbook for Terraform
+	@$(ANSIBLE_PLAYBOOK) --tags="terraform-demo"
 
 .DEFAULT_GOAL := help

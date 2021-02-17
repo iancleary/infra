@@ -1,4 +1,4 @@
-demo_nodename = "linode_terraform_demo"
+demo_nodename = "terraform_demo"
 
 ######
 # Linode specific
