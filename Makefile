@@ -29,9 +29,9 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PING = cd ansible && ansible docker_test -m ping -v
+ANSIBLE_PING = cd ansible && ansible terraform -m ping -v
 
-ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v --ask-become-pass
+ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v
 
 # - to suppress if it doesn't exist
 -include make.env
@@ -66,6 +66,7 @@ bootstrap: ## Installs dependencies needed to run playbook
 bootstrap-check:
 bootstrap-check: ## Check that PATH and requirements are correct
 	@ansible --version | grep "python version"
+	terraform --version
 
 check: DARGS?=
 check: ## Checks personal-computer.yml playbook
@@ -87,31 +88,16 @@ tfdestroy:
 tfdestroy: ## Demo Terraform Destroy
 	cd terraform/demo; terraform destroy
 
-inventory:
-inventory: ## Show ansible inventory
+ansible-inventory:
+ansible-inventory: ## Show ansible inventory
 	cd ansible; ansible-inventory --list
 
-ping:
-ping: ## Ping ansible groups
+ansible-ping:
+ansible-ping: ## Ping ansible groups
 	@$(ANSIBLE_PING)
 
-docs-develop:
-docs-develop: ## setup pipenv to develop docs
-	pipenv
-	pipenv run python3 -m pip install -r requirements.txt
-	pipenv shell
-	# make docs-live
-
-docs-live:
-docs-live: ## create live docs
-	bash scripts/docs-live.sh
-
-install-docker:
-install-docker: ## Install Docker and Docker-Compose
+ansible-linode:
+ansible-linode: ## Install Docker and Docker-Compose
 	@$(ANSIBLE_PLAYBOOK) --tags="install-docker"
-
-ansible-terraform-demo:
-ansible-terraform-demo: ## Ansible Playbook for Terraform
-	@$(ANSIBLE_PLAYBOOK) --tags="terraform-demo"
 
 .DEFAULT_GOAL := help

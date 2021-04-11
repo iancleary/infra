@@ -1,3 +1,18 @@
+terraform {
+  required_providers {
+    linode = {
+      source = "linode/linode"
+      version = "1.14.3"
+    }
+  }
+}
+
+provider "linode" {
+  # https://developers.linode.com/api/v4/#section/Personal-Access-Token
+  token = yamldecode(file("~/.config/tokens/linode.yaml"))["token"]
+}
+
+
 module "node" {
 
   source = "../modules/linode-instance"
@@ -7,7 +22,7 @@ module "node" {
   region = var.linode_region_us_west
   type   = var.linode_type_5usd_1gb
   sshkeys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDu8C0K++pvSsGA9DAfHSr4emPAx5cgizR0phgMPVpReO75X7H7oD7MjeKmxOQNc3wDibIbL2lyO7Zj16ZcX307M/2RErZEGMnpLSfme1QvBPBZHhykqkxnCYD9sKsr5H3qEVEfdWGb6kArpyewUZ1ro598QPh0GZy1YBH8aVpDcUssTGYs9ubHfMkDPPap5MKqFp8gGO79SJwKA4RUUhMzRu51xpB976+wi3CuV8Qulhq5BTzzeNxf2S8muqFv24dmkOt1IEvhbCkW9CDm/D8PMeC+oPsUJ8zbyn6PBcZaccLpBMObvRa8sk2QjuKG7tYSYMpjCdo94Xb2Fv4rg9lBfhpXdtXFpMUjpvd6gfssf/kmkX2UNrVATg3vYdf90zYzOIlk6noXtxgD/6stim83SyIekOR1f/2PDeup5wAkr1IkwLxId7+NIaEdw9uRT3VOQDjqaRM+DogYSkdtQkVubIQRiMdiWFjOEkVgNFdmUbGYqG4pJXDanjBJ0fLLkVIgl34NhTPXtq/BbFa+IT3fBkEO6G2m05j3XWKGNHNztZuP7WsGqdaQHXmEpDFj/YzSOh/AMzY2qtqAtjXupIstDNBaz5yBbedJdfJdXJnbb2YVgxtwVmI8vD2sw6+dJ/7kcuFbeBYMwxS/2WmtOR8QX59MvvUJx1CSfGucDibkRQ== iancleary@hey.com"
+    data.linode_sshkey.ian.ssh_key
   ]
   root_pass = yamldecode(file("~/.config/tokens/linode.yaml"))["default-root-pass"]
 }

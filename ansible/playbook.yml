@@ -1,8 +1,4 @@
 ---
-- hosts: docker_test
-  roles:
-    - {role: iancleary.docker, tags: ['install-docker', 'provision']}
-
 - name: Setup Linodes from Terraform
   hosts: terraform
   vars:

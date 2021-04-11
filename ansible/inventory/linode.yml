@@ -1,6 +1,6 @@
 ---
-plugin: community.general.linode
-tags:
-  - "terraform_demo"
-groups:
-  terraform: "'terraform_demo' in (tags|list)"
+terraform:
+  hosts:
+    198.74.51.9
+  vars:
+    ansible_ssh_user: "root"

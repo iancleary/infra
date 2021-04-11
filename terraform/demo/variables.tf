@@ -26,6 +26,11 @@ variable "linode_region_uk" {
   default = "eu-west"
 }
 
+## linode-cli sshkeys list
+data "linode_sshkey" "ian" {
+  label = "ian"
+}
+
 variable "linode_type_5usd_1gb" {
   #1vcpu, 1gb, 25gb
   type    = string
