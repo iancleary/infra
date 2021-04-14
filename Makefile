@@ -29,9 +29,9 @@ endif
 
 
 # Main Ansible Playbook Command (prompts for password)
-ANSIBLE_PING = cd ansible && ansible terraform -m ping -v
+ANSIBLE_PING = cd ansible && ansible terraform -u root -m ping -v
 
-ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -v
+ANSIBLE_PLAYBOOK = cd ansible && ansible-playbook playbook.yml -u root -v
 
 # - to suppress if it doesn't exist
 -include make.env
@@ -87,6 +87,10 @@ tfcreate: ## Demo Terraform Create
 tfdestroy:
 tfdestroy: ## Demo Terraform Destroy
 	cd terraform/demo; terraform destroy
+
+ansible-requirements:
+ansible-requirements:  ## Install ansible galaxy roles
+	ansible-galaxy install -r ansible/requirements.yml
 
 ansible-inventory:
 ansible-inventory: ## Show ansible inventory

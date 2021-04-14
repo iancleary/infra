@@ -47,12 +47,6 @@ Install roles and collections
 ansible-galaxy install -r ansible/requirements.yml
 ```
 
-The Ansible communnity.general.linode plugin requires the LINODE_ACCESS_TOKEN to be set as an environment variable
-
-```bash
-export LINODE_ACCESS_TOKEN=123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
-```
-
 --------------------------
 
 ## Changes

@@ -2,5 +2,6 @@
 terraform:
   hosts:
     198.74.51.9
-  vars:
-    ansible_ssh_user: "root"
+  # vars:
+  #   ansible_user: "root"
+    # become_user: "root"
