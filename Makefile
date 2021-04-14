@@ -100,8 +100,8 @@ ansible-ping:
 ansible-ping: ## Ping ansible groups
 	@$(ANSIBLE_PING)
 
-ansible-linode:
-ansible-linode: ## Install Docker and Docker-Compose
-	@$(ANSIBLE_PLAYBOOK) --tags="install-docker"
+ansible-playbook:
+ansible-playbook: ## Install Docker and Docker-Compose
+	@$(ANSIBLE_PLAYBOOK)
 
 .DEFAULT_GOAL := help
