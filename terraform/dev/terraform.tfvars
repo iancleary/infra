@@ -1,1 +1,1 @@
-dev_domain = "icancclearynow.com"
+domain = "iancleary.dev"
