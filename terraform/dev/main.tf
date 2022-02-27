@@ -50,9 +50,22 @@ resource "vercel_domain" "dev" {
   name = var.domain
 }
 
+resource "vercel_dns" "root" {
+  domain = vercel_domain.dev.name
+  type   = "A"
+  value  = local.cloud1_ipv4
+  name   = ""
+}
 resource "vercel_dns" "www" {
   domain = vercel_domain.dev.name
   type   = "A"
   value  = local.cloud1_ipv4
   name   = "www"
+}
+
+resource "vercel_dns" "cloud1" {
+  domain = vercel_domain.dev.name
+  type   = "A"
+  value  = local.cloud1_ipv4
+  name   = "cloud1"
 }
