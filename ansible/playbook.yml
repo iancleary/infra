@@ -1,5 +1,6 @@
 ---
 - name: Setup Linodes from Terraform
-  hosts: terraform
+  hosts: cloud1
+  remote_user: root
   roles:
-    - {role: geerlingguy.docker, tags: ['install-docker']}
+    - {role: iancleary.docker, tags: ['install-docker']}
