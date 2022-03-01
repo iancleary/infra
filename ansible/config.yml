@@ -1,0 +1,6 @@
+---
+email_accounts:
+  - email: "hello@iancleary.dev"
+    password: password1234
+  - email: "test@iancleary.dev"
+    password: password1234

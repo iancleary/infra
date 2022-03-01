@@ -1,52 +1,16 @@
 ---
 
-- name: Create directories for files and data
-  ansible.builtin.file:
-    path: /opt/mailserver
-    state: directory
-    mode: '0755'
-  with_items:
-    - /opt/mailserver
-    - /opt/mailserver/docker-data/dms/mail-data/
-    - /opt/mailserver/docker-data/dms/mail-state/
-    - /opt/mailserver/docker-data/dms/mail-logs/
-    - /opt/mailserver/docker-data/dms/config/
+# - include_tasks: provision.yml
+#   tags: 
+#     - provision
 
-- name: Template the docker-compose.yml to ~/mailserver
-  ansible.builtin.template:
-    src: docker-compose.yml.j2
-    dest: /opt/mailserver/docker-compose.yml
-    owner: root
-    group: root
-    mode: '0644'
+- include_tasks: configure.yml
+  tags: 
+    - configure
 
-- name: Template the docker-compose.yml to ~/mailserver
-  ansible.builtin.template:
-    src: mailserver.env.j2
-    dest: /opt/mailserver/mailserver.env
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Install python3-pip apt package
-  ansible.builtin.apt:
-    name: python3-pip
-
-- name: Install docker python package
-  pip:
-    name: docker
-    executable: pip3
-
-- name: Pull an image
-  community.docker.docker_image:
-    name: mailserver/docker-mailserver
-    tag: latest
-    source: pull
-    # Select platform for pulling. If not specified, will pull whatever docker prefers.
-    pull:
-      platform: amd64
-
-- name: Run docker-compose.yml up
-  ansible.builtin.command: docker-compose -f docker-compose.yml up
-  args:
-    chdir: /opt/mailserver/
+# - name: Run docker-compose.yml up
+#   ansible.builtin.command: docker-compose up
+#   args:
+#     chdir: /opt/mailserver/
+#   tags:
+#     - start

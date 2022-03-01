@@ -1,0 +1,55 @@
+---
+- name: Create directories for files and data
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - /opt/mailserver
+    - /opt/mailserver/docker-data/dms/mail-data/
+    - /opt/mailserver/docker-data/dms/mail-state/
+    - /opt/mailserver/docker-data/dms/mail-logs/
+    - /opt/mailserver/docker-data/dms/config/
+    - /opt/mailserver/docker-data/certbot
+
+- name: Template the docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: /opt/mailserver/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Template the docker-compose.yml
+  ansible.builtin.template:
+    src: mailserver.env.j2
+    dest: /opt/mailserver/mailserver.env
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy the setup.sh script
+  ansible.builtin.copy:
+    src: setup.sh
+    dest: /opt/mailserver/setup.sh
+    owner: root
+    group: root
+    mode: '750'
+
+- name: Install python3-pip apt package
+  ansible.builtin.apt:
+    name: python3-pip
+
+- name: Install docker python package
+  pip:
+    name: docker
+    executable: pip3
+
+- name: Pull an image
+  community.docker.docker_image:
+    name: mailserver/docker-mailserver
+    tag: latest
+    source: pull
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+    pull:
+      platform: amd64

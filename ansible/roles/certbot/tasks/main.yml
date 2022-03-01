@@ -1,0 +1,24 @@
+---
+- name: Install snapd
+  ansible.builtin.apt:
+    name: snapd
+
+- name: Ensure that your version of snapd is up to date 
+  ansible.builtin.command: snap install core
+
+- name: Ensure that your version of snapd is up to date 
+  ansible.builtin.command: snap refresh core
+
+- name: Remove certbot via apt
+  ansible.builtin.apt:
+    name: certbot
+    state: absent
+
+- name: Install certbot snap
+  community.general.snap:
+    name: certbot
+    state: present
+    classic: yes
+
+- name: Prepare the Certbot command 
+  ansible.builtin.command: ln -s /snap/bin/certbot /usr/bin/certbot
