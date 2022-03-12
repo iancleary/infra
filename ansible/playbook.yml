@@ -1,5 +1,20 @@
 ---
 - name: Setup Linodes from Terraform
-  hosts: terraform
+  hosts: cloud1
+  remote_user: root
+  
+  # vars_files:
+  #   - default.config.yml
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ['always']
+
   roles:
-    - {role: geerlingguy.docker, tags: ['install-docker']}
+    - {role: iancleary.docker, tags: ['install-docker']}
+    - {role: certbot, tags: ['ssl', 'certbot']}
+    - {role: mailserver-provision, tags: ['provision']}
+    - {role: mailserver-configure, tags: ['configure']}
+

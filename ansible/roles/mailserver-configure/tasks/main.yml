@@ -1,0 +1,14 @@
+---
+
+- include_tasks: provision.yml
+
+- include_tasks: configure.yml
+  tags: 
+    - configure
+
+# - name: Run docker-compose.yml up
+#   ansible.builtin.command: docker-compose up
+#   args:
+#     chdir: /opt/mailserver/
+#   tags:
+#     - start
