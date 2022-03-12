@@ -6,6 +6,8 @@
 ansible-galaxy install -r ansible/requirements.yml
 ```
 
-```bash
-python3 -m pip install --user linode_api4
-```
+## Mailserver
+
+Create a certificate using Lets Encrypt
+
+https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#lets-encrypt-recommended

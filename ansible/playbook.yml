@@ -15,4 +15,6 @@
   roles:
     - {role: iancleary.docker, tags: ['install-docker']}
     - {role: certbot, tags: ['ssl', 'certbot']}
-    - {role: mailserver, tags: ['provision', 'configure']}
+    - {role: mailserver-provision, tags: ['provision']}
+    - {role: mailserver-configure, tags: ['configure']}
+
