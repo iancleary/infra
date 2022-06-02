@@ -68,19 +68,20 @@ resource "vercel_dns" "ns2_box_spf1" {
 
 ## --------------------------------------------
 ## MX
-# https://github.com/chronark/terraform-provider-vercel/issues/51
+# https://github.com/vercel/terraform-provider-vercel
+# https://github.com/vercel/terraform-provider-vercel/blob/main/examples/resources/vercel_dns_record/resource.tf
 # 
 # resource "vercel_dns" "mx" {
 #   domain = vercel_domain.prod.name
 #   type   = "MX"
-#   value  = "mail.mailroute.net."
+#   value  = "box.iancleary.me"
 #   name   = ""
 # }
 
 # resource "vercel_dns" "mx_box" {
 #   domain = vercel_domain.prod.name
 #   type   = "MX"
-#   value  = "mail.mailroute.net."
+#   value  = "box.iancleary.me"
 #   name   = "box"
 # }
 
