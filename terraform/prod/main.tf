@@ -33,21 +33,145 @@ output "domain" {
   value = var.domain
 }
 
-## --------------------------------------------
-## SPF1
+
+resource "vercel_dns_record" "mx" {
+  domain = "iancleary.me"
+  type   = "MX"
+  ttl    = 60
+  value  = "box.iancleary.me"
+  name   = ""
+  mx_priority = 10
+}
+
+# Primary MX Record
+resource "vercel_dns_record" "mx_box" {
+  domain = "iancleary.me"
+  type   = "MX"
+  ttl    = 60
+  value  = "box.iancleary.me"
+  name   = "box"
+  mx_priority = 10
+}
+
+resource "vercel_dns_record" "box_ipv4" {
+  domain = "iancleary.me"
+  type   = "A"
+  ttl    = 60
+  value  = var.mail_ipv4
+  name   = "box"
+}
+resource "vercel_dns_record" "box_ipv6" {
+  domain = "iancleary.me"
+  type   = "AAAA"
+  ttl    = 60
+  value  = var.mail_ipv6
+  name   = "box"
+}
+
 resource "vercel_dns_record" "spf1" {
   domain = "iancleary.me"
   type   = "TXT"
   ttl    = 60
-  value  = "v=spf1 mx ip4:${var.mail_ipv4} a:${var.domain} a:box.${var.domain} ~all"
+  value  = "v=spf1 mx -all"
   name   = ""
 }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_autoconfig" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "autoconfig"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_autodiscover" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "autodiscover"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_mta-sts_box" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "mta-sts.box"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+
+# resource "vercel_dns_record" "mx_ns1_box" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "ns1.box"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_ns2_box" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "ns2.box"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_mta-sts" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "mta-sts"
+#   mx_priority = 10
+# }
+
+# # Prevents use of this domain name for incoming mail.
+# resource "vercel_dns_record" "mx_www" {
+#   domain = "iancleary.me"
+#   type   = "MX"
+#   ttl    = 60
+#   value  = "."
+#   name   = "www"
+#   mx_priority = 10
+# }
+
+
+
+
+resource "vercel_dns_record" "autodiscover_spf1" {
+  domain = "iancleary.me"
+  type   = "TXT"
+  ttl    = 60
+  value  = "v=spf1 mx -all"
+  name   = "autodiscover"
+}
+
+resource "vercel_dns_record" "autoconfig_spf1" {
+  domain = "iancleary.me"
+  type   = "TXT"
+  ttl    = 60
+  value  = "v=spf1 mx -all"
+  name   = "autoconfig"
+}
+
 
 resource "vercel_dns_record" "www_spf1" {
   domain = "iancleary.me"
   type   = "TXT"
   ttl    = 60
-  value  = "v=spf1 mx ip4:${var.mail_ipv4} a:${var.domain} a:box.${var.domain} ~all"
+  value  = "v=spf1 mx -all"
   name   = "www"
 }
 
@@ -63,7 +187,7 @@ resource "vercel_dns_record" "mta-sts_box_spf1" {
   domain = "iancleary.me"
   type   = "TXT"
   ttl    = 60
-  value  = "v=spf1 mx ip4:${var.mail_ipv4} a:${var.domain} a:box.${var.domain} ~all"
+  value  = "v=spf1 mx -all"
   name   = "mta-sts.box"
 }
 
@@ -71,7 +195,7 @@ resource "vercel_dns_record" "ns1_box_spf1" {
   domain = "iancleary.me"
   type   = "TXT"
   ttl    = 60
-  value  = "v=spf1 mx ip4:${var.mail_ipv4} a:${var.domain} a:box.${var.domain} ~all"
+  value  = "v=spf1 mx -all"
   name   = "ns1.box"
 }
 
@@ -79,34 +203,10 @@ resource "vercel_dns_record" "ns2_box_spf1" {
   domain = "iancleary.me"
   type   = "TXT"
   ttl    = 60
-  value  = "v=spf1 mx ip4:${var.mail_ipv4} a:${var.domain} a:box.${var.domain} ~all"
+  value  = "v=spf1 mx -all"
   name   = "ns2.box"
 }
 
-
-
-## --------------------------------------------
-## MX
-# https://github.com/vercel/terraform-provider-vercel
-# https://github.com/vercel/terraform-provider-vercel/blob/main/examples/resources/vercel_dns_record/resource.tf
-# 
-resource "vercel_dns_record" "mx" {
-  domain = "iancleary.me"
-  type   = "MX"
-  ttl    = 60
-  value  = "box.iancleary.me"
-  name   = ""
-  mx_priority = 10
-}
-
-resource "vercel_dns_record" "mx_box" {
-  domain = "iancleary.me"
-  type   = "MX"
-  ttl    = 60
-  value  = "box.iancleary.me"
-  name   = "box"
-  mx_priority = 10
-}
 
 ## --------------------------------------------
 ## A
@@ -134,13 +234,6 @@ resource "vercel_dns_record" "mta_sts_ipv4" {
   name   = "mta-sts"
 }
 
-resource "vercel_dns_record" "box_ipv4" {
-  domain = "iancleary.me"
-  type   = "A"
-  ttl    = 60
-  value  = var.mail_ipv4
-  name   = "box"
-}
 
 resource "vercel_dns_record" "mta_sts_box_ipv4" {
   domain = "iancleary.me"
@@ -191,13 +284,7 @@ resource "vercel_dns_record" "mta_sts_ipv6" {
   name   = "mta-sts"
 }
 
-resource "vercel_dns_record" "box_ipv6" {
-  domain = "iancleary.me"
-  type   = "AAAA"
-  ttl    = 60
-  value  = var.mail_ipv6
-  name   = "box"
-}
+
 
 resource "vercel_dns_record" "mta_sts_box_ipv6" {
   domain = "iancleary.me"
@@ -221,6 +308,32 @@ resource "vercel_dns_record" "ns2_box_ipv6" {
   ttl    = 60
   value  = var.mail_ipv6
   name   = "ns2.box"
+}
+
+resource "vercel_dns_record" "caldav_src" {
+  domain = "iancleary.me"
+  type   = "SRV"
+  ttl    = 60
+  srv = {
+    port     = 443
+    weight   = 65534
+    priority = 65534
+    target   = "box.iancleary.me."
+  }
+  name   = "_caldavs._tcp"
+}
+
+resource "vercel_dns_record" "carddav_src" {
+  domain = "iancleary.me"
+  type   = "SRV"
+  ttl    = 60
+  srv = {
+    port     = 443
+    weight   = 65534
+    priority = 65534
+    target   = "box.iancleary.me."
+  }
+  name   = "_carddavs._tcp"
 }
 
 
