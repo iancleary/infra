@@ -1,14 +1,14 @@
 terraform {
   required_providers {
     vercel = {
-      source = "chronark/vercel"
-      version = "0.14.2"
+      source = "vercel/vercel"
+      version = "0.6.0"
     }
   }
 }
 
 provider "vercel" {
   # https://vercel.com/account/tokens
-  token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
+  api_token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
 }
 
