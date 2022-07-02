@@ -1,6 +1,6 @@
 ---
-- name: Setup Linodes from Terraform
-  hosts: cloud1
+- name: Configure Mail In A Box
+  hosts: mail
   remote_user: root
   
   # vars_files:
@@ -13,8 +13,4 @@
       tags: ['always']
 
   roles:
-    - {role: iancleary.docker, tags: ['install-docker']}
-    - {role: certbot, tags: ['ssl', 'certbot']}
-    - {role: mailserver-provision, tags: ['provision']}
-    - {role: mailserver-configure, tags: ['configure']}
-
+    - {role: github-users, tags: ['ssh-keys']}

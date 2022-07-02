@@ -18,7 +18,7 @@ resource "vercel_project_domain" "portfolio" {
 # The status_code can optionally be controlled.
 resource "vercel_project_domain" "portfolio_redirect" {
   project_id = vercel_project.portfolio.id
-  domain     = "www.${vercel_project_domain.portfolio.domain}"
+  domain     = "www.${var.domain}"
 
   redirect             = vercel_project_domain.portfolio.domain
   redirect_status_code = 307
@@ -27,6 +27,14 @@ resource "vercel_project_domain" "portfolio_redirect" {
 resource "vercel_deployment" "portfolio" {
   project_id = vercel_project.portfolio.id
   ref        = "main" # or a git branch
+}
+
+resource "vercel_dns_record" "www" {
+  domain = "iancleary.me"
+  type   = "A"
+  ttl    = 60
+  value  = "76.76.21.21"
+  name   = "www"
 }
 
 output "domain" {
