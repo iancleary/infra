@@ -1,3 +1,13 @@
+terraform {
+  cloud {
+    organization = "iancleary"
+
+    workspaces {
+      name = "infra-prod"
+    }
+  }
+}
+
 resource "vercel_project" "portfolio" {
   name      = "portfolio"
   framework = "nextjs"

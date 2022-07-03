@@ -7,8 +7,9 @@ terraform {
   }
 }
 
-provider "vercel" {
-  # https://vercel.com/account/tokens
-  api_token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
-}
+# Switched to Terraform Cloud
+# provider "vercel" {
+#   # https://vercel.com/account/tokens
+#   api_token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
+# }
 
