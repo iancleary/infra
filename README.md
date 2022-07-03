@@ -14,6 +14,8 @@ Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/int
 
 Modeling of of <https://github.com/selfhostedshow/infra>, I use an config file for token and default password for Linode.  I've extended this concept for Vercel as well.  These tokens are used with Terraform.
 
+> I'm in the processing of migrating to (learning) terraform cloud.  In that environment I'm using environment variables (sensitive) rather than plaintext tokens on my machines.
+
 ### Linode
 ```yaml
 ---
