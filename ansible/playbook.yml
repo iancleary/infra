@@ -1,6 +1,6 @@
 ---
 - name: Configure Mail In A Box
-  hosts: mail
+  hosts: all
   remote_user: root
   
   # vars_files:
@@ -14,3 +14,11 @@
 
   roles:
     - {role: github-users, tags: ['ssh-keys']}
+    
+- name: Setup Gitlab
+  hosts: gitlab
+  remote_user: root
+
+  roles:
+    - {role: tailscale, tags: ['tailscale']}
+    - {role: gitlab, tags: ['gitlab']}

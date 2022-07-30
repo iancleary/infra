@@ -1,0 +1,18 @@
+---
+- name: Update repositories cache and install dependencies
+  ansible.builtin.apt:
+    name:
+      - curl 
+      - openssh-server
+      - ca-certificates
+      - tzdata
+      - perl
+    update_cache: yes
+
+- name: Install postfix to send email notifications
+  ansible.builtin.apt:
+    name: postfix
+
+- name: Install a .deb package from the internet
+  ansible.builtin.apt:
+    deb: https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/{{ ansible_distribution_release}}/gitlab-ce_{{ gitlab_version }}-ce.0_amd64.deb

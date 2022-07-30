@@ -5,3 +5,5 @@ github_users_absent: []
 github_users:
   - name: iancleary
     groups: sudo,www-data
+
+gitlab_version: 15.0.5
