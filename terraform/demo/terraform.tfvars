@@ -4,6 +4,7 @@ demo_nodename = "terraform_demo"
 # Linode specific
 ## linode-cli images list
 linode_image_ubu2004  = "linode/ubuntu20.04"
+linode_image_ubu2204  = "linode/ubuntu22.04"
 
 ## linode-cli regions list
 ### https://api.linode.com/v4/regions

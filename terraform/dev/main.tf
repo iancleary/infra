@@ -1,29 +1,12 @@
-# https://registry.terraform.io/providers/chronark/vercel/latest/doc
 terraform {
-  required_providers {
-    vercel = {
-      source = "vercel/vercel"
-      version = "0.6.0"
-    }
-    linode = {
-      source = "linode/linode"
-      version = "1.25.0"
+  cloud {
+    organization = "iancleary"
+
+    workspaces {
+      name = "infra-dev"
     }
   }
 }
-
-
-provider "vercel" {
-  # https://vercel.com/account/tokens
-  api_token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
-}
-
-provider "linode" {
-  # https://developers.linode.com/api/v4/#section/Personal-Access-Token
-  token = yamldecode(file("~/.config/tokens/linode.yaml"))["token"]
-}
-
-###### END PROVIDER CONFIGURATION ######
 
 resource "vercel_project" "portfolio" {
   name      = "dev"
