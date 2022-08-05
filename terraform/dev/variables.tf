@@ -11,6 +11,12 @@ variable "linode_image_ubu2004" {
   default = "linode/ubuntu20.04"
 }
 
+variable "linode_image_ubu2204" {
+  type    = string
+  default = "linode/ubuntu22.04"
+}
+
+
 variable "linode_region_us_west" {
   type    = string
   default = "us-west"
@@ -57,4 +63,12 @@ variable "linode_type_40usd_8gb" {
   #4vcpu, 8gb, 160gb
   type    = string
   default = "g6-standard-3"
+}
+
+variable "linode_default_root_password" {
+  type    = string
+}
+
+variable "linode_token" {
+  type    = string  
 }

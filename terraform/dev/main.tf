@@ -8,6 +8,10 @@ terraform {
   }
 }
 
+provider "linode" {
+    token = var.linode_token
+}
+
 resource "vercel_project" "portfolio" {
   name      = "dev"
   framework = "nextjs"
@@ -38,3 +42,27 @@ resource "vercel_deployment" "portfolio_example" {
   project_id = vercel_project.portfolio.id
   ref        = "main" # or a git branch
 }
+
+# resource "linode_instance" "docker_mailserver" {
+#   image  = var.linode_image_ubu2204
+#   label  = var.nodename
+#   region = var.linode_region_us_west
+#   type   = var.linode_type_5usd_1gb
+#   authorized_keys = [
+#     data.linode_sshkey.ian.ssh_key
+#   ]
+#   root_pass = var.linode_default_root_password
+# }
+
+# output "ipv4" {
+#   value = tolist(linode_instance.docker_mailserver.ipv4)[0]
+# }
+
+# output "ipv6" {
+#   value = replace(linode_instance.docker_mailserver.ipv6, "/128", "")
+# }
+
+# locals {
+#   ipv4 = tolist(linode_instance.docker_mailserver.ipv4)[0]
+#   ipv6 = replace(linode_instance.docker_mailserver.ipv6, "/128", "")
+# }

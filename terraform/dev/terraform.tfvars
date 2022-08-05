@@ -1,6 +1,6 @@
 domain = "iancleary.dev"
 
-nodename = "cloud1"
+nodename = "docker_mailserver"
 
 ######
 # Linode specific
