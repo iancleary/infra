@@ -4,8 +4,8 @@ services:
     container_name: mailserver
     # If the FQDN for your mail-server is only two labels (eg: example.com),
     # you can assign this entirely to `hostname` and remove `domainname`.
-    hostname: cloud1
-    domainname: cloud1.iancleary.dev
+    hostname: mail
+    domainname: mail.iancleary.dev
     env_file: mailserver.env
     # More information about the mail-server ports:
     # https://docker-mailserver.github.io/docker-mailserver/edge/config/security/understanding-the-ports/
