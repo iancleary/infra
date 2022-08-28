@@ -14,5 +14,11 @@
     name: tailscale
     update_cache: yes
 
-# - name: Prepare the Certbot command 
-#   ansible.builtin.command: ln -s /snap/bin/certbot /usr/bin/certbot
+# login directly via ssh
+# connect your machine to your Tailscale network and authenticate in your browser:
+
+## sudo tailscale up
+
+# You’re connected! You can find your Tailscale IPv4 address by running:
+
+## tailscale ip -4

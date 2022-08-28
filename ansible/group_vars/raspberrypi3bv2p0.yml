@@ -1,0 +1,7 @@
+---
+github_users_authorized_keys_exclusive: true
+github_url: https://github.com
+github_users_absent: []
+github_users:
+  - name: iancleary
+    groups: sudo,www-data

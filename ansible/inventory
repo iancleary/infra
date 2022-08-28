@@ -3,3 +3,6 @@ box.iancleary.me
 
 [gitlab]
 gitlab.iancleary.github.beta.tailscale.net
+
+[raspberrypi3bv2p0]
+192.168.1.78
