@@ -5,3 +5,8 @@ github_users_absent: []
 github_users:
   - name: iancleary
     groups: sudo,www-data
+adguard_home_user: iancleary
+docker_install_compose: true
+docker_compose_version: 2.10.2
+docker_users:
+  - iancleary
