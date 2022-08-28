@@ -11,3 +11,32 @@ ansible-galaxy install -r ansible/requirements.yml
 Create a certificate using Lets Encrypt
 
 https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#lets-encrypt-recommended
+
+
+## become password
+ansible-playbook raspberrypis.yml --extra-vars='ansible_become_pass=replace-me-with-password'
+
+## Setup user on remote machine
+
+Run the playbook to execute the `github_users` role to allow `iancleary` to exits
+
+# login as original user
+ssh pi@192.168.1.78
+
+# update password of iancleary
+sudo password iancleary
+# enter new password
+# confirm new password
+
+Change username in playbooks
+
+From
+```yaml
+  remote_user: pi/ubuntu/etc.
+```
+
+
+From
+```yaml
+  remote_user: iancleary
+```

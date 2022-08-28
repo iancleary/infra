@@ -1,0 +1,8 @@
+---
+- name: Setup Raspberry Pis
+  hosts: raspberrypi3bv2p0
+  remote_user: iancleary
+
+  roles:
+    - {role: github-users, become: true, tags: ['ssh-keys']}
+    - {role: tailscale, become: true, tags: ['tailscale']}
