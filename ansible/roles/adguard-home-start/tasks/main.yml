@@ -1,0 +1,6 @@
+---
+- name: Create and start services
+  community.docker.docker_compose:
+    project_src: "/home/{{ adguard_home_user }}/adguard-home/"
+    state: present
+  register: output

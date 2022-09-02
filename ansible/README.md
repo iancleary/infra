@@ -16,6 +16,9 @@ https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#
 ## become password
 ansible-playbook raspberrypi3bv2p0.yml --extra-vars='ansible_become_pass=replace-me-with-password'
 
+> Adguard home
+> ansible-playbook raspberrypi3bv2p0.yml --tags='adguard-home-start' --extra-vars='ansible_become_pass=replace-me-with-password'
+
 ## Setup user on remote machine
 
 Run the playbook to execute the `github_users` role to allow `iancleary` to exits

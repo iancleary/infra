@@ -11,18 +11,6 @@
     state: directory
     mode: '0755'
 
-- name: Install python3 pip
-  become: true
-  ansible.builtin.apt:
-    name: python3-pip
-
-- name: Install python packages
-  ansible.builtin.pip:
-    name: 
-      - docker==6.0.0
-      - docker-compose==1.29.2
-      - PyYAML
-
 - name: pull adguardhome docker image
   community.docker.docker_image:
     name: adguard/adguardhome
@@ -38,10 +26,4 @@
     dest: "/home/{{ adguard_home_user }}/adguard-home/docker-compose.yml"
     owner: "{{ adguard_home_user }}"
     group: "{{ adguard_home_user }}"
-    mode: '0644'
-
-- name: Create and start services
-  community.docker.docker_compose:
-    project_src: /home/{{ adguard_home_user }}/adguard-home/
-    state: present
-  register: output
+    mode: '0755'
