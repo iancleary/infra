@@ -14,7 +14,7 @@ https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#
 
 
 ## become password
-ansible-playbook raspberrypis.yml --extra-vars='ansible_become_pass=replace-me-with-password'
+ansible-playbook raspberrypi3bv2p0.yml --extra-vars='ansible_become_pass=replace-me-with-password'
 
 ## Setup user on remote machine
 
