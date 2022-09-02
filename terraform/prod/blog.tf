@@ -26,3 +26,11 @@ resource "vercel_deployment" "blog" {
   project_id = vercel_project.blog.id
   ref        = "main" # or a git branch
 }
+
+resource "vercel_dns_record" "blog_www" {
+  domain = var.domain
+  type   = "A"
+  ttl    = 60
+  value  = "76.76.21.21"
+  name   = "www"
+}
