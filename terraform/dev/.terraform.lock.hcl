@@ -6,6 +6,7 @@ provider "registry.terraform.io/linode/linode" {
   constraints = "1.29.1"
   hashes = [
     "h1:9GuPmdnN5+5mIVx2Oc9uKiFMRpdjyq0kGrRjwx/60SU=",
+    "h1:MieJWxjuHKGw8idCtnI0LaoyfQQvOSesThY+IoeMrIQ=",
     "zh:0483c1c890e01d20289419b28dae20d81e2c8dd800d2c7a706038a1a745cf8bf",
     "zh:0cce739abbfba9b8b13861f1724b7f619739448b7b8a6c56269bf87356e11f3f",
     "zh:1a54ace070aa3b6e6a8b47b95d5a9a114bce863918f28fdf4e7996bbe28b77b0",
@@ -27,6 +28,7 @@ provider "registry.terraform.io/vercel/vercel" {
   version     = "0.6.1"
   constraints = "0.6.1"
   hashes = [
+    "h1:8bLRhftjmSeeEEqOCfsJaNDYc5i9XnMh0XAnciRTWYE=",
     "h1:HbEG/XSmxTkVBpP9wrVAsBF5kej5x46O937OR4ouPSo=",
     "zh:0dbcc8696166f9103268d9b5ee3429e33273235b46de907d6c9f089e5660ba7f",
     "zh:1842d39eca121e67a5b66d881ed863a617e49374ae9e83caeaff986b605ee0fc",
