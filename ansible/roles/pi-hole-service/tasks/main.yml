@@ -1,6 +1,6 @@
 ---
 - name: Create and start services
   community.docker.docker_compose:
-    project_src: "/home/{{ adguard_home_user }}/adguard-home/"
-    state: present
+    project_src: "/home/{{ pi_hole_user }}/pi-hole/"
+    state: "{{ pi_hole_state }}"
   register: output

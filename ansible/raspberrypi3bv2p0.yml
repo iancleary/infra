@@ -8,5 +8,7 @@
     - {role: tailscale, become: true, tags: ['tailscale']}
     - {role: iancleary.docker, become: true, tags: ['docker']}
     - {role: adguard-home-provision, tags: ['adguard-home-provision']}
-    - {role: adguard-home-start, tags: ['adguard-home-start']}
+    - {role: adguard-home-service, tags: ['adguard-home-service']}
+    - {role: pi-hole-provision, tags: ['pi-hole-provision']}
+    - {role: pi-hole-service, tags: ['pi-hole-service']}
     

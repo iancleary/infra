@@ -6,7 +6,8 @@ github_users:
   - name: iancleary
     groups: sudo,www-data
 adguard_home_user: iancleary
-docker_install_compose: true
-docker_compose_python_version: 1.29.2
+adguard_home_state: absent
+pi_hole_user: iancleary
+pi_hole_state: present
 docker_users:
   - iancleary
