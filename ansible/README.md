@@ -13,12 +13,24 @@ Create a certificate using Lets Encrypt
 https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#lets-encrypt-recommended
 
 
+## Ansible Vault
+
+My vault file(s):
+
+* [group_vars/raspberrypi3bv2p0/vault.yml](group_vars/raspberrypi3bv2p0/vault.yml)
+
+References:
+
+* <https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html#variables-and-vaults>
+* <https://docs.ansible.com/ansible/latest/user_guide/vault.html#using-encrypted-variables-and-files>
+
+
 ## become password
 ansible-playbook raspberrypi3bv2p0.yml --extra-vars='ansible_become_pass=replace-me-with-password'
 
 > pihole
-> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-provision' --extra-vars='ansible_become_pass=replace-me-with-password'
-> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-service' --extra-vars='ansible_become_pass=replace-me-with-password'
+> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-provision' --extra-vars='ansible_become_pass=replace-me-with-password' --ask-vault-pass
+> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-service' --extra-vars='ansible_become_pass=replace-me-with-password' --ask-vault-pass
 
 ## Setup user on remote machine
 
