@@ -16,8 +16,9 @@ https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#
 ## become password
 ansible-playbook raspberrypi3bv2p0.yml --extra-vars='ansible_become_pass=replace-me-with-password'
 
-> Adguard home
-> ansible-playbook raspberrypi3bv2p0.yml --tags='adguard-home-start' --extra-vars='ansible_become_pass=replace-me-with-password'
+> pihole
+> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-provision' --extra-vars='ansible_become_pass=replace-me-with-password'
+> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-service' --extra-vars='ansible_become_pass=replace-me-with-password'
 
 ## Setup user on remote machine
 

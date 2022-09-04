@@ -1,15 +1,18 @@
 ---
-- name: Create a workdir directory if it does not exist
+- name: Create a adguard-home directory if it does not exist
   ansible.builtin.file:
-    path: "/home/{{ adguard_home_user }}/adguard-home/workdir/"
+    path: "/home/{{ adguard_home_user }}/adguard-home/"
     state: directory
-    mode: '0755'
 
-- name: Create a confdir directory if it does not exist
-  ansible.builtin.file:
-    path: "/home/{{ adguard_home_user }}/adguard-home/confdir/"
-    state: directory
-    mode: '0755'
+# - name: Create a workdir directory if it does not exist
+#   ansible.builtin.file:
+#     path: "/home/{{ adguard_home_user }}/adguard-home/workdir/"
+#     state: directory
+
+# - name: Create a confdir directory if it does not exist
+#   ansible.builtin.file:
+#     path: "/home/{{ adguard_home_user }}/adguard-home/confdir/"
+#     state: directory
 
 - name: pull adguardhome docker image
   community.docker.docker_image:
@@ -26,4 +29,4 @@
     dest: "/home/{{ adguard_home_user }}/adguard-home/docker-compose.yml"
     owner: "{{ adguard_home_user }}"
     group: "{{ adguard_home_user }}"
-    mode: '0755'
+    mode: '755'

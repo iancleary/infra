@@ -1,15 +1,8 @@
 ---
-- name: Create a etc-pihole directory if it does not exist
+- name: Create a pi-hole directory if it does not exist
   ansible.builtin.file:
-    path: "/home/{{ pi_hole_user }}/pi-hole/etc-pihole/"
+    path: "/home/{{ pi_hole_user }}/pi-hole"
     state: directory
-    mode: '0755'
-
-- name: Create a etc-dnsmasq.d directory if it does not exist
-  ansible.builtin.file:
-    path: "/home/{{ pi_hole_user }}/pi-hole/etc-dnsmasq.d/"
-    state: directory
-    mode: '0755'
 
 - name: pull pihole/pihole docker image
   community.docker.docker_image:
@@ -26,4 +19,4 @@
     dest: "/home/{{ pi_hole_user }}/pi-hole/docker-compose.yml"
     owner: "{{ pi_hole_user }}"
     group: "{{ pi_hole_user }}"
-    mode: '0755'
+    mode: '755'
