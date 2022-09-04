@@ -5,10 +5,13 @@ github_users_absent: []
 github_users:
   - name: iancleary
     groups: sudo,www-data
+
+docker_users:
+  - iancleary
+
 adguard_home_user: iancleary
 adguard_home_state: absent
+
 pi_hole_user: iancleary
 pi_hole_state: present
 pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
-docker_users:
-  - iancleary
