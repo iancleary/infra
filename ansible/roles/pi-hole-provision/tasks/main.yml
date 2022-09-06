@@ -1,17 +1,45 @@
 ---
+- name: Docker - install apt package dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      # docker apt dependencies
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - software-properties-common
+      # docker-compose (via pip)
+      - python3-pip 
+    state: present
+
+- name: Docker - Add users to the group
+  become: true
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: ["docker"]
+    append: "yes"
+  loop: "{{ docker_users|flatten(levels=1) }}"
+
+- name: Install python packages for ansible management of docker and docker-compose
+  ansible.builtin.pip:
+    name: 
+      - docker=={{ docker_pip_version }}
+      - docker-compose=={{ docker_compose_pip_version }} 
+      - PyYAML
+
 - name: Create a pi-hole directory if it does not exist
   ansible.builtin.file:
     path: "/home/{{ pi_hole_user }}/pi-hole"
     state: directory
 
-- name: pull pihole/pihole docker image
-  community.docker.docker_image:
-    name: pihole/pihole
-    source: pull
-    tag: latest
-    # Select platform for pulling. If not specified, will pull whatever docker prefers.
-    pull:
-      platform: arm64
+# - name: pull pihole/pihole docker image
+#   community.docker.docker_image:
+#     name: pihole/pihole
+#     source: pull
+#     tag: latest
+#     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
 - name: Template docker-compose file to pi-hole folder
   ansible.builtin.template:

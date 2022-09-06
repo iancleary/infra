@@ -1,11 +1,17 @@
 ---
+iancleary_user_password: "{{ vault_iancleary_user_password }}"
+pi_user_password: "{{ vault_pi_user_password }}"
+
 github_users_authorized_keys_exclusive: true
 github_url: https://github.com
 github_users_absent: []
 github_users:
   - name: iancleary
-    groups: sudo,www-data
+    groups: sudo,www-data,docker
+    # password: "{{ vault_iancleary_user_password }}"
 
+docker_pip_version: 6.0.0
+docker_compose_pip_version: 1.29.2
 docker_users:
   - iancleary
 
