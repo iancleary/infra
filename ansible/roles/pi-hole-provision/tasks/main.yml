@@ -34,12 +34,28 @@
     path: "/home/{{ pi_hole_user }}/pi-hole"
     state: directory
 
-# - name: pull pihole/pihole docker image
-#   community.docker.docker_image:
-#     name: pihole/pihole
-#     source: pull
-#     tag: latest
-#     # Select platform for pulling. If not specified, will pull whatever docker prefers.
+- name: pull pihole/pihole docker image
+  community.docker.docker_image:
+    name: pihole/pihole
+    source: pull
+    tag: latest
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: disable DNSStubListener in Systemd-resolve
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^DNSStubListener'
+    line: DNSStubListener=no
+
+- name: Create a symbolic link
+  become: true
+  ansible.builtin.file:
+    src: /run/systemd/resolve/resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+
+# will need to reboot
 
 - name: Template docker-compose file to pi-hole folder
   ansible.builtin.template:
@@ -47,4 +63,3 @@
     dest: "/home/{{ pi_hole_user }}/pi-hole/docker-compose.yml"
     owner: "{{ pi_hole_user }}"
     group: "{{ pi_hole_user }}"
-    mode: '755'

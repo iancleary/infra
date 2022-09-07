@@ -5,6 +5,7 @@
     shell: /bin/bash
     createhome: true
     groups: "{{ item.groups | default(omit) }}"
+    append: "yes"
     home: /home/{{ item.name | default(item) }}
     password: "{{ item.password | default(omit) }}"
     state: present
