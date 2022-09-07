@@ -18,6 +18,7 @@ https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#
 My vault file(s):
 
 * [group_vars/raspberrypi3bv2p0/vault.yml](group_vars/raspberrypi3bv2p0/vault.yml)
+* [group_vars/dns-local/vault.yml](group_vars/dns-local/vault.yml)
 
 References:
 
@@ -26,12 +27,12 @@ References:
 
 
 ## become password
-ansible-playbook raspberrypi3bv2p0.yml --extra-vars='ansible_become_pass=replace-me-with-password'
+ansible-playbook dns-local.yml --extra-vars='ansible_become_pass=replace-me-with-password'
 
 > pihole
-> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-provision' --ask-vault-pass
-> ansible-playbook raspberrypi3bv2p0.yml --tags='pi-hole-service' --ask-vault-pass
-> ansible-playbook raspberrypi3bv2p0.yml --ask-vault-pass
+> ansible-playbook dns-local.yml --tags='pi-hole-provision' --ask-vault-pass
+> ansible-playbook dns-local.yml --tags='pi-hole-service' --ask-vault-pass
+> ansible-playbook dns-local.yml --ask-vault-pass
 
 ## Setup user on remote machine
 
