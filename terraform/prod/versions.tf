@@ -4,6 +4,10 @@ terraform {
       source = "vercel/vercel"
       version = "0.6.1"
     }
+    linode = {
+      source  = "linode/linode"
+      version = "1.29.1"
+    }
   }
 }
 
@@ -12,4 +16,3 @@ terraform {
 #   # https://vercel.com/account/tokens
 #   api_token = yamldecode(file("~/.config/tokens/vercel.yaml"))["token"]
 # }
-
