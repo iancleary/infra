@@ -17,4 +17,4 @@ docker_users:
 docker_mailserver_hostname: cloud1
 docker_mailserver_domainname: cloud1.iancleary.me
 docker_mailserver_tag: latest
-docker_mailserver_email_accounts: "{{ vault_email_accounts }}"
+docker_mailserver_email_accounts: "{{ vault_docker_mailserver_email_accounts }}"
