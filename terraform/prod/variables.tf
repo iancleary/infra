@@ -66,3 +66,7 @@ variable "linode_type_40usd_8gb" {
   type    = string
   default = "g6-standard-3"
 }
+
+variable "linode_default_root_password" {
+  type    = string
+}
