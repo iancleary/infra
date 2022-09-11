@@ -1,11 +1,11 @@
 services:
   mailserver:
-    image: docker.io/mailserver/docker-mailserver:latest
+    image: "docker.io/mailserver/docker-mailserver:{{ docker_mailserver_tag }}"
     container_name: mailserver
     # If the FQDN for your mail-server is only two labels (eg: example.com),
     # you can assign this entirely to `hostname` and remove `domainname`.
-    hostname: mail
-    domainname: mail.iancleary.dev
+    hostname: "{{ docker_mailserver_hostname }}"
+    domainname: "{{ docker_mailserver_domainname }}"
     env_file: mailserver.env
     # More information about the mail-server ports:
     # https://docker-mailserver.github.io/docker-mailserver/edge/config/security/understanding-the-ports/
@@ -21,10 +21,12 @@ services:
       - ./docker-data/dms/mail-state/:/var/mail-state/
       - ./docker-data/dms/mail-logs/:/var/log/mail/
       - ./docker-data/dms/config/:/tmp/docker-mailserver/
-      - ./docker-data/certbot/certs/:/etc/letsencrypt # letsencrypt
       - /etc/localtime:/etc/localtime:ro
     restart: always
     stop_grace_period: 1m
     cap_add:
       - NET_ADMIN
-      - SYS_PTRACE
+    healthcheck:
+      test: "ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
+      timeout: 3s
+      retries: 0

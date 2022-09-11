@@ -1,7 +1,4 @@
 ---
-
-- include_tasks: provision.yml
-
 - include_tasks: configure.yml
   tags: 
     - configure

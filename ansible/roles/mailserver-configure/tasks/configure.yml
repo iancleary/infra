@@ -35,4 +35,4 @@
   ansible.builtin.command: ./setup.sh email add {{ item.email }} {{ item.password }}
   args:
     chdir: /opt/mailserver/
-  loop: []
+  with_items: docker_mailserver_email_accounts

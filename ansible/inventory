@@ -7,5 +7,8 @@ gitlab.iancleary.github.beta.tailscale.net
 [raspberrypi3bv2p0]
 192.168.1.78
 
-[dns_local]
+[dns]
 192.168.1.80
+
+[cloud1]
+45.79.79.170

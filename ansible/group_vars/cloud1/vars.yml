@@ -1,0 +1,20 @@
+---
+iancleary_user_password: "{{ vault_iancleary_user_password }}"
+# still need to login as I haven't hashed this for ansible to allow setting via task
+
+github_users_authorized_keys_exclusive: true
+github_url: https://github.com
+github_users_absent: []
+github_users:
+  - name: iancleary
+    groups: sudo,www-data
+
+docker_pip_version: 6.0.0
+docker_compose_pip_version: 1.29.2
+docker_users:
+  - iancleary
+
+docker_mailserver_hostname: cloud1
+docker_mailserver_domainname: cloud1.iancleary.me
+docker_mailserver_tag: latest
+docker_mailserver_email_accounts: "{{ vault_email_accounts }}"
