@@ -19,6 +19,11 @@ variable "linode_image_ubu2004" {
   default = "linode/ubuntu20.04"
 }
 
+variable "linode_image_ubu2204" {
+  type    = string
+  default = "linode/ubuntu22.04"
+}
+
 variable "linode_region_us_west" {
   type    = string
   default = "us-west"
