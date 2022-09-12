@@ -1,6 +1,28 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/linode/linode" {
+  version     = "1.29.1"
+  constraints = "1.29.1"
+  hashes = [
+    "h1:MieJWxjuHKGw8idCtnI0LaoyfQQvOSesThY+IoeMrIQ=",
+    "zh:0483c1c890e01d20289419b28dae20d81e2c8dd800d2c7a706038a1a745cf8bf",
+    "zh:0cce739abbfba9b8b13861f1724b7f619739448b7b8a6c56269bf87356e11f3f",
+    "zh:1a54ace070aa3b6e6a8b47b95d5a9a114bce863918f28fdf4e7996bbe28b77b0",
+    "zh:1f92e8c5c9ce027339efe05ee6d41e5490d5fb1a886df04364498efd275a4e5c",
+    "zh:20455431041440a2d819d33c5b0369a3a603cd08bebedd7f300698808ef754c3",
+    "zh:39fe475dfa87ea09b13cc494cf0b67d6905e4ac5e439bc6ee6c7864b4c355b9f",
+    "zh:43600d314165024715c8752cb9065eefe550484eb7e873bde6bca1a2807de75c",
+    "zh:4a9868fd0f47eeb4e263cb3ade18562cdb06581203c50605585bbceab0f27776",
+    "zh:c738d9f09128c50d909475b616acdb92a2dd8fe98903c93f0809a1f910b1ed59",
+    "zh:de588171958e1e4e9031542d9e18e7337982397b50d171b249a7e6af0f701a80",
+    "zh:e8cdbc58b9a189d92ec986f23a84e84a7e428b6949525a87f6c8bda76d9de95c",
+    "zh:f5c8776a87332671cf2692eca873d7a2dd6c15901c728ce4b4507531a9cd7954",
+    "zh:f72c2193a8cae9cf771153b35b7224cc446664d76398286a4c4d34907cbad6b0",
+    "zh:fe8d6bca6646e8020bd55f4f8b5a6865c44ac5b92ad20d6f83d003e832fc4c5d",
+  ]
+}
+
 provider "registry.terraform.io/vercel/vercel" {
   version     = "0.6.1"
   constraints = "0.6.1"

@@ -16,6 +16,7 @@
     - {role: github-users, tags: ['ssh-keys']}
     - {role: iancleary.docker, tags: ['docker']}
     - {role: mailserver-provision, tags: ['mailserver-provision']}
+    - {role: mailserver-configure, tags: ['mailserver-configure']}
 
 # - name: Configure Cloud 1 (iancleary)
 #   hosts: cloud1
