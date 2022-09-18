@@ -10,10 +10,6 @@ variable "mail_ipv6" {
   type    = string
 }
 
-variable "nodename" {
-  type = string
-}
-
 variable "linode_image_ubu2004" {
   type    = string
   default = "linode/ubuntu20.04"
