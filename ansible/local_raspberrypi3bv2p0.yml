@@ -11,7 +11,7 @@
   hosts: raspberrypi3bv2p0
   remote_user: iancleary
   roles:
-    - {role: tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
+    - {role: iancleary.tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
     # - {role: iancleary.docker, become: true, tags: ['docker']}
     # - {role: adguard-home-provision, tags: ['adguard-home-provision']}
     # - {role: adguard-home-service, tags: ['adguard-home-service']}

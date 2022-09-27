@@ -4,7 +4,7 @@
   remote_user: iancleary
   roles:
     - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ iancleary_user_password }}"}
-    - {role: tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
+    - {role: iancleary.tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
     - {role: iancleary.docker, become: true, tags: ['docker'], ansible_become_password: "{{ iancleary_user_password }}"}
     # docker needs a reboot/logout cycle for group permission to take effect
     - {role: pi-hole-provision, tags: ['pi-hole-provision'], ansible_become_password: "{{ iancleary_user_password }}"}

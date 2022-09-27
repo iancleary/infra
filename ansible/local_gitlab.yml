@@ -4,5 +4,5 @@
   remote_user: root
 
   roles:
-    - {role: tailscale, tags: ['tailscale']}
+    - {role: iancleary.tailscale, tags: ['tailscale']}
     - {role: gitlab, tags: ['gitlab']}
