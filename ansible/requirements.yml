@@ -1,6 +1,7 @@
 ---
 roles:
 - src: iancleary.docker
+- src: iancleary.tailscale
 
 collections:
 - name: community.general
