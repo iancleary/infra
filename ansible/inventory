@@ -10,5 +10,8 @@ gitlab.iancleary.github.beta.tailscale.net
 [dns]
 192.168.1.80
 
+[primary]
+192.168.1.87
+
 [cloud1]
 45.79.79.170
