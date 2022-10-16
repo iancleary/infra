@@ -1,5 +1,5 @@
 ---
-- name: Setup DNS Server
+- name: Setup Ubuntu Server on Unraid
   hosts: primary
   remote_user: iancleary
   roles:
