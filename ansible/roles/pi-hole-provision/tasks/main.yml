@@ -39,6 +39,7 @@
     name: pihole/pihole
     source: pull
     tag: latest
+    force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
 - name: disable DNSStubListener in Systemd-resolve
