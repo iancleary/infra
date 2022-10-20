@@ -20,10 +20,9 @@
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
     state: absent
     remove_volumes: false
-  # when: custom_dns.changed
+  when: custom_dns.changed
 
 - name: Create and start services
   community.docker.docker_compose:
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
     state: "{{ pi_hole_state }}"
-  register: output
