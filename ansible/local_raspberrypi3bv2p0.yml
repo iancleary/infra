@@ -1,20 +1,21 @@
 ---
-- name: Setup Raspberry Pis
-  hosts: raspberrypi3bv2p0
-  remote_user: pi
-  roles:
-    - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ pi_user_password }}"}
+# - name: Setup Raspberry Pis
+#   hosts: raspberrypi3bv2p0
+#   remote_user: pi
+#   roles:
+#     - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ pi_user_password }}"}
 
 # ssh pi@192.168.1.78
 # sudo passwd iancleary
-- name: Setup Raspberry Pis
+- name: Setup Raspberry Pi
   hosts: raspberrypi3bv2p0
   remote_user: iancleary
   roles:
+    - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ iancleary_user_password }}"}
     - {role: iancleary.tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
     # - {role: iancleary.docker, become: true, tags: ['docker']}
     # - {role: adguard-home-provision, tags: ['adguard-home-provision']}
     # - {role: adguard-home-service, tags: ['adguard-home-service']}
     - {role: pi-hole-provision, tags: ['pi-hole-provision'], ansible_become_password: "{{ iancleary_user_password }}"}
-    - {role: pi-hole-service, tags: ['pi-hole-service']}
+    - {role: pi-hole-service, tags: ['pi-hole-service'], ansible_become_password: "{{ iancleary_user_password }}"}
     

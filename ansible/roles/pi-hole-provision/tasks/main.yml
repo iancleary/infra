@@ -49,18 +49,12 @@
     regexp: '^DNSStubListener'
     line: DNSStubListener=no
 
-- name: Create a symbolic link
+- name: Create a symbolic link (not sure about force = yes here on raspberrypi3bv2p0)
   become: true
   ansible.builtin.file:
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
     state: link
+    force: yes
 
 # will need to reboot
-
-- name: Template docker-compose file to pi-hole folder
-  ansible.builtin.template:
-    src: docker-compose.yml.j2
-    dest: "/home/{{ pi_hole_user }}/pi-hole/docker-compose.yml"
-    owner: "{{ pi_hole_user }}"
-    group: "{{ pi_hole_user }}"

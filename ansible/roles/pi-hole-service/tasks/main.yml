@@ -1,4 +1,27 @@
 ---
+
+- name: Template docker-compose file to pi-hole folder
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "/home/{{ pi_hole_user }}/pi-hole/docker-compose.yml"
+    owner: "{{ pi_hole_user }}"
+    group: "{{ pi_hole_user }}"
+
+- name: Template custom dns conf file
+  template:
+    src: "custom.list.j2"
+    dest: /home/{{ pi_hole_user }}/pi-hole/etc-pihole/custom.list
+  become: true
+  register: custom_dns
+  # 'pihole restartdns' (can just restart docker stack
+  # if template changed, then add a stop command before this.)
+- name: Stop service if custom dns changed
+  community.docker.docker_compose:
+    project_src: "/home/{{ pi_hole_user }}/pi-hole/"
+    state: absent
+    remove_volumes: false
+  # when: custom_dns.changed
+
 - name: Create and start services
   community.docker.docker_compose:
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
