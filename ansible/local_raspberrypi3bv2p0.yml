@@ -18,4 +18,6 @@
     # - {role: adguard-home-service, tags: ['adguard-home-service']}
     - {role: pi-hole-provision, tags: ['pi-hole-provision'], ansible_become_password: "{{ iancleary_user_password }}"}
     - {role: pi-hole-service, tags: ['pi-hole-service'], ansible_become_password: "{{ iancleary_user_password }}"}
+    - {role: unifi-controller-provision, tags: ['unifi-controller-provision'], ansible_become_password: "{{ iancleary_user_password }}"}
+    - {role: unifi-controller-service, tags: ['unifi-controller-service'], ansible_become_password: "{{ iancleary_user_password }}"}
     

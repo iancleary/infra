@@ -1,0 +1,12 @@
+---
+- name: Template docker-compose file to unifi-controller folder
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "/home/{{ unifi_controller_user }}/unifi-controller/docker-compose.yml"
+    owner: "{{ unifi_controller_user }}"
+    group: "{{ unifi_controller_user }}"
+
+- name: Create and start services
+  community.docker.docker_compose:
+    project_src: "/home/{{ unifi_controller_user }}/unifi-controller/"
+    state: "{{ unifi_controller_state }}"
