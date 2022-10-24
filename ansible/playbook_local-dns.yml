@@ -1,0 +1,6 @@
+---
+- name: Update Local DNS entries
+  hosts: raspberrypi3bv2p0
+  remote_user: iancleary
+  roles:
+    - {role: pi-hole-service, tags: ['pi-hole-service'], ansible_become_password: "{{ iancleary_user_password }}"}

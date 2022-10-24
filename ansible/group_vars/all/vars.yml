@@ -26,8 +26,6 @@ pi_hole_state: present
 pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
 
 pi_hole_dns_entries:
-  - name: pihole.local
-    address: 192.168.1.78
   - name: unraid.local
     address: 192.168.1.42
   - name: tower.local
