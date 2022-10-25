@@ -1,6 +1,6 @@
 ---
-- name: Upgrade and reboot all Raspberry Pis
-  hosts: raspberrypi3bv2p0
+- name: Upgrade and reboot servers, as needed
+  hosts: all
   remote_user: iancleary
   roles:
     - {role: upgrade, become: true, tags: ['upgrade'], ansible_become_password: "{{ iancleary_user_password }}"}

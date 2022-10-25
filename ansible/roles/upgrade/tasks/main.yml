@@ -14,7 +14,7 @@
   ansible.builtin.reboot:
   when: reboot_required_file.stat.exists == true
 
-- name: Remove dependencies that are no longer reboot_required_file.stat.exists
+- name: Remove dependencies that are no longer
   ansible.builtin.apt:
     autoremove: yes
     
