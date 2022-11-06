@@ -3,11 +3,3 @@
   ansible.builtin.file:
     path: "/home/{{ unifi_controller_user }}/unifi-controller"
     state: directory
-
-- name: pull lscr.io/linuxserver/unifi-controller docker image
-  community.docker.docker_image:
-    name: lscr.io/linuxserver/unifi-controller
-    source: pull
-    tag: latest
-    force_source: true
-    # Select platform for pulling. If not specified, will pull whatever docker prefers.

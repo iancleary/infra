@@ -1,4 +1,12 @@
 ---
+- name: pull lscr.io/linuxserver/unifi-controller docker image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/unifi-controller
+    source: pull
+    tag: latest
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
 - name: Template docker-compose file to unifi-controller folder
   ansible.builtin.template:
     src: docker-compose.yml.j2

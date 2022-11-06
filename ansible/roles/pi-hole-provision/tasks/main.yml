@@ -34,14 +34,6 @@
     path: "/home/{{ pi_hole_user }}/pi-hole"
     state: directory
 
-- name: pull pihole/pihole docker image
-  community.docker.docker_image:
-    name: pihole/pihole
-    source: pull
-    tag: latest
-    force_source: true
-    # Select platform for pulling. If not specified, will pull whatever docker prefers.
-
 - name: disable DNSStubListener in Systemd-resolve
   become: true
   ansible.builtin.lineinfile:
