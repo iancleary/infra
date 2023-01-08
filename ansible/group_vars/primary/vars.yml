@@ -1,2 +1,0 @@
----
-ansible_become_password: "{{ vault_iancleary_user_password }}"

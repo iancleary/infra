@@ -8,5 +8,5 @@
     - {role: iancleary.docker, become: true, tags: ['docker'], ansible_become_password: "{{ iancleary_user_password }}"}
     # docker needs a reboot/logout cycle for group permission to take effect
     - {role: pi-hole-provision, tags: ['pi-hole-provision'], ansible_become_password: "{{ iancleary_user_password }}"}
-    - {role: pi-hole-service, tags: ['pi-hole-service']}
+    - {role: pi-hole-service, tags: ['pi-hole-service'], ansible_become_password: "{{ iancleary_user_password }}"}
     
