@@ -1,0 +1,6 @@
+---
+- name: Update servers to have recent public ssh-keys
+  hosts: primary
+  become: true
+  roles:
+    - {role: github-users, tags: ['ssh-keys']}

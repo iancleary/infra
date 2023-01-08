@@ -1,0 +1,3 @@
+{% for dns_entry in pi_hole_dns_entries %}
+{{dns_entry.address}} {{dns_entry.name}}
+{% endfor %}

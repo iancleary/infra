@@ -18,6 +18,18 @@ docker_users:
 adguard_home_user: iancleary
 adguard_home_state: absent
 
+unifi_controller_user: iancleary
+unifi_controller_state: present
+
 pi_hole_user: iancleary
 pi_hole_state: present
 pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
+
+pi_hole_dns_entries:
+  - name: tower.local
+    address: 192.168.1.42
+  - name: homeassistant.local
+    address: 192.168.1.72
+  - name: primary.local
+    address: 192.168.1.87
+

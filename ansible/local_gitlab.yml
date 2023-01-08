@@ -1,8 +1,0 @@
----
-- name: Setup Gitlab
-  hosts: gitlab
-  remote_user: root
-
-  roles:
-    - {role: iancleary.tailscale, tags: ['tailscale']}
-    - {role: gitlab, tags: ['gitlab']}

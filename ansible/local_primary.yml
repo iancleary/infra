@@ -1,8 +1,0 @@
----
-- name: Setup DNS Server
-  hosts: primary
-  remote_user: iancleary
-  roles:
-    - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ iancleary_user_password }}"}
-    - {role: iancleary.tailscale, become: true, tags: ['tailscale'], ansible_become_password: "{{ iancleary_user_password }}"}
-    

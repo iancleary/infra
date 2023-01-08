@@ -1,4 +1,8 @@
 ---
+# - name: Ensure GitHub user accounts are present.
+#   ansible.builtin.debug:
+#     msg: "privilege escalation successful"
+
 - name: Ensure GitHub user accounts are present.
   ansible.builtin.user:
     name: "{{ item.name | default(item) }}"

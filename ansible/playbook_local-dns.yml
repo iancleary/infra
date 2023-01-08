@@ -1,5 +1,5 @@
 ---
-- name: Setup DNS Server
+- name: Update Local DNS entries
   hosts: dns
   remote_user: iancleary
   roles:
