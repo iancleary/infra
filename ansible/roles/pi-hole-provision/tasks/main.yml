@@ -35,6 +35,7 @@
     state: directory
 
 - name: pull pihole/pihole docker image
+  become: true
   community.docker.docker_image:
     name: pihole/pihole
     source: pull

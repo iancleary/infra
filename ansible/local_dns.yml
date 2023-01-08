@@ -1,6 +1,6 @@
 ---
 - name: Setup DNS Server
-  hosts: dns_local
+  hosts: dns
   remote_user: iancleary
   roles:
     - {role: github-users, become: true, tags: ['ssh-keys'], ansible_become_password: "{{ iancleary_user_password }}"}
