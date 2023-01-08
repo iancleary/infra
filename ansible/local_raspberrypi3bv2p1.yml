@@ -1,9 +1,0 @@
----
-- name: Setup Raspberry Pis
-  hosts: raspberrypi3bv2p1
-  remote_user: pi
-
-  roles:
-    - {role: github-users, become: true, tags: ['ssh-keys']}
-    - {role: iancleary.tailscale, become: true, tags: ['tailscale']}
-    - {role: iancleary.docker, become: true, tags: ['docker']}
