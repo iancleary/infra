@@ -6,6 +6,7 @@
     source: pull
     tag: latest
     force_source: true
+  register: new_image
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
 - name: Template docker-compose file to pi-hole folder
@@ -28,7 +29,7 @@
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
     state: absent
     remove_volumes: false
-  when: custom_dns.changed
+  when: custom_dns.changed or new_image.changed
 
 - name: Create and start services
   community.docker.docker_compose:
