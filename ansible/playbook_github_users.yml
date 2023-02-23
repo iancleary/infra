@@ -1,6 +1,5 @@
 ---
-- name: Update servers to have recent public ssh-keys
-  hosts: primary
-  become: true
+- name: Update dns to have recent public ssh-keys
+  hosts: dns
   roles:
-    - {role: github-users, tags: ['ssh-keys']}
+    - {role: github-users, tags: ['ssh-keys'], ansible_become_password: "{{ iancleary_user_password }}"}
