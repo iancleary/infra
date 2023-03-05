@@ -19,9 +19,10 @@ setup:
 # Install applications from Microsoft Store
 winget:
     -winget install Microsoft.WindowsTerminal
+    -winget install Microsoft.VisualStudioCode
 
 # Run all recipes
-all: setup winget terminal desktop vscode containers
+all: setup winget terminal desktop vscode containersgit
 
 # Terminal and Scripts
 terminal: setup
@@ -39,15 +40,6 @@ desktop: setup
     -choco install git.install --params "/GitAndUnixToolsOnPath /NoGitLfs /SChannel /NoAutoCrlf /WindowsTerminal /WindowsTerminalProfile /DefaultBranchName:main /Editor:VisualStudioCode"
     choco install greenshot
     choco install path-copy-copy
-
-# Install VS Code and some Extensions
-vscode: setup
-    # Visual Studio Code: Cross-platform IDE of choice for me
-    choco install vscode
-    choco install vscode-icons
-    choco install vscode-markdownlint
-    choco install vscode-docker
-    choco install vscode-python
 
 # Install Docker
 containers: setup
