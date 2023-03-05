@@ -5,6 +5,14 @@ This repo helps install the [chocolatey](https://docs.chocolatey.org/en-us/) sof
 
 # Choco install
 
-Open a Power Shell terminal as an administrator, and run: * [install.ps1](install.ps1)
+Open a Power Shell terminal as an administrator, and install chocolately:
 
-> While this is a ps1 script, I generally just copy it line by line to avoid changing execution policy
+```ps1
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+```
+
+Then install [just](https://github.com/casey/just) to run the justfile.
+
+`choco install just`

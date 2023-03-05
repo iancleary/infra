@@ -1,0 +1,55 @@
+# use PowerShell instead of sh:
+set shell := ["powershell.exe", "-c"]
+
+# List recipes
+list:
+    @just --list
+
+# avoids choco install -y everywhere in this script
+# Allow global confirmation
+setup:
+    choco feature enable -n=allowGlobalConfirmation
+
+
+## Search from terminal: choco search <package>
+## View locally installed choco packages: choco list --local-only
+## Search visually on site: https://chocolatey.org/packages
+## I like installing the below packages, for example
+
+# Install applications from Microsoft Store
+winget:
+    -winget install Microsoft.WindowsTerminal
+
+# Run all recipes
+all: setup winget terminal desktop vscode containers
+
+# Terminal and Scripts
+terminal: setup
+    # Windows Terminal: Huge improvement over native tooling
+    choco install powershell-core
+    choco install wget
+    choco install gh
+    choco install python3
+    choco install nodejs
+    choco install terraform
+
+# Setup the Desktop with some tools
+desktop: setup
+    choco install powertoys
+    -choco install git.install --params "/GitAndUnixToolsOnPath /NoGitLfs /SChannel /NoAutoCrlf /WindowsTerminal /WindowsTerminalProfile /DefaultBranchName:main /Editor:VisualStudioCode"
+    choco install greenshot
+    choco install path-copy-copy
+
+# Install VS Code and some Extensions
+vscode: setup
+    # Visual Studio Code: Cross-platform IDE of choice for me
+    choco install vscode
+    choco install vscode-icons
+    choco install vscode-markdownlint
+    choco install vscode-docker
+    choco install vscode-python
+
+# Install Docker
+containers: setup
+    choco install Containers Microsoft-Hyper-V --source windowsfeatures
+    choco install docker-desktop
