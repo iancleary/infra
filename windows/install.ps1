@@ -91,4 +91,3 @@ choco install path-copy-copy
 
 # Node
 choco install nodejs
-choco install yarn
