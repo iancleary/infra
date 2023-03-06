@@ -16,7 +16,7 @@ in
     programs.git = {
         enable = true;
         userName  = "iancleary";
-        userEmail = "hello@iancleary.me";
+        userEmail = "github@iancleary.me";
     };
     home.file = {
 
