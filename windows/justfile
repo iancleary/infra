@@ -45,3 +45,7 @@ desktop: setup
 containers: setup
     choco install Containers Microsoft-Hyper-V --source windowsfeatures
     choco install docker-desktop
+
+# Upgrade all packages
+upgrade:
+    choco upgrade all -y
