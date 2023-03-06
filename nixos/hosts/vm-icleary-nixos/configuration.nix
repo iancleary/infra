@@ -17,7 +17,7 @@
       ./modules/networking/networkmanager/enabled.nix
       ./modules/networking/openssh/enabled.nix
       ./modules/networking/wait-online.nix
-      ./modules/nixos-version/22.11.nix
+      ./modules/nixos-version/22.11.nix # IMPORTANT
       ./modules/timezone/America-Phoenix.nix
       ./modules/unfree/allowed.nix
       ./modules/virtualbox/guest-enabled.nix
