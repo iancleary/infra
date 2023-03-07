@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 HOST=`hostname`
 if [[ ! -z "$1" ]]; then
 	HOST=$1
@@ -9,18 +7,6 @@ if [[ ! -e "hosts/$HOST/configuration.nix" ]] || [[ ! -e "hosts/$HOST/hardware-c
 	echo "missing $HOST.nix or $HOST-hardware.nix" >&2
 	exit 1
 fi
-
-function make_dir() {
-	sudo mkdir -p "/etc/nixos/$1"
-}
-
-function make_symlink_file() {
-	sudo ln -f "$1" "/etc/nixos/$1"
-}
-
-function make_symlink_dir() {
-	sudo ln -s "$1" "/etc/nixos/$1"
-}
 
 function clean_local_folder() {
 	sudo rm -rf "/etc/nixos/$1"
