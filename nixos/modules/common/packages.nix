@@ -15,6 +15,7 @@
     wget
     docker
     gh
+    just
     python38
     python39
     python310
