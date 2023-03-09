@@ -12,6 +12,34 @@ https://github.com/michaelpj/nixos-config/blob/master/modules/home.nix
 
 https://github.com/NixOS/nixpkgs/issues/154696#issuecomment-1012026159
 
+## First Run
+
+Edit:
+
+* update hostname
+* add user to `vboxsf` group
+
+Run:
+
+```bash
+cd /etc/nixos
+sudo nixos-rebuild switch
+sudo reboot now
+```
+
+Then setup a shared folder, copy the public ssh key over to `/mnt/shared/authorized_keys`.
+
+Then run
+
+```bash
+cd /etc/nixos
+sudo mkdir ssh
+sudo cp /mnt/shared/authorized_keys /etc/nixos/ssh/authorized_keys
+```
+
+> Then clone this repo onto the shared folder and run the [update-config.sh](update-config.sh) script to change the contents of `/etc/nixos/` to mirror this git repo.
+
+**Setup home manager before rebuilding!**
 
 ## Home Manager
 
