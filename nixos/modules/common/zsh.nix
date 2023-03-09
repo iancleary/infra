@@ -8,30 +8,30 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    colorls
-    oh-my-zsh
     zsh
-    zsh-history
-    zsh-completions
-    zsh-powerlevel10k
-    zsh-syntax-highlighting
   ];
 
+  # https://github.com/nix-community/home-manager/issues/605#issuecomment-753667922
   fonts.fontconfig.enable = true;
 
-  # https://nixos.wiki/wiki/Fonts
+  # fonts.fontDir.enable = true;
+
+  ########
+  ## When using SSH, Windows Terminal, or VS Code with a shared directory
+  ## You need the fonts installed on the host machine, not the Virtual Machine
+  ## Below installs them on the Virtual Machine.
+  ##
+  ## To install them on your local machine
+  ## https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+  ########
+
+  # # https://nixos.wiki/wiki/Fonts
   fonts.fonts = with pkgs; [
     meslo-lgs-nf
-    # noto-fonts
-    # noto-fonts-cjk
-    # noto-fonts-emoji
-    # liberation_ttf
-    # fira-code
-    # fira-code-symbols
-    # mplus-outline-fonts.githubRelease
-    # dina-font
-    # proggyfonts
   ];
+  fonts.fontconfig.defaultFonts.serif = ["meslo-lgs-nf"];
+  fonts.fontconfig.defaultFonts.sansSerif = ["meslo-lgs-nf"];
+  fonts.fontconfig.defaultFonts.monospace = ["meslo-lgs-nf"];
 
   # https://nixos.wiki/wiki/Command_Shell
   # Many programs look at /etc/shells to determine if a user is a "normal" user and not a "system" user. 
@@ -39,14 +39,8 @@
   # To add a shell to /etc/shells use the following line in your config:
   environment.shells = with pkgs; [ zsh ];
 
-  # Enable ZSH
-  programs.zsh.enable = true;
-
-  # Enable oh-my-zsh
-  programs.zsh.ohMyZsh = {
-    enable = true;
-    plugins = [ "gitfast" "yarn" "zsh-syntax-highlighting" "powerlevel10k" ];
-  }; 
+  # https://nix-community.github.io/home-manager/options.html#opt-programs.zsh.enableCompletion
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # https://nixos.wiki/wiki/Command_Shell
   users.defaultUserShell = pkgs.zsh;
