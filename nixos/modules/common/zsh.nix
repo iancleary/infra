@@ -16,10 +16,22 @@
 
   # fonts.fontDir.enable = true;
 
+  ########
+  ## When using SSH, Windows Terminal, or VS Code with a shared directory
+  ## You need the fonts installed on the host machine, not the Virtual Machine
+  ## Below installs them on the Virtual Machine.
+  ##
+  ## To install them on your local machine
+  ## https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+  ########
+
   # # https://nixos.wiki/wiki/Fonts
   fonts.fonts = with pkgs; [
     meslo-lgs-nf
   ];
+  fonts.fontconfig.defaultFonts.serif = ["meslo-lgs-nf"];
+  fonts.fontconfig.defaultFonts.sansSerif = ["meslo-lgs-nf"];
+  fonts.fontconfig.defaultFonts.monospace = ["meslo-lgs-nf"];
 
   # https://nixos.wiki/wiki/Command_Shell
   # Many programs look at /etc/shells to determine if a user is a "normal" user and not a "system" user. 

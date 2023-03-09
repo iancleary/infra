@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home-manager.users.icleary = {
@@ -25,18 +25,21 @@
         # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         enableCompletion = true;
         enableSyntaxHighlighting = true;
-        # oh-my-zsh = {
-        #     enable = true;
-        # };
+        # https://discourse.nixos.org/t/using-an-external-oh-my-zsh-theme-with-zsh-in-nix/6142/2
         plugins = [
             {
                 name = "powerlevel10k";
                 src = pkgs.zsh-powerlevel10k;
                 file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
             }
+            {
+                name = "powerlevel10k-config";
+                # src is relative to the directory you run `sudo nixos-rebuild x` from,
+                # not relative to the /etc/nixos/configuration.nix file!
+                src = lib.cleanSource /etc/nixos/modules/common/p10k-config;
+                file = "p10k.zsh";
+            }
         ];
     };
-  };
-
-  fonts.fontconfig.enable = true;
+  }; 
 }
