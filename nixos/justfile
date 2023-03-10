@@ -1,0 +1,22 @@
+# list recipes
+help:
+  just --list
+
+now := `date +"%Y-%m-%d_%H.%M.%S"`
+hostname := `uname -n`
+
+# echo hostname (uname -n)
+echo:
+  @echo "{{ hostname }}"
+
+# Copy the nixos config in repo to /etc/nixos
+update: 
+  bash update-config.sh "{{ hostname }}"
+
+# Run `sudo nixos-rebuild switch`
+switch:
+  sudo nixos-rebuild switch
+
+# Reboot
+reboot:
+  sudo reboot now
