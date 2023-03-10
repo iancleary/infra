@@ -8,11 +8,15 @@ This repo demonstrates my use of the Infrastructure as Code philosophy using [Ni
 
 ### Windows Laptops and Desktops
 
-I originally started down a path of using dotfiles and ansible to manage my (Ubuntu LTS) desktop configuration, [iancleary/ubuntu-dev-playbook](https://github.com/iancleary/ubuntu-dev-playbook).
+I originally started down a path of using [dotfiles](https://github.com/iancleary/dotfiles_old) and ansible to manage my (Ubuntu LTS) desktop configuration, [iancleary/ubuntu-dev-playbook](https://github.com/iancleary/ubuntu-dev-playbook).
 
 Since then, I've discovered the Nix package manager, and the NixOS Operating System.
 
-At work (Payload Systems Engineer), the ubiquitous operating system is Windows.  I've dabbled with Ubuntu LTS as a host operating system, but the Microsoft ecosystem can be high friction, depending on what kind of tasks you do, day to day.
+I still use a dotfiles repo, [iancleary/dotfiles](https://github.com/iancleary/dotfiles), but have switched from [yadm](https://yadm.io) to [chezmoi](https://chezmoi.io), as the latter supports Windows, while `yadm` is Unix only.  I recommend both, but Chezmoi fit my changing needs.
+
+At work ([Payload Systems Engineering on Communications Satellites](https://en.wikipedia.org/wiki/Communications_satellite)), the ubiquitous operating system is Windows.
+
+I've dabbled with Ubuntu LTS as a host operating system, but the Microsoft ecosystem can be high friction, depending on what kind of tasks you do, day to day.
 I went to try Windows Subsystem for Linux, but experienced issues while connecting to the work VPN and DNS issues, when using WSL2.  There are probably ways to get that to work now (at the time of writing this) or in the future.  However, that's not where I want to spend my time.
 
 So, for now, I've focused on how to cultivate all the tools and systems I'd like, while using Windows as the host Operating System.
