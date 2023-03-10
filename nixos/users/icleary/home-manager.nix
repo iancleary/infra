@@ -9,7 +9,7 @@
         nix-zsh-completions
     ];
 
-    home.file.".p10k.zsh".source = /etc/nixos/users/icleary/dotfiles/.p10k.zsh;
+    home.file.".p10k.zsh".source = ./dotfiles/.p10k.zsh;
     
     programs.zsh = {
         enable = true;
