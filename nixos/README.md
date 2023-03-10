@@ -20,6 +20,7 @@ Edit:
 
 * update hostname
 * add user to `vboxsf` group
+* add `just` to `environment.systemPackages`
 
 Run:
 
