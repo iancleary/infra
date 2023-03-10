@@ -8,6 +8,8 @@
         colorls
         nix-zsh-completions
     ];
+
+    home.file.".p10k.zsh".source = /etc/nixos/users/iancleary/dotfiles/.p10k.zsh;
     
     programs.zsh = {
         enable = true;
@@ -18,11 +20,20 @@
         };
         # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         enableCompletion = true;
-        # enableSyntaxHighlighting = true;
         
         # https://nixos.org/manual/nix/stable/language/values.html#type-string
         # https://discourse.nixos.org/t/need-help-understanding-how-to-escape-special-characters-in-the-list-of-str-type/11389/4
+        
+
+        ####
+        # On each machine, run p10k configure once.  That should create ~/.p10k.zsh with my preferences.
+        ####
+
+        # beginning of file
         initExtraFirst = (builtins.readFile /etc/nixos/modules/common/p10k-config/instant_prompt.zsh);
+
+        # end of file
+        initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh";
 
         # https://discourse.nixos.org/t/using-an-external-oh-my-zsh-theme-with-zsh-in-nix/6142/2
         plugins = [
@@ -49,13 +60,13 @@
                 src = pkgs.zsh-powerlevel10k;
                 file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
             }
-            {
-                name = "powerlevel10k-config";
-                # src is relative to the directory you run `sudo nixos-rebuild x` from,
-                # not relative to the /etc/nixos/configuration.nix file!
-                src = lib.cleanSource /etc/nixos/modules/common/p10k-config;
-                file = "p10k.zsh";
-            }
+            # {
+            #     name = "powerlevel10k-config";
+            #     # src is relative to the directory you run `sudo nixos-rebuild x` from,
+            #     # not relative to the /etc/nixos/configuration.nix file!
+            #     src = lib.cleanSource /etc/nixos/modules/common/p10k-config;
+            #     file = "p10k.zsh";
+            # }
         ];
     };
   }; 
