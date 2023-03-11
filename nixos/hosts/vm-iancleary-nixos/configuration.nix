@@ -26,6 +26,7 @@
       ./modules/networking/hostname/vm-iancleary-nixos.nix
       ./modules/networking/networkmanager/enabled.nix
       ./modules/networking/openssh/enabled.nix
+      ./modules/networking/openssh/start-ssh-agent.nix
       ./modules/networking/wait-online.nix
 
       ./modules/timezone/America-Phoenix.nix
