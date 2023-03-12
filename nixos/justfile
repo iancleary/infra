@@ -20,3 +20,7 @@ switch:
 # Reboot
 reboot:
   sudo reboot now
+
+# Install pip with python3.10
+python3.10-pip:
+  python3.10 -m ensurepip --default-pip

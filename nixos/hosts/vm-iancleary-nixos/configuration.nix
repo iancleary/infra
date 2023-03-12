@@ -17,6 +17,7 @@
       ./users/iancleary/vboxsf.nix
 
       ./modules/common/docker.nix
+      ./modules/common/localBinInPath.nix
       ./modules/common/packages.nix
       ./modules/common/zsh.nix
       ./modules/common/x11-keymap.nix
