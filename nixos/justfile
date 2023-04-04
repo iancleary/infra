@@ -10,7 +10,7 @@ echo:
   @echo "{{ hostname }}"
 
 # Copy the nixos config in repo to /etc/nixos
-update: 
+update:
   bash update-config.sh "{{ hostname }}"
 
 # Run `sudo nixos-rebuild switch`
