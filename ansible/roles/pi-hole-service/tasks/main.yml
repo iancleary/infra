@@ -17,7 +17,7 @@
     group: "{{ pi_hole_user }}"
 
 - name: Template custom dns conf file
-  template:
+  ansible.builtin.template:
     src: "custom.list.j2"
     dest: /home/{{ pi_hole_user }}/pi-hole/etc-pihole/custom.list
   become: true
