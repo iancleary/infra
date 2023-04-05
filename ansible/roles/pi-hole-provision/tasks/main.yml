@@ -34,6 +34,11 @@
     path: "/home/{{ pi_hole_user }}/pi-hole"
     state: directory
 
+- name: Create a pi-hole/etc-pihole/ directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ pi_hole_user }}/pi-hole/etc-pihole/"
+    state: directory
+
 - name: disable DNSStubListener in Systemd-resolve
   become: true
   ansible.builtin.lineinfile:
