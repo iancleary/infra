@@ -30,4 +30,3 @@ pi_hole_dns_entries:
     address: 192.168.1.42
   - name: homeassistant.local
     address: 192.168.1.72
-

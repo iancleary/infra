@@ -11,7 +11,7 @@
       - lsb-release
       - software-properties-common
       # docker-compose (via pip)
-      - python3-pip 
+      - python3-pip
     state: present
 
 - name: Docker - Add users to the group
@@ -24,9 +24,9 @@
 
 - name: Install python packages for ansible management of docker and docker-compose
   ansible.builtin.pip:
-    name: 
+    name:
       - docker=={{ docker_pip_version }}
-      - docker-compose=={{ docker_compose_pip_version }} 
+      - docker-compose=={{ docker_compose_pip_version }}
       - PyYAML
 
 - name: Create a pi-hole directory if it does not exist

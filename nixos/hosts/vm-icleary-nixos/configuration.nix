@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      
+
       ./modules/nixos-version/22.11.nix # IMPORTANT
 
       <home-manager/nixos>
@@ -21,9 +21,9 @@
       ./modules/common/packages.nix
       ./modules/common/zsh.nix
       ./modules/common/x11-keymap.nix
-      
+
       ./modules/localization/en_US.nix
-      
+
       ./modules/networking/hostname/vm-icleary-nixos.nix
       ./modules/networking/networkmanager/enabled.nix
       ./modules/networking/openssh/enabled.nix
@@ -31,12 +31,12 @@
       ./modules/networking/wait-online.nix
 
       ./modules/timezone/America-Phoenix.nix
-      
+
       ./modules/unfree/allowed.nix
-      
+
       ./modules/virtualbox/guest-enabled.nix
-      
-      
+
+
     ];
 
   # Bootloader.

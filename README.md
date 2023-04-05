@@ -63,7 +63,7 @@ I have an [UnRaid](https://unraid.net/) server at home, that I use as Network At
 
 * [ansible/playbook_local-dns.yml](ansible/playbook_local-dns.yml)
 
-I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.  
+I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.
 I use Tailscale to connect back to these systems and am protected by WireGuard, and prompt security patches on all my systems, [ansible\playbook_upgrade.yml](ansible\playbook_upgrade.yml).
 
 I also maintain a Tailscale Docker Image for UnRaid, [iancleary/unraid-tailscale](https://github.com/iancleary/unraid-tailscale).

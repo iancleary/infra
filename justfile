@@ -10,5 +10,5 @@ echo:
   @echo "{{ hostname }}"
 
 # Checkout main && pull
-main: 
+main:
   git checkout main && git pull origin main && git branch

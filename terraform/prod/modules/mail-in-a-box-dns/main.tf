@@ -313,5 +313,3 @@ resource "vercel_dns_record" "carddav_src" {
   }
   name   = "_carddavs._tcp"
 }
-
-

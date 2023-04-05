@@ -3,14 +3,14 @@
 {
   home-manager.users.icleary = {
     home.stateVersion = "22.11";
-    
+
     home.packages = with pkgs; [
         colorls
         nix-zsh-completions
     ];
 
     home.file.".p10k.zsh".source = ./dotfiles/.p10k.zsh;
-    
+
     programs.zsh = {
         enable = true;
         shellAliases = {
@@ -20,10 +20,10 @@
         };
         # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         enableCompletion = true;
-        
+
         # https://nixos.org/manual/nix/stable/language/values.html#type-string
         # https://discourse.nixos.org/t/need-help-understanding-how-to-escape-special-characters-in-the-list-of-str-type/11389/4
-        
+
 
         ####
         # On each machine, run p10k configure once.  That should create ~/.p10k.zsh with my preferences.
@@ -62,5 +62,5 @@
             }
         ];
     };
-  }; 
+  };
 }
