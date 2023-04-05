@@ -10,8 +10,3 @@
   # {command}`ssh-add` to add a key to the agent.
   programs.ssh.startAgent = true;
 }
-
-
-
-
-

@@ -11,8 +11,3 @@
   # networking.firewall.enable = false;
 
 }
-
-
-
-
-
