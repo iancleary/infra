@@ -1,0 +1,23 @@
+# list recipes
+help:
+  just --list
+
+now := `date +"%Y-%m-%d_%H.%M.%S"`
+hostname := `uname -n`
+
+
+# Run ansible playbook_github_users.yml
+keyrotate:
+    ansible-playbook playbook_github_users.yml --ask-vault-pass
+
+# Run ansible playbook_local-dns.yml
+dns:
+    ansible-playbook playbook_local-dns.yml --ask-vault-pass
+
+# View ansible-vault
+view:
+    ansible-vault view group_vars/all/vault.yml
+
+# edit ansible-vault
+edit:
+    export EDITOR=nano && ansible-vault edit group_vars/all/vault.yml
