@@ -25,4 +25,7 @@ pi_hole_user: iancleary
 pi_hole_state: present
 pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
 
+pi_hole_ftlconf_local_ipv4: "{{ vault_pi_hole_ftlconf_local_ipv4 }}"
+pi_hole_dns: "{{ vault_pi_hole_dns }}"
+pi_hole_tz: "{{ vault_pi_hole_tz }}"
 pi_hole_dns_entries: "{{ vault_pi_hole_dns_entries }}"

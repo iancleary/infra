@@ -13,8 +13,17 @@ services:
       - "67:67/udp"
       - "80:80/tcp"
     environment:
-      TZ: 'America/Phoenix'
+      # Recommended environment variables
+      TZ: "{{ pi_hole_tz }}"
       WEBPASSWORD: "{{ pi_hole_web_password }}"
+      FTLCONF_LOCAL_IPV4: "{{ pi_hole_ftlconf_local_ipv4 }}"
+      # Optional environment variables
+      PIHOLE_DNS_: "{{ pi_hole_dns }}"
+      PIHOLE_DOMAIN: 'home.arpa'
+      REV_SERVER: 'true'
+      REV_SERVER_DOMAIN: 'home.arpa'
+      REV_SERVER_CIDR: '192.168.1.0/24'
+      REV_SERVER_TARGET: '192.168.1.1'
     # Volumes store your data between container upgrades
     volumes:
       - './etc-pihole:/etc/pihole/'
