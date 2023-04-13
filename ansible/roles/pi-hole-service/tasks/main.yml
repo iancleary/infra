@@ -35,3 +35,7 @@
   community.docker.docker_compose:
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
     state: "{{ pi_hole_state }}"
+
+- name: Update White Wild list
+  ansible.builtin.command:  docker exec pihole pihole --white-wild "{{ item }}"
+  with_items: "{{ pi_hole_white_wild_entries }}"
