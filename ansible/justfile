@@ -14,6 +14,10 @@ keyrotate:
 dns:
     ansible-playbook playbook_local-dns.yml --ask-vault-pass
 
+# Run ansible playbook_local-raspberrypi.yml
+raspberrypi:
+    ansible-playbook -v playbook_local-raspberrypi.yml --ask-vault-pass
+
 # Update hosts via ansible playbook_upgrade.yml
 upgrade:
     ansible-playbook playbook_upgrade.yml --ask-vault-pass

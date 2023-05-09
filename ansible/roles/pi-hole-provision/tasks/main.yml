@@ -1,16 +1,8 @@
 ---
-- name: Docker - install apt package dependencies
+- name: Install apt packages for ansible management of docker and docker-compose
   become: true
   ansible.builtin.apt:
     name:
-      # docker apt dependencies
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - gnupg
-      - lsb-release
-      - software-properties-common
-      # docker-compose (via pip)
       - python3-pip
     state: present
 

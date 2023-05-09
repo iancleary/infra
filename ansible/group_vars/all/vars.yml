@@ -1,5 +1,6 @@
 ---
-iancleary_user_password: "{{ vault_iancleary_user_password }}"
+iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
+iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"
 pi_user_password: "{{ vault_pi_user_password }}"
 
 github_users_authorized_keys_exclusive: true
