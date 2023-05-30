@@ -1,3 +1,4 @@
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub \
   io.github.seadve.Kooha \
   com.github.junrrein.PDFSlicer \
