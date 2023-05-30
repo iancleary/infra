@@ -9,6 +9,6 @@
   users.users.iancleary = {
     isNormalUser = true;
     description = "iancleary on bare-metal";
-    extraGroups = [ "networkmanager" "wheel" "docker" "vboxsf"];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
   };
 }
