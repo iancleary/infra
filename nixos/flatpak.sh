@@ -1,5 +1,5 @@
 flatpak install flathub \
-  com.uploadedlobster.peek \
+  io.github.seadve.Kooha \
   com.github.junrrein.PDFSlicer \
   org.kde.okular \
   com.spotify.Client \
