@@ -8,7 +8,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.iancleary = {
     isNormalUser = true;
-    description = "iancleary on bare-metal";
+    description = "Ian Cleary";
     extraGroups = [ "networkmanager" "wheel" "docker"];
   };
 }
