@@ -24,7 +24,7 @@
   register: custom_dns
   # 'pihole restartdns' (can just restart docker stack
   # if template changed, then add a stop command before this.)
-- name: Stop service if custom dns changed
+- name: Stop service if custom dns changed or a new image was pulled
   community.docker.docker_compose:
     project_src: "/home/{{ pi_hole_user }}/pi-hole/"
     state: absent
