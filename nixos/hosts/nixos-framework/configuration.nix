@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
 
       ./modules/nixos-version/22.11.nix # IMPORTANT
+      # ./modules/nixos-version/23.05.nix # IMPORTANT
 
       <home-manager/nixos>
       ./users/iancleary/bare-metal.nix
