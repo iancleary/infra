@@ -13,7 +13,7 @@
     guake
     linssid
     jetbrains.pycharm-community
-    vscode-fhs
+    vscode-fhs # vscode with FHS (File Hierarchy System) layout
   ];
 
   # Run Vscode under Wayland
