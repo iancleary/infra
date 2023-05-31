@@ -13,6 +13,9 @@
     guake
     linssid
     jetbrains.pycharm-community
+    vscode-fhs # vscode with FHS (File Hierarchy System) layout
   ];
 
+  # Run Vscode under Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

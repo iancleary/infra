@@ -4,6 +4,12 @@
   home-manager.users.iancleary = {
     home.stateVersion = "22.11";
 
+    dconf.settings = {
+      "org/gnome/mutter" = {
+        experimental-features = [ "scale-monitor-framebuffer" ];
+      };
+    };
+
     home.packages = with pkgs; [
         colorls
         nix-zsh-completions
@@ -16,7 +22,19 @@
         shellAliases = {
             l = "ls -alh";
             ll = "ls -l";
-            ls = "colorls";
+            ls = "ls -F";
+            ga = "git add";
+            gc = "git commit -m";
+            gs = "git status";
+            gp = "git push origin";
+            gl = "git pull origin";
+            gcm = "git checkout main && git pull origin main && git branch -D ";
+            gd = "git diff";
+            gds = "git diff --staged";
+            gr = "git reset HEAD --hard";
+            hg = "history|grep";  # search bash history, I swapped the letters for github-cli compatibility
+            left = "ls -t -1";  # most recently edited files
+            cg = "cd `git rev-parse --show-toplevel`";  # go to git main level
         };
         # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         enableCompletion = true;
