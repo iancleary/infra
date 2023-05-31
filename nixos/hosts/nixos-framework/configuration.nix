@@ -28,7 +28,6 @@
       ./modules/desktop/flatpak.nix
       ./modules/desktop/gnome-x11.nix
       ./modules/desktop/packages.nix
-      ./modules/desktop/vscode.nix
 
       ./modules/localization/en_US.nix
 
