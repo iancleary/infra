@@ -4,6 +4,12 @@
   home-manager.users.iancleary = {
     home.stateVersion = "22.11";
 
+    dconf.settings = {
+      "org/gnome/mutter" = {
+        experimental-features = [ "scale-monitor-framebuffer" ];
+      };
+    };
+
     home.packages = with pkgs; [
         colorls
         nix-zsh-completions
