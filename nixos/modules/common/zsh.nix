@@ -11,6 +11,8 @@
     zsh
   ];
 
+  programs.zsh.enable = true;
+
   # https://github.com/nix-community/home-manager/issues/605#issuecomment-753667922
   fonts.fontconfig.enable = true;
 
