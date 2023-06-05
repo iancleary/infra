@@ -8,7 +8,10 @@
   services.openssh = {
     enable = true;
     # require public key authentication for better security
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    settings = {
+      # https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-23.05-notable-changes
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
   };
 }
