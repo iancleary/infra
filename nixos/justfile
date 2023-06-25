@@ -17,6 +17,10 @@ update:
 switch:
   sudo nixos-rebuild switch
 
+# Run `sudo nixos-rebuild switch --upgrade` to upgrade channels
+upgrade:
+  sudo nixos-rebuild switch --upgrade
+
 # Reboot
 reboot:
   sudo reboot now
