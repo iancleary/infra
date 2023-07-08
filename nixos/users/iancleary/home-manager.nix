@@ -51,7 +51,12 @@
         initExtraFirst = (builtins.readFile /etc/nixos/modules/common/p10k-config/instant_prompt.zsh);
 
         # end of file
-        initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh";
+        initExtra =
+        ''
+            [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+            setopt auto_cd
+            cdpath=(.. $HOME $HOME/Development $HOME/infra)
+        '';
 
         # https://discourse.nixos.org/t/using-an-external-oh-my-zsh-theme-with-zsh-in-nix/6142/2
         plugins = [
