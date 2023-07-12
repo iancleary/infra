@@ -1,0 +1,3 @@
+[submodule "nixos"]
+	path = nixos
+	url = git@github.com:iancleary/nixos-config.git
