@@ -4,8 +4,8 @@
   remote_user: iancleary
   roles:
     - {
-        role: setup-odroid,
+        role: odroid_nix_config,
         become: true,
-        tags: ["setup"],
+        tags: ["nix-config"],
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }

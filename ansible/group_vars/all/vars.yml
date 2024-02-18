@@ -7,38 +7,39 @@ odroid_nixos_modules:
   - tailscale.nix
 
 iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
-
+#
+#
 # Below is from old vars.yml
+#
+# iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
+# iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"
+# pi_user_password: "{{ vault_pi_user_password }}"
 
-iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
-iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"
-pi_user_password: "{{ vault_pi_user_password }}"
+# github_users_authorized_keys_exclusive: true
+# github_url: https://github.com
+# github_users_absent: []
+# github_users:
+#   - name: iancleary
+#     groups: sudo,www-data
+#     # password: "{{ vault_iancleary_user_password }}"
 
-github_users_authorized_keys_exclusive: true
-github_url: https://github.com
-github_users_absent: []
-github_users:
-  - name: iancleary
-    groups: sudo,www-data
-    # password: "{{ vault_iancleary_user_password }}"
+# docker_pip_version: 6.0.0
+# docker_compose_pip_version: 1.29.2
+# docker_users:
+#   - iancleary
 
-docker_pip_version: 6.0.0
-docker_compose_pip_version: 1.29.2
-docker_users:
-  - iancleary
+# adguard_home_user: iancleary
+# adguard_home_state: absent
 
-adguard_home_user: iancleary
-adguard_home_state: absent
+# unifi_controller_user: iancleary
+# unifi_controller_state: present
 
-unifi_controller_user: iancleary
-unifi_controller_state: present
+# pi_hole_user: iancleary
+# pi_hole_state: present
+# pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
 
-pi_hole_user: iancleary
-pi_hole_state: present
-pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
-
-pi_hole_ftlconf_local_ipv4: "{{ vault_pi_hole_ftlconf_local_ipv4 }}"
-pi_hole_dns: "{{ vault_pi_hole_dns }}"
-pi_hole_tz: "{{ vault_pi_hole_tz }}"
-pi_hole_dns_entries: "{{ vault_pi_hole_dns_entries }}"
-pi_hole_white_wild_entries: "{{ vault_pi_hole_white_wild_entries }}"
+# pi_hole_ftlconf_local_ipv4: "{{ vault_pi_hole_ftlconf_local_ipv4 }}"
+# pi_hole_dns: "{{ vault_pi_hole_dns }}"
+# pi_hole_tz: "{{ vault_pi_hole_tz }}"
+# pi_hole_dns_entries: "{{ vault_pi_hole_dns_entries }}"
+# pi_hole_white_wild_entries: "{{ vault_pi_hole_white_wild_entries }}"
