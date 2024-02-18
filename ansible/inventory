@@ -6,3 +6,6 @@
 
 [raspberrypi]
 192.168.1.187
+
+[odroid1]
+odroid1.tail2500d.ts.net
