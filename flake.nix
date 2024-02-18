@@ -5,8 +5,6 @@
   inputs = {
     # Simply the greatest package repository on the planet
     nixpkgs.url = "github:NixOS/nixpkgs";
-
-    nixpkgs.config.allowUnfree = true;
     # A set of helper functions for using flakes
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -14,7 +12,7 @@
   outputs = { self, nixpkgs, flake-utils, mach-nix }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
 
         ansible = pkgs.ansible_2_14;
 
