@@ -32,7 +32,7 @@
 
             # # Run when the shell is started up
             shellHook = ''
-              printf "\n\nRepo Tools:\n" && which ansible && which just && which pre-commit && pre-commit install && printf "\n\n";
+              printf "\n\nRepo Tools:\n" && which ansible && which just && which pre-commit && pre-commit install && printf "\n\n" && export GIT_EDITOR=nano;
             '';
           };
         };
