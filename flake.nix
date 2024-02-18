@@ -5,6 +5,8 @@
   inputs = {
     # Simply the greatest package repository on the planet
     nixpkgs.url = "github:NixOS/nixpkgs";
+
+    nixpkgs.config.allowUnfree = true;
     # A set of helper functions for using flakes
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -23,7 +25,13 @@
 
         nano = pkgs.nano;
 
-        repoTools = [ just pre-commit nano ];
+        ssh = pkgs.openssh;
+
+        git = pkgs.git;
+
+        graphite = pkgs.graphite-cli;
+
+        repoTools = [ just pre-commit nano ssh git graphite ];
       in {
         devShells = {
           default = pkgs.mkShell {

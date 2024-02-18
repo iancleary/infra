@@ -1,0 +1,24 @@
+---
+version: "3.7"
+services:
+  tailscale:
+        hostname: books                         # This will become the tailscale device name
+        image: docker.io/tailscale/tailscale:latest
+        volumes:
+            - ./tailscale:/var/lib/tailscale        # State data will be stored in this directory
+            - "/dev/net/tun:/dev/net/tun"           # Required for tailscale to work
+        cap_add:                                    # Required for tailscale to work
+          - net_admin
+          - sys_module
+        command: tailscaled
+
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    network_mode: service:tailscale
+#    ports:
+#      - 13378:80
+    volumes:
+      - ./Audiobooks:/audiobooks
+      - ./Podcasts:/podcasts
+      - ./config:/config
+      - ./metadata>:/metadata
