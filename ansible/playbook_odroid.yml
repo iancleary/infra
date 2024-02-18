@@ -1,0 +1,11 @@
+---
+- name: Update Odroid Server
+  hosts: odroid1
+  remote_user: iancleary
+  roles:
+    - {
+        role: setup-odroid,
+        become: true,
+        tags: ["setup"],
+        ansible_become_password: "{{ iancleary_odroid_user_password }}",
+      }

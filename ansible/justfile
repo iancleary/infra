@@ -6,6 +6,10 @@ now := `date +"%Y-%m-%d_%H.%M.%S"`
 hostname := `uname -n`
 
 
+# Run ansible playbook_odroid.yml
+odroid:
+    ansible-playbook playbook_odroid.yml --ask-vault-pass
+
 # Run ansible playbook_github_users.yml
 keyrotate:
     ansible-playbook playbook_github_users.yml --ask-vault-pass

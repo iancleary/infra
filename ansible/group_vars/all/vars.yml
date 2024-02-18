@@ -1,4 +1,7 @@
 ---
+iancleary_odroid_user_password: "{{ vault_iancleary_odroid_user_password }}"
+odroid_nextcloud_pgsql_password: "{{ vault_odroid_nextcloud_pgsql_password }}"
+
 iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
 iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"
 pi_user_password: "{{ vault_pi_user_password }}"

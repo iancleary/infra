@@ -1,0 +1,55 @@
+---
+- name: Create directories, if it does not exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  become: true
+  with_items:
+    - "/etc/nixos/modules"
+    - "/etc/nixos/secrets"
+
+- name: Template nix configuration files
+  become: true
+  ansible.builtin.template:
+    src: "{{ item.src}}"
+    dest: "{{ item.dest }}"
+    owner: "root"
+    group: "root"
+  with_items:
+    - src: "configuration.nix"
+      dest: "/etc/nixos/configuration.nix"
+    - src: "hardware-configuration.nix"
+      dest: "/etc/nixos/hardware-configuration.nix"
+  register: configuration
+
+- name: Template nix modules
+  become: true
+  ansible.builtin.template:
+    src: "modules/{{ item.src }}"
+    dest: "/etc/nixos/modules/{{ item.dest }}"
+    owner: "root"
+    group: "root"
+  with_items:
+    - src: "nextcloud.nix"
+      dest: "nextcloud.nix"
+    - src: "podman.nix"
+      dest: "podman.nix"
+  register: modules
+
+- name: Template nix secrets
+  become: true
+  ansible.builtin.template:
+    src: "secrets/{{ item.src }}"
+    dest: "/etc/nixos/secrets/{{ item.dest }}"
+    owner: "root"
+    group: "root"
+  with_items:
+    - src: "nextcloud-pgsql.secret.j2"
+      dest: "nextcloud-pgsql.secret"
+  register: secrets
+
+- name: Run nixos-rebuild
+  become: true
+  ansible.builtin.command: nixos-rebuild switch
+  when: configuration.changed or modules.changed or secrets.changed
+  register: rebuild
