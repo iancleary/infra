@@ -7,5 +7,5 @@
         role: setup-odroid,
         become: true,
         tags: ["setup"],
-        ansible_become_password: "{{ iancleary_odroid_user_password }}",
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }
