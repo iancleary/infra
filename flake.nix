@@ -22,6 +22,7 @@
         pre-commit = pkgs.pre-commit;
 
         nano = pkgs.nano;
+        vim = pkgs.vim;
 
         ssh = pkgs.openssh;
 
@@ -29,7 +30,7 @@
 
         graphite = pkgs.graphite-cli;
 
-        repoTools = [ just pre-commit nano ssh git graphite ];
+        repoTools = [ just pre-commit nano ssh git graphite vim];
       in {
         devShells = {
           default = pkgs.mkShell {

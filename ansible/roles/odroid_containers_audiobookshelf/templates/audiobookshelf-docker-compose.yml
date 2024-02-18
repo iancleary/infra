@@ -1,5 +1,6 @@
 ---
 version: "3.7"
+name: audiobookshelf
 services:
   tailscale:
         hostname: books                         # This will become the tailscale device name

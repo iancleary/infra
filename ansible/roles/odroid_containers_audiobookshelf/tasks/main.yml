@@ -1,53 +1,4 @@
 ---
-# - name: Tailscale image present
-#   containers.podman.podman_image:
-#     name: docker.io/tailscale/tailscale:latest
-#     state: present
-
-# - name: Audiobookshelf image present
-#   containers.podman.podman_image:
-#     name: ghcr.io/advplyr/audiobookshelf:latest
-#     state: present
-# - name: Tailscale container present
-#   containers.podman.podman_container:
-#     name: tailscale_audiobookshelf
-#     state: started
-#     hostname: books
-#     image: docker.io/tailscale/tailscale:stable
-#     volumes:
-#       - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale/:/var/lib/tailscale"
-#       - "/dev/net/tun:/dev/net/tun"
-#     cap_add:
-#       - net_admin
-#       - sys_module
-#     command: "tailscaled"
-
-# - name: Audiobookshelf container present
-#   containers.podman.podman_container:
-#     name: audiobookshelf
-#     state: started
-#     image: ghcr.io/advplyr/audiobookshelf:latest
-#     network: container:tailscale_audiobookshelf
-#     ports:
-#       - "8000:8000"
-#     volumes:
-#       - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Audiobooks:/audiobook"
-#       - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Podcasts:/podcasts"
-#       - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/config:/config"
-#       - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/metadata:/metadata"
-
-# - name: Setup the tailscale containers
-#   ansible.builtin.shell: "podman exec -it tailscale_audiobookshelf tailscale up --authkey={{ iancleary_tailscale_auth_key }}"
-
-# - name: Install requests python package for docker/docker-compose
-#   ansible.builtin.pip:
-#     name:
-#       - docker>-1.8.0,<7
-#       - docker-compose>=1.7.0,<2.0.0
-#       - PyYAML>=3.11,<=5.3.1 # https://github.com/yaml/pyyaml/issues/724#issuecomment-1638587228
-#     virtualenv: /home/{{ odroid_container_user }}/docker_venv
-#     virtualenv_site_packages: yes
-
 - name: Pull tailscale image
   community.docker.docker_image:
     name: docker.io/tailscale/tailscale:latest
@@ -64,7 +15,7 @@
     force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
-- name: Create the directory for the compose file
+- name: Create the directories that the compose file uses
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
@@ -87,3 +38,8 @@
   community.docker.docker_compose_v2:
     project_src: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
     state: present
+
+- name: Authenticate the tailscale container
+  ansible.builtin.shell: "docker compose exec tailscale tailscale up --authkey {{ iancleary_tailscale_auth_key }}"
+  args:
+    chdir: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
