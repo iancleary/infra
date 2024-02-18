@@ -1,12 +1,14 @@
 ---
-iancleary_odroid_user_password: "{{ vault_iancleary_odroid_user_password }}"
+odroid_iancleary_user_password: "{{ vault_odroid_iancleary_user_password }}"
 odroid_nextcloud_pgsql_password: "{{ vault_odroid_nextcloud_pgsql_password }}"
-iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
-
-nixos_modules:
+odroid_nixos_modules:
   - nextcloud.nix
   - podman.nix
   - tailscale.nix
+
+iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
+
+# Below is from old vars.yml
 
 iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
 iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"

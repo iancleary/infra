@@ -29,7 +29,7 @@
     dest: "/etc/nixos/modules/{{ item }}"
     owner: "root"
     group: "root"
-  with_items: "{{ nixos_modules }}"
+  with_items: "{{ odroid_nixos_modules }}"
   register: modules
 
 - name: Template nix secrets

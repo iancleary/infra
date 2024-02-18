@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-{% for module in nixos_modules %}
+{% for module in odroid_nixos_modules %}
       ./modules/{{module}}
 {% endfor %}
     ];
