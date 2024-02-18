@@ -153,3 +153,5 @@ group_vars/*
 # note that group_vars/all/*.yml is version controlled
 
 .vscode
+
+.direnv/
