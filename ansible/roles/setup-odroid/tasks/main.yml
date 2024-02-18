@@ -25,15 +25,11 @@
 - name: Template nix modules
   become: true
   ansible.builtin.template:
-    src: "modules/{{ item.src }}"
-    dest: "/etc/nixos/modules/{{ item.dest }}"
+    src: "modules/{{ item }}"
+    dest: "/etc/nixos/modules/{{ item }}"
     owner: "root"
     group: "root"
-  with_items:
-    - src: "nextcloud.nix"
-      dest: "nextcloud.nix"
-    - src: "podman.nix"
-      dest: "podman.nix"
+  with_items: "{{ nixos_modules }}"
   register: modules
 
 - name: Template nix secrets
@@ -46,10 +42,11 @@
   with_items:
     - src: "nextcloud-pgsql.secret.j2"
       dest: "nextcloud-pgsql.secret"
+    - src: "tailscale_key.j2"
+      dest: "tailscale_key"
   register: secrets
-
-- name: Run nixos-rebuild
-  become: true
-  ansible.builtin.command: nixos-rebuild switch
-  when: configuration.changed or modules.changed or secrets.changed
-  register: rebuild
+# - name: Run nixos-rebuild
+#   become: true
+#   ansible.builtin.command: nixos-rebuild switch
+#   when: configuration.changed or modules.changed or secrets.changed
+#   register: rebuild

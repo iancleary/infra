@@ -21,7 +21,9 @@
         # Run python packages in a isolated environment
         pre-commit = pkgs.pre-commit;
 
-        repoTools = [ just pre-commit ];
+        nano = pkgs.nano;
+
+        repoTools = [ just pre-commit nano ];
       in {
         devShells = {
           default = pkgs.mkShell {
