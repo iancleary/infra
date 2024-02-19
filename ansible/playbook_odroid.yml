@@ -9,3 +9,9 @@
         tags: ["nix-config"],
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }
+    - {
+        role: odroid_containers_audiobookshelf,
+        become: true,
+        tags: ["audiobookshelf  "],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }

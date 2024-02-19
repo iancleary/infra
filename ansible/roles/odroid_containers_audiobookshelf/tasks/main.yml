@@ -1,0 +1,45 @@
+---
+- name: Pull tailscale image
+  community.docker.docker_image:
+    name: docker.io/tailscale/tailscale:latest
+    source: pull
+    tag: latest
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Pull audiobookshelf image
+  community.docker.docker_image:
+    name: docker.io/advplyr/audiobookshelf:latest
+    source: pull
+    tag: latest
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Create the directories that the compose file uses
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Audiobooks/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Podcasts/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/config/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/metadata/"
+
+- name: Copy the compose file to the server
+  ansible.builtin.template:
+    src: "audiobookshelf-docker-compose.yml"
+    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/docker-compose.yml"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+- name: Create and start services
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
+    state: present
+
+- name: Authenticate the tailscale container
+  ansible.builtin.shell: "docker compose exec tailscale tailscale up --authkey {{ iancleary_tailscale_auth_key }}"
+  args:
+    chdir: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"

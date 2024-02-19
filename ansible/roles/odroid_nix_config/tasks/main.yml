@@ -45,8 +45,9 @@
     - src: "tailscale_key.j2"
       dest: "tailscale_key"
   register: secrets
-# - name: Run nixos-rebuild
-#   become: true
-#   ansible.builtin.command: nixos-rebuild switch
-#   when: configuration.changed or modules.changed or secrets.changed
-#   register: rebuild
+
+- name: Run nixos-rebuild
+  become: true
+  ansible.builtin.command: nixos-rebuild switch
+  when: configuration.changed or modules.changed or secrets.changed
+  register: rebuild

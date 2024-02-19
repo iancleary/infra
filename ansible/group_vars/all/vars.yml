@@ -3,8 +3,11 @@ odroid_iancleary_user_password: "{{ vault_odroid_iancleary_user_password }}"
 odroid_nextcloud_pgsql_password: "{{ vault_odroid_nextcloud_pgsql_password }}"
 odroid_nixos_modules:
   - nextcloud.nix
-  - podman.nix
+  - docker.nix
   - tailscale.nix
+
+odroid_container_user: iancleary
+odroid_container_user_group: users
 
 iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
 #

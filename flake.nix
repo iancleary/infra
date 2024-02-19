@@ -12,7 +12,7 @@
   outputs = { self, nixpkgs, flake-utils, mach-nix }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
 
         ansible = pkgs.ansible_2_14;
 
@@ -22,8 +22,15 @@
         pre-commit = pkgs.pre-commit;
 
         nano = pkgs.nano;
+        vim = pkgs.vim;
 
-        repoTools = [ just pre-commit nano ];
+        ssh = pkgs.openssh;
+
+        git = pkgs.git;
+
+        graphite = pkgs.graphite-cli;
+
+        repoTools = [ just pre-commit nano ssh git graphite vim];
       in {
         devShells = {
           default = pkgs.mkShell {
