@@ -20,16 +20,27 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-state/"
+    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/"
     - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Audiobooks/"
     - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Podcasts/"
     - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/config/"
     - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/metadata/"
 
-- name: Copy the compose file to the server
+- name: Copy the docker compose file to the server
   ansible.builtin.template:
     src: "audiobookshelf-docker-compose.yml"
     dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/docker-compose.yml"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+# Make sure this dest file maps to /config/tailscale.json in the container...
+# inspect manually if it is the first time placing this file onto your server
+- name: Copy the tailscale json file to the server
+  ansible.builtin.template:
+    src: "tailscale.json"
+    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/config/tailscale.json"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -38,8 +49,3 @@
   community.docker.docker_compose_v2:
     project_src: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
     state: present
-
-- name: Authenticate the tailscale container
-  ansible.builtin.shell: "docker compose exec tailscale tailscale up --authkey {{ iancleary_tailscale_auth_key }}"
-  args:
-    chdir: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
