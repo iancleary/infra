@@ -1,7 +1,7 @@
 ---
 - name: Pull tailscale image
   community.docker.docker_image:
-    name: docker.io/tailscale/tailscale:latest
+    name: docker.io/tailscale/tailscale
     source: pull
     tag: latest
     force_source: true
@@ -9,7 +9,7 @@
 
 - name: Pull s-pdf image
   community.docker.docker_image:
-    name: docker.io/frooodle/s-pdf:latest
+    name: docker.io/frooodle/s-pdf
     source: pull
     tag: latest
     force_source: true

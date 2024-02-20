@@ -1,4 +1,12 @@
 { self, config, lib, pkgs, ... }: {
+
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 ];
+    };
+  };
+
   services = {
     nginx.virtualHosts = {
       # "odroid1.tail2500d.ts.net" = {
