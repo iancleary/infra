@@ -27,11 +27,28 @@ When I change the ansible files for the NixOS configuration, it will fail to bui
 
 ## Initial Setup of a Server with NixOS
 
-The first setup can copy the configuration.nix file directly, then I can run `sudo tailscale up --ssh` to connect to the server, and then run the ansible playbook to configure the containers and adjust the nix configuration, rebuilding and switching to the new configuration as needed.
+The first setup:
 
-I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.
+- copy the [configuration.nix](ansible/roles/odroid_nix_config/templates/configuration.nix) file directly into /etc/nixos/configuration.nix
+- adjust the hostname
+- delete the jinja2 template rows
+- run `sudo nixos-rebuild switch`
+- then I can run `sudo tailscale up --ssh` to connect to the server to tailscale
+- then run the ansible playbook to configure the containers and adjust the nix configuration (rebuilding and switching to the new configuration as needed).
 
-I use Tailscale to connect back to these systems and am protected by WireGuard and no exposed ports to the internet. I allow some local ports to be exposed to the local area network, but only ones needed to configure my Wireless Access Points (to facilitate there adoption).
+### Networking and open ports
+
+> I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.
+
+I use Tailscale to connect back to these systems and am protected by WireGuard and no exposed ports to the internet.
+
+The docker-compose files all use a Tailscale sidecar to connect to the Tailscale network. This allows me to connect to the containers from my local machine, and from the server, but not from the internet. It also sets up HTTPS for the containers, using Let's Encrypt.
+
+See [Contain your excitement: A deep dive into using Tailscale with Docker, by Alex Kretzschmar](https://tailscale.com/blog/docker-tailscale-guide).
+
+> I allow some local ports to be exposed to the local area network, but only ones needed to configure my Wireless Access Points (to facilitate there adoption).
+
+The default is to not expose a port, and use HTTPS with my Tailnet.
 
 ## Operating Systems
 
