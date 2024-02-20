@@ -1,0 +1,37 @@
+---
+version: "3.7"
+name: audiobookshelf
+services:
+  tailscale:
+        hostname: books                         # This will become the tailscale device name
+        image: docker.io/tailscale/tailscale:latest
+        environment:
+          - TS_AUTH_KEY={{ iancleary_tailscale_auth_key }}
+          - TS_SERVE_CONFIG=/config/tailscale.json
+          - TS_STATE_DIR=/var/lib/tailscale
+        volumes:
+            - ${PWD}/tailscale-state:/var/lib/tailscale
+            - ${PWD}/tailscale-config/config:/config       # State data will be stored in this directory
+            - "/dev/net/tun:/dev/net/tun"           # Required for tailscale to work
+        cap_add:                                    # Required for tailscale to work
+          - net_admin
+          - sys_module
+        restart: unless-stopped
+
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    network_mode: service:tailscale
+    depends_on:
+      - tailscale
+    volumes:
+      - ${PWD}/Audiobooks:/audiobooks
+      - ${PWD}/Podcasts:/podcasts
+      - ${PWD}/config:/config
+      - ${PWD}/metadata:/metadata
+    restart: unless-stopped
+
+volumes:
+  audiobookshelf:
+    driver: local
+  tailscale:
+    driver: local

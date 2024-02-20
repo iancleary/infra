@@ -7,9 +7,9 @@
     force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
-- name: Pull audiobookshelf image
+- name: Pull jellyfin image
   community.docker.docker_image:
-    name: docker.io/advplyr/audiobookshelf:latest
+    name: docker.io/jellyfin/jellyfin:latest
     source: pull
     tag: latest
     force_source: true
@@ -20,17 +20,17 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-state/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Audiobooks/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Podcasts/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/config/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/metadata/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-state/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/config/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/config/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/cache/"
+    - "/home/{{ odroid_container_user }}/Containers/jellyfin/media/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
-    src: "audiobookshelf-docker-compose.yml"
-    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/docker-compose.yml"
+    src: "jellyfin-docker-compose.yml"
+    dest: "/home/{{ odroid_container_user }}/Containers/jellyfin/docker-compose.yml"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -40,12 +40,12 @@
 - name: Copy the tailscale json file to the server
   ansible.builtin.template:
     src: "tailscale.json"
-    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/config/tailscale.json"
+    dest: "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/config/tailscale.json"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
 - name: Create and start services
   community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
+    project_src: "/home/{{ odroid_container_user }}/Containers/jellyfin"
     state: present
