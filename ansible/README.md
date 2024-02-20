@@ -1,60 +1,29 @@
 # Ansible
 
+I use a [justfile](justfile) to drive all commands.
+
+> A `justfile` is a simple way to define and run project-specific tasks. It is similar to a `makefile`. It's documentation is available at [here](https://github.com/casey/just).
+
+Nix is used to manage the environment. The `just` command is installed using nix.
+
+See the [flake.nix](flake.nix) file for the environment.
+
+Direnv is used to manage the environment. The `.envrc` file is used to load the environment.
+
 ## Install roles and collections
 
 ```bash
-ansible-galaxy install -r ansible/requirements.yml
+just galaxy
 ```
-
-## Mailserver
-
-Create a certificate using Lets Encrypt
-
-https://docker-mailserver.github.io/docker-mailserver/edge/config/security/ssl/#lets-encrypt-recommended
-
 
 ## Ansible Vault
 
 My vault file(s):
 
-* [group_vars/raspberrypi3bv2p0/vault.yml](group_vars/raspberrypi3bv2p0/vault.yml)
-* [group_vars/dns/vault.yml](group_vars/dns-local/vault.yml)
+- [group_vars/all/vault.yml](group_vars/all/vault.yml)
+- [group_vars/all/vault.yml](group_vars/all/vault.yml)
 
 References:
 
-* <https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html#variables-and-vaults>
-* <https://docs.ansible.com/ansible/latest/user_guide/vault.html#using-encrypted-variables-and-files>
-
-
-## become password
-ansible-playbook local_dns.yml --extra-vars='ansible_become_pass=replace-me-with-password'
-
-> pihole
-> ansible-playbook local_dns.yml --tags='pi-hole-provision' --ask-vault-pass
-> ansible-playbook local_dns.yml --tags='pi-hole-service' --ask-vault-pass
-> ansible-playbook local_dns.yml --ask-vault-pass
-
-## Setup user on remote machine
-
-Run the playbook to execute the `github_users` role to allow `iancleary` to exits
-
-# login as original user
-ssh pi@192.168.1.78
-
-# update password of iancleary
-sudo password iancleary
-# enter new password
-# confirm new password
-
-Change username in playbooks
-
-From
-```yaml
-  remote_user: pi/ubuntu/etc.
-```
-
-
-From
-```yaml
-  remote_user: iancleary
-```
+- <https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html#variables-and-vaults>
+- <https://docs.ansible.com/ansible/latest/user_guide/vault.html#using-encrypted-variables-and-files>

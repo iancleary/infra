@@ -2,9 +2,42 @@
 
 Personal Infrastructure as code
 
-This repo demonstrates my use of the Infrastructure as Code philosophy using [NixOS](https://nixos.org), [Ansible](https://docs.ansible.com/ansible_community.html), [Terraform](https://www.terraform.io/), and [Chocolatey](https://chocolatey.org/).
+This repo demonstrates my use of the Infrastructure as Code philosophy using [NixOS](https://nixos.org), [Ansible](https://docs.ansible.com/ansible_community.html), and [Chocolatey](https://chocolatey.org/).
+
+### Tooling
+
+Install [nix](https://nixos.org) and [direnv](https://direnv.net).
+
+Clone the repo and run `direnv allow` to load the environment.
+
+## Ansible
+
+I used to use an [UnRaid](https://unraid.net/) server at home, that I use as Network Attached Storage (NAS) server. It also run many docker containers, and several virtual machines (Home Assistant). It became a server that I had confidence in, but couldn't recreate or adjust easily. I've since moved to a NixOS server, and use Ansible to manage it.
+
+> Why Ansible? I've used Ansible for a few years now, and I'm comfortable with it. It allows me to template docker compose easilty and it's vault is familiar to me. There are ways to use NixOS entirely manage the server, but I'm not there yet (and don't want to have to create the secrets files manually). I haven't seen how tools on NixOS handle secrets without manually making the file after ssh'ing into the server.
+
+To me, I see the NixOS server as a way to manage the server and it's configuration, packages, networking, and anything to do with the host. On top of that extremely stable base, the Ansible playbooks are a tried and true way to manage the configuration of the containers.
+
+There are ways to use NixOS to manage the containers, but there are currently more questions than paved road solutions. I'm not sure how to handle the secrets files (/nix/store is world readible). I haven't seen how tools on NixOS handle secrets without manually making the file after ssh'ing into the server. To me it seems like a good idea to use Ansible to manage the containers, and NixOS to manage the host.
+
+When I change the ansible files for the NixOS configuration, it will fail to build if I have an issue that impacts the host.
+
+> Full stop! That is powerful. The only thing to avoid is to make a change that removes tailscale...which would remove my ability to ssh into the server.
+> I could go grab the server, plug in a keyboard and monitor, and revert with GRUB. That is a pain, but is a nice physical backup plan.
+
+## Initial Setup of a Server with NixOS
+
+The first setup can copy the configuration.nix file directly, then I can run `sudo tailscale up --ssh` to connect to the server, and then run the ansible playbook to configure the containers and adjust the nix configuration, rebuilding and switching to the new configuration as needed.
+
+I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.
+
+I use Tailscale to connect back to these systems and am protected by WireGuard and no exposed ports to the internet. I allow some local ports to be exposed to the local area network, but only ones needed to configure my Wireless Access Points (to facilitate there adoption).
 
 ## Operating Systems
+
+### MacOS
+
+I bought a Macbook Air and use it for development, catching up with friends, and when I just need to get some personal things done. Since Nix runs very well on Apple Silicon Macs, I have started to do a lot of configuration with Nix. This removes the need for Development Containers and any virtualization...speed!
 
 ### Windows Laptops and Desktops
 
@@ -23,9 +56,15 @@ I explored various options in Virtual Machines, while on a Windows host: Hyper-V
 
 I've landed on Virtual Box, with a few tricks to make SSH consistent across reboots. Port Forwarding!
 
+> TBD to add a repo, but search online for "Virtual Box Port Forwarding +SSH" and you'll find the solution. It maps a host port to a guest's port 22 (or whatever port the guest uses for the openssh server).
+
 So my solution, Virtual Box, allows me to use NixOS, have an immutable file system with rollbacks via GRUB entries, that I can pause/resume as needed. I really enjoyed learning Ansible, and it is a fantastic tool, but the discover of the recovery and rollback features of NixOS were a \*illuminating discovery for me. The build with fail if it causes issues with other parts of the configuration.
 
 ### NixOS
+
+I have dabbled with NixOS as a desktop Operating System and can say it is fantastic.
+
+> My NixOS Configuration is in the [iancleary/nixos-config](https://github.com/iancleary/nixos-config) repo.
 
 There are some excellent write up on Nix and NixOS, so I'll defer to them rather than repeat them (poorly) here:
 
@@ -42,51 +81,3 @@ There are some excellent write up on Nix and NixOS, so I'll defer to them rather
 - [Example Home Manager Configuration, by michaelpj](https://github.com/michaelpj/nixos-config/blob/master/modules/home.nix)
 
 - [Declarative management of dotfiles with Nix and Home Manager](https://www.bekk.christmas/post/2021/16/dotfiles-with-nix-and-home-manager). Nix is a declarative package manager with rising popularity. One of the best ways to actually learn it is to use it, and what better way to learn it than using it every day to manage your dotfiles? 10 min read, by Ole Kristian Pedersen
-
-### MacOS
-
-I bought a Macbook Air and use it for leisure, catching up with friends, and when I just need to get some personal things done. I do less configuration and development on my Mac.
-
-I've used the `brew` (Homebrew) package manager, and have repeated my terminal configuration from Ubuntu and NixOS there. I likely will bring some of that configuration into this repo. Maybe; maybe not.
-
-## Server Configuration
-
-### Tooling
-
-Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) and [terraform](https://www.terraform.io/downloads).
-
-#### Ansible
-
-I have an [UnRaid](https://unraid.net/) server at home, that I use as Network Attached Storage (NAS) server. I also run many docker containers, and several virtual machines (Home Assistant and an Ubuntu server running PiHole).
-
-- [ansible/playbook_local-dns.yml](ansible/playbook_local-dns.yml)
-
-I don't believe it is a good idea to open any ports from that server up to the internet, from my local network.
-I use Tailscale to connect back to these systems and am protected by WireGuard, and prompt security patches on all my systems, [ansible\playbook_upgrade.yml](ansible\playbook_upgrade.yml).
-
-I also maintain a Tailscale Docker Image for UnRaid, [iancleary/unraid-tailscale](https://github.com/iancleary/unraid-tailscale).
-
-#### Terraform
-
-Modeling of of <https://github.com/selfhostedshow/infra>, I use an config file for token and default password for Linode. I've extended this concept for Vercel as well. These tokens are used with Terraform.
-
-> I'm in the processing of migrating to (learning) terraform cloud. In that environment I'm using environment variables (sensitive) rather than plaintext tokens on my machines.
-
-##### Linode Token
-
-```yaml
----
-# ~/.config/tokens/linode.yaml
-default-root-pass: "supersecretpassword"
-token: 123456789abcdefghijklmnopqrstuvqxyz123456789abcdefghijklmnopqrst
-```
-
-##### Vercel Token
-
-```yaml
----
-# ~/.config/tokens/vercel.yaml
-token: qrstuvqxyz123456789abcdefghi
-```
-
-> I've since switched my Email from a Mail-in-a-box server on Linode to Fastmail, so my DNS entries are no longer in Vercel and controlled here.
