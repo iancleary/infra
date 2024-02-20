@@ -27,3 +27,9 @@
         tags: ["pdf"],
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }
+    - {
+        role: containers_homeassistant,
+        become: true,
+        tags: ["homeassistant"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }

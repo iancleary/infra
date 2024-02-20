@@ -9,7 +9,7 @@
 
 - name: Pull jellyfin image
   community.docker.docker_image:
-    name: docker.io/jellyfin/jellyfin:latest
+    name: docker.io/jellyfin/jellyfin
     source: pull
     tag: latest
     force_source: true

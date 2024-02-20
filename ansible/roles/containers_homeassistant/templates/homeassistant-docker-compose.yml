@@ -1,0 +1,35 @@
+---
+version: "3.7"
+name: homeassistant
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - ${PWD}/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    # ports:
+    #   - 8123:8123 # Web UI
+    network_mode: host
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    volumes:
+      # - ${PWD}/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ${PWD}/mosquitto/config:/mosquitto/config/
+      - ${PWD}/mosquitto/data:/mosquitto/data/
+      - ${PWD}/mosquitto/log:/mosquitto/log
+    network_mode: host
+    # ports:
+    #   - 1883:1883 # mqtt
+    #   - 8883:8883 # mqtt over tls
+    #   - 9001:9001 # plain websockets
+    # networks:
+    #   - mosquitto
+# networks:
+#   mosquitto:
+#     name: mosquitto
+#     driver: bridge

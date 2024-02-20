@@ -5,9 +5,13 @@ odroid_nixos_modules:
   - nextcloud.nix
   - docker.nix
   - tailscale.nix
+  - homeassistant.nix
 
 odroid_container_user: iancleary
 odroid_container_user_group: users
+
+homeassistant_mosquitto_user: "{{ vault_homeassistant_mosquitto_user }}"
+homeassistant_mosquitto_password: "{{ vault_homeassistant_mosquitto_password }}"
 
 iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
 #

@@ -1,0 +1,72 @@
+---
+- name: Pull homeassistant image
+  community.docker.docker_image:
+    name: ghcr.io/home-assistant/home-assistant
+    source: pull
+    tag: stable
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Pull docker.io eclipse-mosquitto:2 image
+  community.docker.docker_image:
+    name: eclipse-mosquitto
+    source: pull
+    tag: 2
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Create the directories that the compose file uses
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "/home/{{ odroid_container_user }}/Containers/homeassistant/config/"
+    - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/"
+    - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/data/"
+    - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/log/"
+
+- name: Copy the docker compose file to the server
+  ansible.builtin.template:
+    src: "homeassistant-docker-compose.yml"
+    dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/docker-compose.yml"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+- name: Copy the mosquitto config file to the server
+  ansible.builtin.template:
+    src: "mosquitto.beforepassword.conf"
+    dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/mosquitto.conf"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+- name: Copy the mosquitto password file to the server
+  ansible.builtin.template:
+    src: "mosquitto.password.txt"
+    dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/password.txt"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0660"
+
+- name: Create and start services
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+    state: present
+  register: homeassistant_docker_compose
+
+# https://mosquitto.org/man/mosquitto_passwd-1.html
+# template the mosquitto password file with ansible, then run the mosquitto_passwd command to hash the passwords
+- name: Upgrade the mosquitto password to use hashed passwords
+  ansible.builtin.shell: "docker exec -i mosquitto mosquitto_passwd -U /mosquitto/config/password.txt"
+  args:
+    chdir: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+
+# disable anonymous access to the mosquitto broker, after hashing the passwords
+- name: Copy the mosquitto config (after password) file to the server
+  ansible.builtin.template:
+    src: "mosquitto.afterpassword.conf"
+    dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/mosquitto.conf"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
