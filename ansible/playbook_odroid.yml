@@ -10,8 +10,20 @@
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }
     - {
-        role: odroid_containers_audiobookshelf,
+        role: containers_audiobookshelf,
         become: true,
-        tags: ["audiobookshelf  "],
+        tags: ["audiobookshelf"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }
+    - {
+        role: containers_jellyfin,
+        become: true,
+        tags: ["jellyfin"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }
+    - {
+        role: containers_s_pdf,
+        become: true,
+        tags: ["pdf"],
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }

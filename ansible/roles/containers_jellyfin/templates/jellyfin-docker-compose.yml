@@ -1,9 +1,9 @@
 ---
 version: "3.7"
-name: audiobookshelf
+name: jellyfin
 services:
   tailscale:
-        hostname: books                         # This will become the tailscale device name
+        hostname: jellyfin                         # This will become the tailscale device name
         image: docker.io/tailscale/tailscale:latest
         environment:
           - TS_AUTH_KEY={{ iancleary_tailscale_auth_key }}
@@ -18,20 +18,20 @@ services:
           - sys_module
         restart: unless-stopped
 
-  audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
+  jellyfin:
+    image: docker.io/jellyfin/jellyfin:latest
+    container_name: jellyfin
     network_mode: service:tailscale
     depends_on:
       - tailscale
     volumes:
-      - ${PWD}/Audiobooks:/audiobooks
-      - ${PWD}/Podcasts:/podcasts
       - ${PWD}/config:/config
-      - ${PWD}/metadata>:/metadata
+      - ${PWD}/cache:/cache
+      - ${PWD}/media:/media
     restart: unless-stopped
 
 volumes:
-  audiobookshelf:
+  jellyfin:
     driver: local
   tailscale:
     driver: local
