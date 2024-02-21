@@ -4,6 +4,7 @@
   networking = {
     firewall = {
       enable = true;
+      # https://github.com/linuxserver/docker-unifi-network-application?tab=readme-ov-file#parameters
       allowedTCPPorts = [
         8080  # Port for UAP to inform controller.
         8880  # Port for HTTP portal redirect, if guest portal is enabled.

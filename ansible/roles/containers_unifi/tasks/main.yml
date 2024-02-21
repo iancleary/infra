@@ -1,0 +1,48 @@
+---
+- name: Pull lscr.io/linuxserver/unifi-network-application image
+  community.docker.docker_image:
+    name: lscr.io/linuxserver/unifi-network-application
+    source: pull
+    tag: latest
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Pull docker.io/mongo image
+  community.docker.docker_image:
+    name: docker.io/mongo
+    source: pull
+    tag: "{{ unifi_mongo_version }}"
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
+- name: Create the directories that the compose file uses
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "/home/{{ odroid_container_user }}/Containers/unifi/config/"
+    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/"
+    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/data/"
+    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/init/"
+
+- name: Copy the docker compose file to the server
+  ansible.builtin.template:
+    src: "unifi-docker-compose.yml"
+    dest: "/home/{{ odroid_container_user }}/Containers/unifi/docker-compose.yml"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+- name: Copy the mongo init-mongo.js file to the server
+  ansible.builtin.template:
+    src: "init-mongo.js"
+    dest: "/home/{{ odroid_container_user }}/Containers/unifi/mongo/init/init-mongo.js"
+    owner: "{{ odroid_container_user }}"
+    group: "{{ odroid_container_user_group }}"
+    mode: "0644"
+
+- name: Create and start services
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ odroid_container_user }}/Containers/unifi"
+    state: present
+  register: unifi_docker_compose
