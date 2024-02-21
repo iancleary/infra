@@ -33,3 +33,9 @@
         tags: ["homeassistant"],
         ansible_become_password: "{{ odroid_iancleary_user_password }}",
       }
+    - {
+        role: containers_unifi,
+        become: true,
+        tags: ["unifi"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }

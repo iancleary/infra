@@ -6,12 +6,18 @@ odroid_nixos_modules:
   - docker.nix
   - tailscale.nix
   - homeassistant.nix
+  - unifi.nix
 
 odroid_container_user: iancleary
 odroid_container_user_group: users
 
 homeassistant_mosquitto_user: "{{ vault_homeassistant_mosquitto_user }}"
 homeassistant_mosquitto_password: "{{ vault_homeassistant_mosquitto_password }}"
+
+# MongoDB for Unifi, supports 3.6 through 4.4 as of 2024-02-21
+# https://github.com/linuxserver/docker-unifi-network-application?tab=readme-ov-file#setting-up-your-external-database
+unifi_mongo_version: 4.4
+unifi_mongo_password: "{{ vault_unifi_mongo_password }}"
 
 iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
 #
