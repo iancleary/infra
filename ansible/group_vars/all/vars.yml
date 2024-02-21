@@ -6,6 +6,7 @@ odroid_nixos_modules:
   - docker.nix
   - tailscale.nix
   - homeassistant.nix
+  - unifi.nix
 
 odroid_container_user: iancleary
 odroid_container_user_group: users
