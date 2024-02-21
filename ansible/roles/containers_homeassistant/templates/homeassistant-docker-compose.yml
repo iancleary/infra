@@ -29,6 +29,13 @@ services:
     #   - 9001:9001 # plain websockets
     # networks:
     #   - mosquitto
+  tasmoadmin:
+    image: ghcr.io/tasmoadmin/tasmoadmin:latest
+    container_name: tasmoadmin
+    volumes:
+      - ${PWD}/tasmoadmin:/data
+    ports:
+      - 9541:80
 # networks:
 #   mosquitto:
 #     name: mosquitto

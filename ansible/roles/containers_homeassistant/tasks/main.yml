@@ -15,6 +15,14 @@
     force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
+- name: Pull ghcr.io/tasmoadmin/tasmoadmin image
+  community.docker.docker_image:
+    name: ghcr.io/tasmoadmin/tasmoadmin
+    source: pull
+    tag: latest
+    force_source: true
+    # Select platform for pulling. If not specified, will pull whatever docker prefers.
+
 - name: Create the directories that the compose file uses
   ansible.builtin.file:
     path: "{{ item }}"
@@ -24,6 +32,7 @@
     - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/"
     - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/data/"
     - "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/log/"
+    - "/home/{{ odroid_container_user }}/Containers/homeassistant/tasmoadmin/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
