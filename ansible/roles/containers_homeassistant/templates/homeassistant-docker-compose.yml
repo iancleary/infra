@@ -9,34 +9,54 @@ services:
       - ${PWD}/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
-    restart: unless-stopped
+    restart: always
     privileged: true
+    # networks:
+    #   - localnet
     # ports:
     #   - 8123:8123 # Web UI
+    #   - 51827:51827 # HomeKit
     network_mode: host
+    depends_on:
+      - mosquitto
   mosquitto:
     image: eclipse-mosquitto:2
     container_name: mosquitto
+    restart: always
     volumes:
       # - ${PWD}/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ${PWD}/mosquitto/config:/mosquitto/config/
       - ${PWD}/mosquitto/data:/mosquitto/data/
       - ${PWD}/mosquitto/log:/mosquitto/log
-    network_mode: host
-    # ports:
-    #   - 1883:1883 # mqtt
+    # network_mode: host
+    networks:
+      - localnet
+    ports:
+      - "1883:1883/tcp" # mqtt
     #   - 8883:8883 # mqtt over tls
-    #   - 9001:9001 # plain websockets
+    #  - 9001:9001 # plain websockets
     # networks:
     #   - mosquitto
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-u", "{{ homeassistant_mosquitto_user }}", "-P", "{{ homeassistant_mosquitto_password }}", "-h", "localhost", "-t", "$$SYS/broker/uptime", "-i", "docker_health_check", "-C", "1"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
   tasmoadmin:
     image: ghcr.io/tasmoadmin/tasmoadmin:latest
     container_name: tasmoadmin
+    restart: always
     volumes:
       - ${PWD}/tasmoadmin:/data
+    networks:
+      - localnet
     ports:
       - 9541:80
-# networks:
-#   mosquitto:
-#     name: mosquitto
-#     driver: bridge
+
+# networks - All the containers have been added to a custom network called localnet
+# which is also defined at the top level with the driver set to bridge.
+# This is to make sure all of the containers can properly talk to each other
+# and get around some network oddities I was experiencing with my setup.
+networks:
+  localnet:
+    driver: bridge
