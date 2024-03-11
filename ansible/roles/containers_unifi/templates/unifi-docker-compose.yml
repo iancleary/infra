@@ -1,6 +1,6 @@
 ---
 version: "3.7"
-name: homeassistant
+name: unifi
 services:
   unifi-network-application:
     image: lscr.io/linuxserver/unifi-network-application:latest

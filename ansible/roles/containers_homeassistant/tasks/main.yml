@@ -42,13 +42,13 @@
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
-- name: Copy the mosquitto config file to the server
-  ansible.builtin.template:
-    src: "mosquitto.beforepassword.conf"
-    dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/mosquitto.conf"
-    owner: "{{ odroid_container_user }}"
-    group: "{{ odroid_container_user_group }}"
-    mode: "0644"
+# - name: Copy the mosquitto config file to the server
+#   ansible.builtin.template:
+#     src: "mosquitto.beforepassword.conf"
+#     dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/mosquitto.conf"
+#     owner: "{{ odroid_container_user }}"
+#     group: "{{ odroid_container_user_group }}"
+#     mode: "0644"
 
 - name: Copy the mosquitto password file to the server
   ansible.builtin.template:
@@ -58,20 +58,6 @@
     group: "{{ odroid_container_user_group }}"
     mode: "0660"
 
-- name: Create and start services
-  community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/homeassistant"
-    state: present
-  register: homeassistant_docker_compose
-
-# https://mosquitto.org/man/mosquitto_passwd-1.html
-# template the mosquitto password file with ansible, then run the mosquitto_passwd command to hash the passwords
-- name: Upgrade the mosquitto password to use hashed passwords
-  ansible.builtin.shell: "docker exec -i mosquitto mosquitto_passwd -U /mosquitto/config/password.txt"
-  args:
-    chdir: "/home/{{ odroid_container_user }}/Containers/homeassistant"
-
-# disable anonymous access to the mosquitto broker, after hashing the passwords
 - name: Copy the mosquitto config (after password) file to the server
   ansible.builtin.template:
     src: "mosquitto.afterpassword.conf"
@@ -79,3 +65,49 @@
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
+
+- name: Create and start services
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+    state: present
+  register: homeassistant_docker_compose
+
+# https://mosquitto.org/man/mosquitto_passwd-1.html
+# Warning: File /mosquitto/config/password.txt owner is not root.
+# Future versions will refuse to load this file.To fix this,
+# use `chown root /mosquitto/config/password.txt`.
+# Warning: File /mosquitto/config/password.txt group is not root.
+# Future versions will refuse to load this file.
+- name: Chown the mosquitto password file
+  ansible.builtin.shell: "docker compose exec mosquitto chown root:root /mosquitto/config/password.txt"
+  args:
+    chdir: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+
+# template the mosquitto password file with ansible, then run the mosquitto_passwd command to hash the passwords
+# - name: Upgrade the mosquitto password to use hashed passwords
+#   ansible.builtin.shell: "docker compose exec mosquitto mosquitto_passwd -U /mosquitto/config/password.txt"
+#   args:
+#     chdir: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+
+# template the mosquitto password file with ansible, then run the mosquitto_passwd command to hash the passwords
+- name: Use mosquitto_passwd to set the homeassistant user and password
+  ansible.builtin.shell: "docker compose exec mosquitto mosquitto_passwd -b /mosquitto/config/password.txt {{ homeassistant_mosquitto_user }} {{ homeassistant_mosquitto_password }}"
+  args:
+    chdir: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+
+- name: Restart mosquitto service
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ odroid_container_user }}/Containers/homeassistant"
+    state: restarted
+    services:
+      - mosquitto
+  register: homeassistant_docker_compose
+
+# disable anonymous access to the mosquitto broker, after hashing the passwords
+# - name: Copy the mosquitto config (after password) file to the server
+#   ansible.builtin.template:
+#     src: "mosquitto.afterpassword.conf"
+#     dest: "/home/{{ odroid_container_user }}/Containers/homeassistant/mosquitto/config/mosquitto.conf"
+#     owner: "{{ odroid_container_user }}"
+#     group: "{{ odroid_container_user_group }}"
+#     mode: "0644"
