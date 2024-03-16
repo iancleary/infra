@@ -1,5 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  unstable = import
+    (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
+    { config = config.nixpkgs.config; };
+in
 {
   services.tailscale = {
     enable = true;
@@ -7,5 +12,6 @@
       "--ssh"
     ];
     authKeyFile = "/etc/nixos/secrets/tailscale_key";
+    package = unstable.tailscale;
   };
 }
