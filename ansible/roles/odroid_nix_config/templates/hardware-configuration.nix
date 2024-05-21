@@ -19,7 +19,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/{{ odroid_boot_uuidc}}";
+    { device = "/dev/disk/by-uuid/{{ odroid_boot_uuid }}";
       fsType = "vfat";
     };
 
