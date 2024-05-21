@@ -20,12 +20,12 @@
   # Latest kernel for ZFS
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
-  networking.hostName = "odroid1"; # Define your hostname.
+  networking.hostName = {{ odroid_hostname }}; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  networking.hostId = "8425e349";
+  networking.hostId = {{ odroid_hostId }};
 
   # Set your time zone.
   # time.timeZone = "America/Phoenix";
