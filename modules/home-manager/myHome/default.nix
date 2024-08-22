@@ -2,8 +2,7 @@
 
 {
   options = {
-    myHome = {
-    };
+    myHome = { };
   };
 
   imports = [
