@@ -1,5 +1,0 @@
----
-- name: Create a unifi-controller directory if it does not exist
-  ansible.builtin.file:
-    path: "/home/{{ unifi_controller_user }}/unifi-controller"
-    state: directory
