@@ -63,6 +63,7 @@
 
       devShells = forAllSystems (system: {
         default = nixpkgs.legacyPackages.${system}.callPackage ./shell.nix { };
+        ansible = nixpkgs.legacyPackages.${system}.callPackage ./shells/ansible.nix { };
         lint = nixpkgs.legacyPackages.${system}.callPackage ./shells/lint.nix { };
       });
 

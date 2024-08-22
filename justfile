@@ -37,6 +37,10 @@ fwupd:
 lint:
   nix develop --accept-flake-config .#lint
 
+# Load ansible
+ansible:
+  nix develop --accept-flake-config .#ansible
+
 # format all the files, when in a nix-shell
 format:
   nixpkgs-fmt .
