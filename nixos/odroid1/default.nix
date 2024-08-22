@@ -10,12 +10,8 @@
     ./hardware-configuration.nix
     ./networking.nix # this could be below since it's not machine specific
     ./nextcloud.nix
-    ./tailscale.nix
+    ./tailscale.nix # this is the customization for this server
     # below are system setup, ports, virtualization, etc.
-    ../../modules/nixos/docker.nix
-    ../../modules/nixos/homeassistant.nix
-    ../../modules/nixos/unifi.nix
-    ../../modules/nixos/tailscale.nix
   ];
 
   mySystem = {
@@ -27,7 +23,6 @@
       enable = true;
       home = ./home.nix;
     };
-    # nix.substituters = [ "nasgul" ];
   };
 
   boot = {
