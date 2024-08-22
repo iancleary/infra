@@ -41,7 +41,6 @@
     in
     rec {
       overlays = {
-        default = import ./overlay/default.nix;
         unstable = final: prev: {
           unstable = nixpkgs-unstable.legacyPackages.${prev.system};
           inherit (nixpkgs-unstable.legacyPackages.${prev.system}) neovim-unwrapped;

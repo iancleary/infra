@@ -2,8 +2,8 @@
 
 let
   unstable = import
-    (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
-    { config = config.nixpkgs.config; };
+    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/nixos-unstable")
+    { inherit (config.nixpkgs) config; };
 in
 {
   services.tailscale = {
