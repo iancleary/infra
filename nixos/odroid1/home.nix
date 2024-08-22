@@ -4,9 +4,6 @@
   home.stateVersion = "24.05";
 
   myHome = {
-    gnome.enable = false;
-    kde.enable = false;
-    hyprland.enable = false;
     nextcloud-autosync = {
       enable = false;
     };
@@ -21,7 +18,6 @@
     };
   };
 
-  programs.centerpiece.enable = false;
   # home.packages = with pkgs; [
   # ];
 }

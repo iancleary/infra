@@ -1,8 +1,4 @@
 {
-  imports = [
-    ./tailscale.nix
-    ./unifi.nix
-    ./docker.nix
-    ./homeassistant.nix
-  ];
+  mySystem = import ./mySystem;
+  # homelab = import ./homelab;
 }

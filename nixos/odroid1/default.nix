@@ -8,12 +8,14 @@
   imports = [
     inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
     ./hardware-configuration.nix
-    ./networking.nix
-    ../../modules/nixos/docker.nix
-    ../../modules/nixos/homeassistant.nix
-    ../../modules/nixos./unifi.nix
+    ./networking.nix # this could be below since it's not machine specific
     ./nextcloud.nix
     ./tailscale.nix
+    # below are system setup, ports, virtualization, etc.
+    ../../modules/nixos/docker.nix
+    ../../modules/nixos/homeassistant.nix
+    ../../modules/nixos/unifi.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   mySystem = {
