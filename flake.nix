@@ -30,7 +30,6 @@
     , nixos-hardware
     , home-manager
     , agenix
-    , neovim-plugins
       # , nixgl
     , terminal-config
     , ...
