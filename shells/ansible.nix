@@ -2,7 +2,7 @@
 
 pkgs.mkShellNoCC {
   nativeBuildInputs = with pkgs; [
-    ansible_2_14
+    ansible_2_15
     openssh
     actionlint
     selene

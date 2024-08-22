@@ -50,8 +50,6 @@ format:
 check:
   actionlint
   yamllint .
-  selene .
-  stylua --check .
   statix check
   nixpkgs-fmt --check .
 
