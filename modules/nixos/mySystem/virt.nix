@@ -20,7 +20,6 @@
     (lib.mkIf config.mySystem.vmHost {
       users.users.${config.mySystem.user}.extraGroups = [ "libvirtd" ];
       virtualisation.libvirtd.enable = true;
-      environment.systemPackages = lib.mkIf config.mySystem.gnome.enable [ pkgs.virt-manager ];
     })
     (lib.mkIf config.mySystem.dockerHost {
       users.users.${config.mySystem.user}.extraGroups = [ "docker" ];
