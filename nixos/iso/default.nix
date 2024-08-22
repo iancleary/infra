@@ -8,7 +8,4 @@
       home = ./home.nix;
     };
   };
-  environment.systemPackages = with pkgs; [
-    gnome.gnome-terminal
-  ];
 }
