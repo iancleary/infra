@@ -4,12 +4,6 @@
   remote_user: iancleary
   roles:
     - {
-      role: odroid_nix_config,
-      become: true,
-      tags: ["nix-config"],
-      ansible_become_password: "{{ odroid_iancleary_user_password }}",
-    }
-    - {
       role: containers_audiobookshelf,
       become: true,
       tags: ["audiobookshelf"],
