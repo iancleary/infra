@@ -1,0 +1,6 @@
+{ }:
+{
+  imports = [
+    ./terminal.nix
+  ];
+}
