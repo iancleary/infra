@@ -1,47 +1,97 @@
 {
-  description = "A Nix-flake-based Python development environment";
+  description = "My config";
 
-  # GitHub URLs for the Nix inputs we're using
   inputs = {
-    # Simply the greatest package repository on the planet
-    nixpkgs.url = "github:NixOS/nixpkgs";
-    # A set of helper functions for using flakes
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    # nixgl = {
+    #   url = "github:guibou/nixGL";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    terminal-config.url = "github:iancleary/terminal-config";
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-
-        ansible = pkgs.ansible_2_14;
-
-         # task runner
-        just = pkgs.just;
-        # Run python packages in a isolated environment
-        pre-commit = pkgs.pre-commit;
-
-        nano = pkgs.nano;
-        vim = pkgs.vim;
-
-        ssh = pkgs.openssh;
-
-        git = pkgs.git;
-
-        graphite = pkgs.graphite-cli;
-
-        repoTools = [ just pre-commit nano ssh git graphite vim];
-      in {
-        devShells = {
-          default = pkgs.mkShell {
-            # Packages included in the environment
-            buildInputs = [ ansible ] ++ repoTools;
-
-            # # Run when the shell is started up
-            shellHook = ''
-              printf "\n\nRepo Tools:\n" && which ansible && which just && which pre-commit && pre-commit install && printf "\n\n" && export GIT_EDITOR=nano;
-            '';
-          };
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , nixos-hardware
+    , home-manager
+    , agenix
+      # , nixgl
+    , terminal-config
+    , ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
+    in
+    rec {
+      overlays = {
+        unstable = final: prev: {
+          unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+          inherit (nixpkgs-unstable.legacyPackages.${prev.system}) neovim-unwrapped;
         };
+        neovimPlugins = terminal-config.overlays.default;
+        agenix = agenix.overlays.default;
+        # nixgl = nixgl.overlays.default;
+      };
+
+      legacyPackages = forAllSystems (system:
+        import inputs.nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues overlays;
+          config.allowUnfree = true;
+        }
+      );
+
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+
+      devShells = forAllSystems (system: {
+        default = nixpkgs.legacyPackages.${system}.callPackage ./shell.nix { };
+        ansible = nixpkgs.legacyPackages.${system}.callPackage ./shells/ansible.nix { };
+        lint = nixpkgs.legacyPackages.${system}.callPackage ./shells/lint.nix { };
       });
+
+      formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".nixpkgs-fmt);
+
+      nixosConfigurations =
+        let
+          defaultModules = (builtins.attrValues nixosModules) ++ [
+            agenix.nixosModules.default
+            home-manager.nixosModules.default
+          ];
+          specialArgs = { inherit inputs outputs; };
+
+        in
+        {
+          odroid1 = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              ./nixos/odroid1
+            ];
+          };
+          #odroid2 = nixpkgs.lib.nixosSystem {
+          #  inherit specialArgs;
+          #  system = "x86_64-linux";
+          #    modules = defaultModules ++ [
+          #    ./nixos/odroid2
+          #  ];
+          #};
+        };
+    };
 }
