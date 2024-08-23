@@ -1,4 +1,4 @@
-{ self, config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
 
   networking = {
     firewall = {
@@ -17,7 +17,7 @@
       # hostName = "odroid1.tail2500d.ts.net";
       hostName = "nextcloud.iancleary.me";
       # Need to manually increment with every major upgrade.
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       # Let NixOS install and configure the database automatically.
       database.createLocally = true;
       # Let NixOS install and configure Redis caching automatically.
