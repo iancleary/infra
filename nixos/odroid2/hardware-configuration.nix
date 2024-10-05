@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
@@ -19,27 +20,32 @@
 
   fileSystems = {
     "/" =
-      { device = "rpool/safe/system/root";
+      {
+        device = "rpool/safe/system/root";
         fsType = "zfs";
       };
 
     "/boot" =
-      { device = "/dev/disk/by-uuid/7386-41AA";
+      {
+        device = "/dev/disk/by-uuid/7386-41AA";
         fsType = "vfat";
       };
 
     "/nix" =
-      { device = "rpool/local/nix";
+      {
+        device = "rpool/local/nix";
         fsType = "zfs";
       };
 
     "/var" =
-      { device = "rpool/safe/system/var";
+      {
+        device = "rpool/safe/system/var";
         fsType = "zfs";
       };
 
     "/home/iancleary" =
-      { device = "rpool/safe/home/iancleary";
+      {
+        device = "rpool/safe/home/iancleary";
         fsType = "zfs";
       };
   };

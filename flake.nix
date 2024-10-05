@@ -86,11 +86,11 @@
             ];
           };
           odroid2 = nixpkgs.lib.nixosSystem {
-           inherit specialArgs;
-           system = "x86_64-linux";
-             modules = defaultModules ++ [
-             ./nixos/odroid2
-           ];
+            inherit specialArgs;
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              ./nixos/odroid2
+            ];
           };
         };
     };
