@@ -66,7 +66,7 @@
     # it's located here so this configuration can be copy
     # and pasted into a new system, without ansible
     (
-      python310.withPackages (
+      python312.withPackages (
         ps: with ps; [
           # for community.docker.docker_image
           # and community.docker.docker_compose_v2
