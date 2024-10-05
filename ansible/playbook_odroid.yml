@@ -1,7 +1,6 @@
 ---
 - name: Update Odroid Server
-  hosts: 127.0.0.1
-  connection: local
+  hosts: odroid1
   remote_user: iancleary
   roles:
     - {
