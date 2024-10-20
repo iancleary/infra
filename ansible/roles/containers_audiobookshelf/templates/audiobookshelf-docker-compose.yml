@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
 
   audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
+    image: "{{ audiobookshelf_docker_image }}:{{ audiobookshelf_docker_version }}"
     network_mode: service:tailscale
     depends_on:
       - tailscale

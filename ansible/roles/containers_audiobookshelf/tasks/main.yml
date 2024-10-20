@@ -9,9 +9,9 @@
 
 - name: Pull audiobookshelf image
   community.docker.docker_image:
-    name: docker.io/advplyr/audiobookshelf
+    name: "{{ audiobookshelf_docker_image }}"
     source: pull
-    tag: latest
+    tag: "{{ audiobookshelf_docker_version }}"
     force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
