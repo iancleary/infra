@@ -4,6 +4,12 @@
   remote_user: iancleary
   roles:
     - {
+        role: tailscale_key,
+        become: true,
+        tags: ["tailscale_key"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }
+    - {
         role: containers_audiobookshelf,
         become: true,
         tags: ["audiobookshelf"],
