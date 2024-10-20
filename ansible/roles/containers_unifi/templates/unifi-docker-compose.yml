@@ -3,7 +3,7 @@ version: "3.7"
 name: unifi
 services:
   unifi-network-application:
-    image: lscr.io/linuxserver/unifi-network-application:latest
+    image: lscr.io/linuxserver/unifi-network-application:{{ unifi_network_version }}
     container_name: unifi-network-application
     environment:
       - PUID=1000
