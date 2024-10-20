@@ -26,6 +26,8 @@
     - "/{{ data_pool }}/jellyfin/config/"
     - "/{{ data_pool }}/jellyfin/cache/"
     - "/{{ data_pool }}/jellyfin/media/"
+    - "/{{ data_pool }}/jellyfin/media/Movies/"
+    - "/{{ data_pool }}/jellyfin/media/Shows/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
