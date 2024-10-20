@@ -11,6 +11,8 @@ odroid_nixos_modules:
 odroid_container_user: iancleary
 odroid_container_user_group: users
 
+data_pool: dpool
+
 homeassistant_mosquitto_user: "{{ vault_homeassistant_mosquitto_user }}"
 homeassistant_mosquitto_password: "{{ vault_homeassistant_mosquitto_password }}"
 
