@@ -6,6 +6,8 @@ repos:
       - id: "check-merge-conflict"
       - id: "check-yaml"
       - id: "end-of-file-fixer"
-        exclude: "flake.nix"
+        exclude: 
+          - "flake.nix"
+          - "tailscale_key"
       - id: "mixed-line-ending"
       - id: "trailing-whitespace"
