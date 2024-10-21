@@ -123,6 +123,16 @@ mount -t zfs "${POOL}/safe/home/${MY_USER}" "/mnt/home/${MY_USER}"
 
 # Data Pool Setup
 
+
+```bash
+sudo zfs create dpool/audiobookshelf
+sudo zfs create dpool/homeassistant
+sudo zfs create dpool/jellyfin
+sudo zfs create dpool/nextcloud
+sudo zfs create dpool/s-pdf
+sudo zfs create dpool/unifi
+```
+
 # NixOS installation
 
 Finally it's time to get nix involved! Run the generation command below and

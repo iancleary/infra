@@ -27,7 +27,7 @@
   services.sanoid = {
     enable = true;
     datasets.dpool = {
-      recursive = true ;
+      recursive = true;
       process_children_only = true;
       use_template = [ "production" ];
     };
