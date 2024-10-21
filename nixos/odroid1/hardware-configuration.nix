@@ -34,7 +34,7 @@
           autosnap = true;
           autoprune = true;
         };
-        recursive = yes;
+        recursive = true;
         process_children_only = true;
       };
     };
