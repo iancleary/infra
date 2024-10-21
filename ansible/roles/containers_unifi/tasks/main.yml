@@ -20,15 +20,15 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/unifi/config/"
-    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/"
-    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/data/"
-    - "/home/{{ odroid_container_user }}/Containers/unifi/mongo/init/"
+    - "/{{ data_pool }}/unifi/config/"
+    - "/{{ data_pool }}/unifi/mongo/"
+    - "/{{ data_pool }}/unifi/mongo/data/"
+    - "/{{ data_pool }}/unifi/mongo/init/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
     src: "unifi-docker-compose.yml"
-    dest: "/home/{{ odroid_container_user }}/Containers/unifi/docker-compose.yml"
+    dest: "/{{ data_pool }}/unifi/docker-compose.yml"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -36,13 +36,13 @@
 - name: Copy the mongo init-mongo.js file to the server
   ansible.builtin.template:
     src: "init-mongo.js"
-    dest: "/home/{{ odroid_container_user }}/Containers/unifi/mongo/init/init-mongo.js"
+    dest: "/{{ data_pool }}/unifi/mongo/init/init-mongo.js"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
 - name: Create and start services
   community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/unifi"
+    project_src: "/{{ data_pool }}/unifi"
     state: present
   register: unifi_docker_compose

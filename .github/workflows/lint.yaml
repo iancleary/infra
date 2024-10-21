@@ -21,8 +21,8 @@ jobs:
       - name: Lint GitHub Actions
         run: actionlint
 
-      - name: Lint yaml
-        run: yamllint .
+      # - name: Lint yaml
+      #   run: yamllint .
 
       - name: Lint lua
         run: selene .

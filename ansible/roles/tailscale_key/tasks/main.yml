@@ -1,0 +1,8 @@
+---
+- name: Copy the tailscale_key file to the server
+  ansible.builtin.template:
+    src: "tailscale_key"
+    dest: "/etc/nixos/secrets/tailscale_key"
+    owner: "root"
+    group: "root"
+    mode: "0644"
