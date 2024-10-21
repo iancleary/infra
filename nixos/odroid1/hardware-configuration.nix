@@ -24,19 +24,18 @@
   services.zfs.autoScrub.enable = true;
   services.sanoid = {
     enable = true;
-    datasets = {
-      "dpool" = {
-        options = {
-          hourly = 36;
-          daily = 30;
-          monthly = 3;
-          yearly = 0;
-          autosnap = true;
-          autoprune = true;
-        };
-        recursive = true;
-        process_children_only = true;
-      };
+    datasets.dpool = {
+      recursive = true ;
+      process_children_only = true;
+      use_template = [ "production" ];
+    };
+    templates.production = {
+      hourly = 36;
+      daily = 30;
+      monthly = 3;
+      yearly = 0;
+      autosnap = true;
+      autoprune = true;
     };
   };
 
