@@ -22,6 +22,8 @@
   # https://nixos.wiki/wiki/ZFS#Automatic_scrubbing
   # Recommended; scrubs pools once a week
   services.zfs.autoScrub.enable = true;
+
+  # https://github.com/jimsalterjrs/sanoid
   services.sanoid = {
     enable = true;
     datasets.dpool = {
