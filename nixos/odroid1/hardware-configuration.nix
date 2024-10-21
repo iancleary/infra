@@ -22,6 +22,24 @@
   # https://nixos.wiki/wiki/ZFS#Automatic_scrubbing
   # Recommended; scrubs pools once a week
   services.zfs.autoScrub.enable = true;
+  services.sanoid = {
+    enable = true;
+    datasets = {
+      "dpool" = {
+        options = {
+          hourly = 36;
+          daily = 30;
+          monthly = 3;
+          yearly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+        recursive = yes;
+        process_children_only;
+      };
+    };
+    
+  }
 
   fileSystems = {
     "/" =
