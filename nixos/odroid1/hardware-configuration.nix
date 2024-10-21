@@ -35,7 +35,7 @@
           autoprune = true;
         };
         recursive = yes;
-        process_children_only;
+        process_children_only = true;
       };
     };
     
