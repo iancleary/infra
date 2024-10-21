@@ -2,6 +2,9 @@
 
 ## Root and Home Setup
 
+SSD for root, nix store, home
+HDD for audiobooks, movies, nextcloud files
+
 ## Become root
 
 `sudo su`
@@ -124,7 +127,21 @@ mount -t zfs "${POOL}/safe/home/${MY_USER}" "/mnt/home/${MY_USER}"
 # Data Pool Setup
 
 
+SSD for root, nix store, home
+HDD for audiobooks, movies, nextcloud files
+
 ```bash
+
+zpool list
+ls -lah /dev/disk/by-id
+sudo zpool create -f -o ashift=12 -m /dpool dpool mirror ata-ST4000NE001-2MA101_WS24QMP8 ata-ST4000NE001-2MA101_WS227C59
+zpool list
+
+sudo zpool set cachefile=/etc/zfs/zpool.cache dpool                                                                    
+sudo systemctl enable zfs.target
+sudo zfs set relatime=on dpool
+sudo zfs set compression=lz4 dpool
+
 sudo zfs create dpool/audiobookshelf
 sudo zfs create dpool/homeassistant
 sudo zfs create dpool/jellyfin
@@ -132,6 +149,19 @@ sudo zfs create dpool/nextcloud
 sudo zfs create dpool/s-pdf
 sudo zfs create dpool/unifi
 ```
+
+## Migration 
+
+When I migrated from `~/Containers`
+
+```bash
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/audiobookshelf/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/homeassistant/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/jellyfin/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/s-pdf/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/unifi/"
+```
+
 
 # NixOS installation
 
@@ -146,15 +176,4 @@ nixos-generate-config --root /mnt
 
 ```bash
 nixos-install --no-root-passwd
-```
-
-
-## Running a test VM
-
-```bash
-nixos-rebuild build-vm --flake .#framework
-result/bin/run-framework-vm
-
-# Remove disk image after you are done
-rm framework.qcow2
 ```
