@@ -16,6 +16,7 @@
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    zfs.extraPools = [ "dpool" ];
   };
   fileSystems = {
     "/" =

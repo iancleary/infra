@@ -18,6 +18,9 @@
       hostName = "nextcloud.iancleary.me";
       # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud29;
+
+      # # Directory for data
+      # datadir = "";
       # Let NixOS install and configure the database automatically.
       database.createLocally = true;
       # Let NixOS install and configure Redis caching automatically.
