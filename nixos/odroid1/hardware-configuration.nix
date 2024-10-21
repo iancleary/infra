@@ -38,8 +38,7 @@
         process_children_only = true;
       };
     };
-    
-  }
+  };
 
   fileSystems = {
     "/" =
