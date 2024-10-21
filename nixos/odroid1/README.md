@@ -1,8 +1,6 @@
-# Framework
+# Odroid 1
 
-My dailydriver laptop
-
-## Setup
+## Root and Home Setup
 
 ## Become root
 
@@ -92,10 +90,14 @@ zfs create "${POOL}/local/nix"
 
 ## Set a quota on reserved
 
-````bash
+```bash
 zfs set reservation=100G "${POOL}/reserved"
-zfs set quota=100G "${POOL}/reserved" # ensure we can't accidentally write more than 100G to this partition
+zfs set quota=100G "${POOL}/reserved"
+# ensure we can't accidentally write more than 100G to this partition
+```
 
+## Setup snapshotting
+```bash
 zfs set com.sun:auto-snapshot=true "${POOL}/safe/system"
 zfs set com.sun:auto-snapshot=true "${POOL}/safe/home"
 ```
@@ -119,7 +121,9 @@ mount -t zfs "${POOL}/safe/system/var" /mnt/var
 mount -t zfs "${POOL}/safe/home/${MY_USER}" "/mnt/home/${MY_USER}"
 ```
 
-NixOS installation
+# Data Pool Setup
+
+# NixOS installation
 
 Finally it's time to get nix involved! Run the generation command below and
 it should do a good job at auto-detecting any hardware and filesystem configurations

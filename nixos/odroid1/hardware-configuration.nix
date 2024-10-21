@@ -16,8 +16,13 @@
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    # https://nixos.wiki/wiki/ZFS#Importing_pools_at_boot
     zfs.extraPools = [ "dpool" ];
   };
+  # https://nixos.wiki/wiki/ZFS#Automatic_scrubbing
+  # Recommended; scrubs pools once a week
+  services.zfs.autoScrub.enable = true;
+
   fileSystems = {
     "/" =
       {
