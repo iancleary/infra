@@ -19,8 +19,8 @@
       # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud29;
 
-      # # Directory for data
-      datadir = "/dpool/nextcloud";
+      # Storage path of nextcloud
+      home = "/dpool/nextcloud";
       # Let NixOS install and configure the database automatically.
       database.createLocally = true;
       # Let NixOS install and configure Redis caching automatically.
