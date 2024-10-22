@@ -16,7 +16,31 @@
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    # https://nixos.wiki/wiki/ZFS#Importing_pools_at_boot
+    zfs.extraPools = [ "dpool" ];
   };
+  # https://nixos.wiki/wiki/ZFS#Automatic_scrubbing
+  # Recommended; scrubs pools once a week
+  services.zfs.autoScrub.enable = true;
+
+  # https://github.com/jimsalterjrs/sanoid
+  services.sanoid = {
+    enable = true;
+    datasets.dpool = {
+      recursive = true;
+      process_children_only = true;
+      use_template = [ "production" ];
+    };
+    templates.production = {
+      hourly = 36;
+      daily = 30;
+      monthly = 3;
+      yearly = 0;
+      autosnap = true;
+      autoprune = true;
+    };
+  };
+
   fileSystems = {
     "/" =
       {

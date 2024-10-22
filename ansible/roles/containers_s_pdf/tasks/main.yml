@@ -20,16 +20,16 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/s-pdf/tailscale-state/"
-    - "/home/{{ odroid_container_user }}/Containers/s-pdf/tailscale-config/"
-    - "/home/{{ odroid_container_user }}/Containers/s-pdf/tailscale-config/config/"
-    - "/home/{{ odroid_container_user }}/Containers/s-pdf/trainingData/"
-    - "/home/{{ odroid_container_user }}/Containers/s-pdf/extraConfigs/"
+    - "/{{ data_pool }}/s-pdf/tailscale-state/"
+    - "/{{ data_pool }}/s-pdf/tailscale-config/"
+    - "/{{ data_pool }}/s-pdf/tailscale-config/config/"
+    - "/{{ data_pool }}/s-pdf/trainingData/"
+    - "/{{ data_pool }}/s-pdf/extraConfigs/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
     src: "s-pdf-docker-compose.yml"
-    dest: "/home/{{ odroid_container_user }}/Containers/s-pdf/docker-compose.yml"
+    dest: "/{{ data_pool }}/s-pdf/docker-compose.yml"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -39,12 +39,21 @@
 - name: Copy the tailscale json file to the server
   ansible.builtin.template:
     src: "tailscale.json"
-    dest: "/home/{{ odroid_container_user }}/Containers/s-pdf/tailscale-config/config/tailscale.json"
+    dest: "/{{ data_pool }}/s-pdf/tailscale-config/config/tailscale.json"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
+- name: Stop services
+  community.docker.docker_compose_v2:
+    project_src: "/{{ data_pool }}/s-pdf"
+    state: stopped
+
+- name: Pause for 3 seconds to allow services to fully stop
+  ansible.builtin.pause:
+    seconds: 3
+
 - name: Create and start services
   community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/s-pdf"
+    project_src: "/{{ data_pool }}/s-pdf"
     state: present

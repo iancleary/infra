@@ -11,48 +11,20 @@ odroid_nixos_modules:
 odroid_container_user: iancleary
 odroid_container_user_group: users
 
+data_pool: dpool
+
+# https://github.com/advplyr/audiobookshelf/pkgs/container/audiobookshelf
+audiobookshelf_docker_image: ghcr.io/advplyr/audiobookshelf
+audiobookshelf_docker_version: 2.15.1
+
 homeassistant_mosquitto_user: "{{ vault_homeassistant_mosquitto_user }}"
 homeassistant_mosquitto_password: "{{ vault_homeassistant_mosquitto_password }}"
 
 # MongoDB for Unifi, supports 3.6 through 4.4 as of 2024-02-21
+# Starting with version 8.1 of Unifi Network Application, mongodb 3.6 through 7.0 are supported.
 # https://github.com/linuxserver/docker-unifi-network-application?tab=readme-ov-file#setting-up-your-external-database
 unifi_mongo_version: 4.4
 unifi_mongo_password: "{{ vault_unifi_mongo_password }}"
+unifi_network_version: "8.3.32-ls57"
 
 iancleary_tailscale_auth_key: "{{ vault_iancleary_tailscale_auth_key }}"
-#
-#
-# Below is from old vars.yml
-#
-# iancleary_dns_user_password: "{{ vault_iancleary_dns_user_password }}"
-# iancleary_raspberrypi_user_password: "{{ vault_iancleary_raspberrypi_user_password }}"
-# pi_user_password: "{{ vault_pi_user_password }}"
-
-# github_users_authorized_keys_exclusive: true
-# github_url: https://github.com
-# github_users_absent: []
-# github_users:
-#   - name: iancleary
-#     groups: sudo,www-data
-#     # password: "{{ vault_iancleary_user_password }}"
-
-# docker_pip_version: 6.0.0
-# docker_compose_pip_version: 1.29.2
-# docker_users:
-#   - iancleary
-
-# adguard_home_user: iancleary
-# adguard_home_state: absent
-
-# unifi_controller_user: iancleary
-# unifi_controller_state: present
-
-# pi_hole_user: iancleary
-# pi_hole_state: present
-# pi_hole_web_password: "{{ vault_pi_hole_web_password }}"
-
-# pi_hole_ftlconf_local_ipv4: "{{ vault_pi_hole_ftlconf_local_ipv4 }}"
-# pi_hole_dns: "{{ vault_pi_hole_dns }}"
-# pi_hole_tz: "{{ vault_pi_hole_tz }}"
-# pi_hole_dns_entries: "{{ vault_pi_hole_dns_entries }}"
-# pi_hole_white_wild_entries: "{{ vault_pi_hole_white_wild_entries }}"

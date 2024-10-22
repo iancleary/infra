@@ -9,9 +9,9 @@
 
 - name: Pull audiobookshelf image
   community.docker.docker_image:
-    name: docker.io/advplyr/audiobookshelf
+    name: "{{ audiobookshelf_docker_image }}"
     source: pull
-    tag: latest
+    tag: "{{ audiobookshelf_docker_version }}"
     force_source: true
     # Select platform for pulling. If not specified, will pull whatever docker prefers.
 
@@ -20,18 +20,18 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-state/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/config/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Audiobooks/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/Podcasts/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/config/"
-    - "/home/{{ odroid_container_user }}/Containers/audiobookshelf/metadata/"
+    - "/{{ data_pool }}/audiobookshelf/tailscale-state/"
+    - "/{{ data_pool }}/audiobookshelf/tailscale-config/"
+    - "/{{ data_pool }}/audiobookshelf/tailscale-config/config/"
+    - "/{{ data_pool }}/audiobookshelf/Audiobooks/"
+    - "/{{ data_pool }}/audiobookshelf/Podcasts/"
+    - "/{{ data_pool }}/audiobookshelf/config/"
+    - "/{{ data_pool }}/audiobookshelf/metadata/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
     src: "audiobookshelf-docker-compose.yml"
-    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/docker-compose.yml"
+    dest: "/{{ data_pool }}/audiobookshelf/docker-compose.yml"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -41,12 +41,21 @@
 - name: Copy the tailscale json file to the server
   ansible.builtin.template:
     src: "tailscale.json"
-    dest: "/home/{{ odroid_container_user }}/Containers/audiobookshelf/tailscale-config/config/tailscale.json"
+    dest: "/{{ data_pool }}/audiobookshelf/tailscale-config/config/tailscale.json"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
+- name: Stop services
+  community.docker.docker_compose_v2:
+    project_src: "/{{ data_pool }}/audiobookshelf"
+    state: stopped
+
+- name: Pause for 3 seconds to allow services to fully stop
+  ansible.builtin.pause:
+    seconds: 3
+
 - name: Create and start services
   community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/audiobookshelf"
+    project_src: "/{{ data_pool }}/audiobookshelf"
     state: present

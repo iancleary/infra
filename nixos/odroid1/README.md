@@ -1,8 +1,9 @@
-# Framework
+# Odroid 1
 
-My dailydriver laptop
+## Root and Home Setup
 
-## Setup
+SSD for root, nix store, home
+HDD for audiobooks, movies, nextcloud files
 
 ## Become root
 
@@ -92,10 +93,14 @@ zfs create "${POOL}/local/nix"
 
 ## Set a quota on reserved
 
-````bash
+```bash
 zfs set reservation=100G "${POOL}/reserved"
-zfs set quota=100G "${POOL}/reserved" # ensure we can't accidentally write more than 100G to this partition
+zfs set quota=100G "${POOL}/reserved"
+# ensure we can't accidentally write more than 100G to this partition
+```
 
+## Setup snapshotting
+```bash
 zfs set com.sun:auto-snapshot=true "${POOL}/safe/system"
 zfs set com.sun:auto-snapshot=true "${POOL}/safe/home"
 ```
@@ -119,7 +124,58 @@ mount -t zfs "${POOL}/safe/system/var" /mnt/var
 mount -t zfs "${POOL}/safe/home/${MY_USER}" "/mnt/home/${MY_USER}"
 ```
 
-NixOS installation
+# Data Pool Setup
+
+
+SSD for root, nix store, home
+HDD for audiobooks, movies, nextcloud files
+
+```bash
+
+zpool list
+ls -lah /dev/disk/by-id
+sudo zpool create -f -o ashift=12 -m /dpool dpool mirror ata-ST4000NE001-2MA101_WS24QMP8 ata-ST4000NE001-2MA101_WS227C59
+zpool list
+
+sudo zpool set cachefile=/etc/zfs/zpool.cache dpool                                                                    
+sudo systemctl enable zfs.target
+sudo zfs set relatime=on dpool
+sudo zfs set compression=lz4 dpool
+
+sudo zfs create dpool/audiobookshelf
+sudo zfs create dpool/homeassistant
+sudo zfs create dpool/jellyfin
+sudo zfs create dpool/nextcloud
+sudo zfs create dpool/s-pdf
+sudo zfs create dpool/unifi
+```
+
+## Migration 
+
+When I migrated from `~/Containers`
+
+```bash
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/audiobookshelf/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/homeassistant/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/jellyfin/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/s-pdf/"
+sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/unifi/"
+```
+
+When moving Nextcloud files around
+```bash
+sudo rsync -avu --delete "/home/iancleary/Nextcloud/*" "/dpool/nextcloud/data/admin/files/"
+
+sudo nextcloud-occ files:scan admin
+# admin is a user name, else use --all
+```
+
+[`occ` command with nixos module is `nextcloud-occ`](https://discourse.nixos.org/t/get-executable-path-of-pkgs-writescriptbin-nextcloud-occ/32339)
+
+[scan for new files with `occ files:scan`](https://help.nextcloud.com/t/how-to-make-nextcloud-aware-of-added-files/10824/4)
+
+
+# NixOS installation
 
 Finally it's time to get nix involved! Run the generation command below and
 it should do a good job at auto-detecting any hardware and filesystem configurations
@@ -132,15 +188,4 @@ nixos-generate-config --root /mnt
 
 ```bash
 nixos-install --no-root-passwd
-```
-
-
-## Running a test VM
-
-```bash
-nixos-rebuild build-vm --flake .#framework
-result/bin/run-framework-vm
-
-# Remove disk image after you are done
-rm framework.qcow2
 ```

@@ -20,17 +20,19 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-state/"
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/"
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/config/"
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/config/"
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/cache/"
-    - "/home/{{ odroid_container_user }}/Containers/jellyfin/media/"
+    - "/{{ data_pool }}/jellyfin/tailscale-state/"
+    - "/{{ data_pool }}/jellyfin/tailscale-config/"
+    - "/{{ data_pool }}/jellyfin/tailscale-config/config/"
+    - "/{{ data_pool }}/jellyfin/config/"
+    - "/{{ data_pool }}/jellyfin/cache/"
+    - "/{{ data_pool }}/jellyfin/media/"
+    - "/{{ data_pool }}/jellyfin/media/Movies/"
+    - "/{{ data_pool }}/jellyfin/media/Shows/"
 
 - name: Copy the docker compose file to the server
   ansible.builtin.template:
     src: "jellyfin-docker-compose.yml"
-    dest: "/home/{{ odroid_container_user }}/Containers/jellyfin/docker-compose.yml"
+    dest: "/{{ data_pool }}/jellyfin/docker-compose.yml"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
@@ -40,12 +42,21 @@
 - name: Copy the tailscale json file to the server
   ansible.builtin.template:
     src: "tailscale.json"
-    dest: "/home/{{ odroid_container_user }}/Containers/jellyfin/tailscale-config/config/tailscale.json"
+    dest: "/{{ data_pool }}/jellyfin/tailscale-config/config/tailscale.json"
     owner: "{{ odroid_container_user }}"
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
+- name: Stop services
+  community.docker.docker_compose_v2:
+    project_src: "/{{ data_pool }}/jellyfin"
+    state: stopped
+
+- name: Pause for 3 seconds to allow services to fully stop
+  ansible.builtin.pause:
+    seconds: 3
+
 - name: Create and start services
   community.docker.docker_compose_v2:
-    project_src: "/home/{{ odroid_container_user }}/Containers/jellyfin"
+    project_src: "/{{ data_pool }}/jellyfin"
     state: present
