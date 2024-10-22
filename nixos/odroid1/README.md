@@ -169,7 +169,12 @@ sudo rsync -avu --delete "/home/iancleary/Nextcloud/*" "/dpool/nextcloud/data/ad
 sudo nextcloud-occ files:scan admin
 # admin is a user name, else use --all
 ```
- 
+
+[`occ` command with nixos module is `nextcloud-occ`](https://discourse.nixos.org/t/get-executable-path-of-pkgs-writescriptbin-nextcloud-occ/32339)
+
+[scan for new files with `occ files:scan`](https://help.nextcloud.com/t/how-to-make-nextcloud-aware-of-added-files/10824/4)
+
+
 # NixOS installation
 
 Finally it's time to get nix involved! Run the generation command below and
