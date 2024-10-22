@@ -162,7 +162,14 @@ sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/s-pdf/"
 sudo rsync -avu --delete "/home/iancleary/Containers/unifi/" "/dpool/unifi/"
 ```
 
+When moving Nextcloud files around
+```bash
+sudo rsync -avu --delete "/home/iancleary/Nextcloud/*" "/dpool/nextcloud/data/admin/files/"
 
+sudo nextcloud-occ files:scan admin
+# admin is a user name, else use --all
+```
+ 
 # NixOS installation
 
 Finally it's time to get nix involved! Run the generation command below and

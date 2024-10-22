@@ -66,6 +66,15 @@
     group: "{{ odroid_container_user_group }}"
     mode: "0644"
 
+- name: Stop services
+  community.docker.docker_compose_v2:
+    project_src: "/{{ data_pool }}/homeassistant"
+    state: stopped
+
+- name: Pause for 3 seconds to allow services to fully stop
+  ansible.builtin.pause:
+    seconds: 3
+
 - name: Create and start services
   community.docker.docker_compose_v2:
     project_src: "/{{ data_pool }}/homeassistant"
