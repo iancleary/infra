@@ -6,9 +6,9 @@ This repo demonstrates my use of the Infrastructure as Code philosophy using [Ni
 
 ### Tooling
 
-Install [nix](https://nixos.org) and [direnv](https://direnv.net).
+Install [nix](https://github.com/DeterminateSystems/nix-installer) with the Determinate Systems Nix Installer.
 
-Clone the repo and run `direnv allow` to load the environment.
+See the README's in each folder and use [justfiles with the `just` command](https://github.com/casey/just).
 
 ## Ansible
 
@@ -24,17 +24,6 @@ When I change the ansible files for the NixOS configuration, it will fail to bui
 
 > Full stop! That is powerful. The only thing to avoid is to make a change that removes tailscale...which would remove my ability to ssh into the server.
 > I could go grab the server, plug in a keyboard and monitor, and revert with GRUB. That is a pain, but is a nice physical backup plan.
-
-## Initial Setup of a Server with NixOS
-
-The first setup:
-
-- copy the [configuration.nix](ansible/roles/odroid_nix_config/templates/configuration.nix) file directly into /etc/nixos/configuration.nix
-- adjust the hostname
-- delete the jinja2 template rows
-- run `sudo nixos-rebuild switch`
-- then I can run `sudo tailscale up --ssh` to connect to the server to tailscale
-- then run the ansible playbook to configure the containers and adjust the nix configuration (rebuilding and switching to the new configuration as needed).
 
 ### Networking and open ports
 
@@ -54,7 +43,7 @@ The default is to not expose a port, and use HTTPS with my Tailnet.
 
 ### MacOS
 
-I bought a Macbook Air and use it for development, catching up with friends, and when I just need to get some personal things done. Since Nix runs very well on Apple Silicon Macs, I have started to do a lot of configuration with Nix. This removes the need for Development Containers and any virtualization...speed!
+I used to use a Macbook Air and use it for development, catching up with friends, and when I just need to get some personal things done. Since Nix runs very well on Apple Silicon Macs, I have started to do a lot of configuration with Nix. This removes the need for Development Containers and any virtualization...speed!
 
 ### Windows Laptops and Desktops
 
@@ -71,17 +60,20 @@ I went to try Windows Subsystem for Linux, but experienced issues while connecti
 
 I explored various options in Virtual Machines, while on a Windows host: Hyper-V, VirtualBox. The performance of Hyper-V was intriguing to me, but the lack of static IP Addresses was frustrating. Again, there might be ways to setup Hyper-V to consistently address VMs by IP Address, across reboots, but the only workflow I found was to use PowerShell to get the IP Address after reboot. That worked fairly well with Ubuntu guests, but I experienced intermittent issues recently. See [iancleary/local-ssh-config](https://github.com/iancleary/local-ssh-config) for a Python package that helps script the update process (get IP Address, update ssh config files).
 
-I've landed on Virtual Box, with a few tricks to make SSH consistent across reboots. Port Forwarding!
+I've landed on Virtual Box, with a few tricks to make SSH consistent across reboots. Port Forwarding! 
 
 > TBD to add a repo, but search online for "Virtual Box Port Forwarding +SSH" and you'll find the solution. It maps a host port to a guest's port 22 (or whatever port the guest uses for the openssh server).
 
 So my solution, Virtual Box, allows me to use NixOS, have an immutable file system with rollbacks via GRUB entries, that I can pause/resume as needed. I really enjoyed learning Ansible, and it is a fantastic tool, but the discover of the recovery and rollback features of NixOS were a \*illuminating discovery for me. The build with fail if it causes issues with other parts of the configuration.
 
+> Virtualbox This is only needed when dealing with external requests and needing docker...i.e. other internal services on a work network...WSL2 works fine with nix and local dev without docker
+
 ### NixOS
 
 I have dabbled with NixOS as a desktop Operating System and can say it is fantastic.
 
-> My NixOS Configuration is in the [iancleary/nixos-config](https://github.com/iancleary/nixos-config) repo.
+> My Desktop NixOS Configuration is in the [iancleary/nixos-config](https://github.com/iancleary/nixos-config) repo.
+> Right now, I generally use WSL to have the same workflow at work and at home, and some software availability keeps me on Windows.  See [iancleary/wsl-config](https://github.com/iancleary/wsl-config)
 
 There are some excellent write up on Nix and NixOS, so I'll defer to them rather than repeat them (poorly) here:
 
