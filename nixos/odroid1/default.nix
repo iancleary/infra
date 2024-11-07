@@ -77,6 +77,8 @@
     smartmontools
   ];
 
+  # sudo smartctl -ax /dev/sda
+  # sudo smartctl -ax /dev/sdb
   services.smartd = {
     enable = true;
     devices = [
