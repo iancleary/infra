@@ -74,8 +74,23 @@
         ]
       )
     )
+    smartmontools
   ];
 
+  # sudo smartctl -ax /dev/sda
+  # sudo smartctl -ax /dev/sdb
+  services.smartd = {
+    enable = true;
+    devices = [
+      # use lsblk to find the appropriate value
+      {
+        device = "/dev/sda";
+      }
+      {
+        device = "/dev/sdb";
+      }
+    ];
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
