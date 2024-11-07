@@ -74,6 +74,7 @@
         ]
       )
     )
+    smartmontools
   ];
 
   services.smartd = {
@@ -81,10 +82,10 @@
     devices = [
       # use lsblk to find the appropriate value
       {
-        device = "/dev/sda"; 
+        device = "/dev/sda";
       }
       {
-        device = "/dev/sdb"; 
+        device = "/dev/sdb";
       }
     ];
   };
