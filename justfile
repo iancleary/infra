@@ -15,7 +15,6 @@ update:
 
 # Run `sudo nixos-rebuild switch`
 switch:
-  echo "nix-flatpak initial build may take a while..."
   sudo nixos-rebuild switch --flake .
 
 # Run `sudo nixos-rebuild boot --flake .`
@@ -63,4 +62,4 @@ test:
 
 # Open the github repo in default web browser
 open:
-  xdg-open https://github.com/iancleary/nixos-config & disown
+  xdg-open https://github.com/iancleary/infra & disown
