@@ -1,2 +1,9 @@
-[odroid1]
+[primary]
 odroid1
+
+[backup]
+odroid2
+
+[all]
+odroid1
+odroid2

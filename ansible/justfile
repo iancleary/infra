@@ -13,6 +13,10 @@ galaxy:
 odroid:
     ansible-playbook playbook_odroid.yml --ask-vault-pass
 
+# Run ansible playbook_odroid.yml
+tailscale:
+    ansible-playbook playbook_tailscale.yml --ask-vault-pass
+
 # View ansible-vault
 view:
     ansible-vault view group_vars/all/vault.yml

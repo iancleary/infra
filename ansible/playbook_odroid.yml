@@ -1,6 +1,6 @@
 ---
 - name: Update Odroid Server
-  hosts: odroid1
+  hosts: primary
   remote_user: iancleary
   roles:
     - {
