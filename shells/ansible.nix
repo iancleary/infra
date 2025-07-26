@@ -2,7 +2,7 @@
 
 pkgs.mkShellNoCC {
   nativeBuildInputs = with pkgs; [
-    ansible_2_15
+    uv # ansible uses ./ansible/pyproject.toml and ./ansible/uv.lock for ansible
     openssh
     actionlint
     selene
