@@ -7,20 +7,20 @@ hostname := `uname -n`
 
 # Install ansible-galaxy roles/collections
 galaxy:
-    ansible-galaxy install -r requirements.yml
+    uv run ansible-galaxy install -r requirements.yml
 
 # Run ansible playbook_odroid.yml
 odroid:
-    ansible-playbook playbook_odroid.yml --ask-vault-pass
+    uv run ansible-playbook playbook_odroid.yml --ask-vault-pass
 
 # Run ansible playbook_tailscale.yml
 tailscale:
-    ansible-playbook playbook_tailscale.yml --ask-vault-pass
+    uv run ansible-playbook playbook_tailscale.yml --ask-vault-pass
 
 # View ansible-vault
 view:
-    ansible-vault view group_vars/all/vault.yml
+    uv run ansible-vault view group_vars/all/vault.yml
 
 # edit ansible-vault
 edit:
-    export EDITOR=nano && ansible-vault edit group_vars/all/vault.yml
+    export EDITOR=nano && uv run ansible-vault edit group_vars/all/vault.yml
