@@ -37,6 +37,11 @@ lint:
   nix develop --accept-flake-config .#lint
 
 # Load ansible
+
+galaxy:
+  # nix develop --accept-flake-config .#ansible
+  cd ansible && uv run ansible-galaxy install -r requirements.yml
+  
 tailscale:
   # nix develop --accept-flake-config .#ansible
   cd ansible && uv run ansible-playbook playbook_tailscale.yml --ask-vault-pass
