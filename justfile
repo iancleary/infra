@@ -37,8 +37,21 @@ lint:
   nix develop --accept-flake-config .#lint
 
 # Load ansible
-ansible:
-  nix develop --accept-flake-config .#ansible
+tailscale:
+  # nix develop --accept-flake-config .#ansible
+  cd ansible && uv run ansible-playbook playbook_tailscale.yml --ask-vault-pass
+
+odroid:
+  # nix develop --accept-flake-config .#ansible
+  cd ansible && uv run ansible-playbook playbook_odroid.yml --ask-vault-pass
+
+edit:
+  # nix develop --accept-flake-config .#ansible
+  cd ansible && uv run ansible-vault edit group_vars/all/vault.yml
+
+view:
+  # nix develop --accept-flake-config .#ansible
+  cd ansible && uv run ansible-vault view group_vars/all/vault.yml
 
 # format all the files, when in a nix-shell
 format:
