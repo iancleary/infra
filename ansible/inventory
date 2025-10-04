@@ -1,9 +1,9 @@
 [primary]
-odroid1
+odroid1.tail2500d.ts.net
 
 [backup]
-odroid2
+odroid2.tail2500d.ts.net
 
 [all]
-odroid1
-odroid2
+odroid1.tail2500d.ts.net
+odroid2.tail2500d.ts.net
