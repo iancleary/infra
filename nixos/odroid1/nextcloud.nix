@@ -19,6 +19,8 @@
       # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud32;
 
+      settings.overwriteprotocol = "http";
+
       # Storage path of nextcloud
       home = "/dpool/nextcloud";
       # Let NixOS install and configure the database automatically.
