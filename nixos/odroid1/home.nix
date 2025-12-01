@@ -12,10 +12,6 @@
   myTerminal = {
     cli.personalGitEnable = true;
     zsh.enable = true;
-    neovim = {
-      enable = true;
-      enableLSP = true;
-    };
   };
 
   # home.packages = with pkgs; [
