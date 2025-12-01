@@ -9,7 +9,7 @@
     inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
     ./hardware-configuration.nix
     ./networking.nix # this could be below since it's not machine specific
-    ./nextcloud.nix
+    #./nextcloud.nix
     ./tailscale.nix # this is the customization for this server
     # below are system setup, ports, virtualization, etc.
   ];
