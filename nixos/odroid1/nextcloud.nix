@@ -17,7 +17,7 @@
       # hostName = "odroid1.tail2500d.ts.net";
       hostName = "nextcloud.iancleary.me";
       # Need to manually increment with every major upgrade.
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
 
       settings.overwriteprotocol = "http";
 
