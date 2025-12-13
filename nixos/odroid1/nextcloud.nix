@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
 
+# nextcloud-occ is the command instead of occ
+
   networking = {
     firewall = {
       enable = true;
