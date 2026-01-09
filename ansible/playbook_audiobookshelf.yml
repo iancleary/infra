@@ -1,0 +1,11 @@
+---
+- name: Update AudioBookshelf Server
+  hosts: primary
+  remote_user: iancleary
+  roles:
+    - {
+        role: containers_audiobookshelf,
+        become: true,
+        tags: ["audiobookshelf"],
+        ansible_become_password: "{{ odroid_iancleary_user_password }}",
+      }

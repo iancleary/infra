@@ -13,6 +13,10 @@ galaxy:
 odroid:
     uv run ansible-playbook playbook_odroid.yml --ask-vault-pass
 
+# Run ansible playbook_audiobookshelf.yml
+audiobookshelf:
+    uv run ansible-playbook playbook_audiobookshelf.yml --ask-vault-pass
+
 # Run ansible playbook_tailscale.yml
 tailscale:
     uv run ansible-playbook playbook_tailscale.yml --ask-vault-pass
